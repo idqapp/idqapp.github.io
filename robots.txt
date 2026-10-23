@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://idq-developer.com/sitemap.xml

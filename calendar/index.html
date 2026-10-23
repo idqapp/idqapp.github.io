@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags IT -->
+  <title>Smart Calendar — L'app Android che trova appuntamenti nei tuoi messaggi</title>
+  <meta name="description" content="Smart Calendar analizza automaticamente SMS, WhatsApp, Telegram ed Email per trovare appuntamenti e aggiungerli al tuo calendario. AI on-device, privacy garantita. €2.99 acquisto unico.">
+  <meta name="keywords" content="smart calendar, app calendario android, trova appuntamenti sms, analisi messaggi calendario, whatsapp calendario, telegram calendario, app appuntamenti automatica, ai calendario android">
+  <meta name="author" content="Paolo Migliaccio">
+  <meta name="google-site-verification" content="3npJc6HKGWKH9mHmBPD9Yo5rgmFN76CoKo7L2zWyhr8" />
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://idq-developer.com/calendar">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Smart Calendar — Appuntamenti automatici dai tuoi messaggi">
+  <meta property="og:description" content="L'app Android che usa AI on-device per trovare appuntamenti in SMS, WhatsApp, Telegram ed Email. Tutto privato, tutto offline. €2.99 acquisto unico.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://idq-developer.com/calendar">
+  <meta property="og:image" content="https://idq-developer.com/calendar/screenshots/screen1.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Smart Calendar — AI per il tuo calendario">
+  <meta name="twitter:description" content="Trova automaticamente appuntamenti in SMS, WhatsApp, Telegram ed Email con AI on-device. €2.99 acquisto unico.">
+  <meta name="twitter:image" content="https://idq-developer.com/calendar/screenshots/screen1.png">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Smart Calendar",
+    "operatingSystem": "Android",
+    "applicationCategory": "ProductivityApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "EUR"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Paolo Migliaccio"
+    },
+    "description": "App Android che analizza SMS, WhatsApp, Telegram ed Email per trovare appuntamenti automaticamente usando AI on-device.",
+    "screenshot": "https://idq-developer.com/calendar/screenshots/screen1.png"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0a14;
+      --surface: #12121f;
+      --card: #1a1a2e;
+      --border: #2a2a45;
+      --blue: #5b8def;
+      --green: #4caf82;
+      --teal: #4fc3c3;
+      --amber: #ffb347;
+      --red: #ef5350;
+      --white: #e8e8f0;
+      --muted: #8888aa;
+      --glow: rgba(91, 141, 239, 0.3);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .lang-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: flex-end;
+      padding: 12px 24px;
+      background: rgba(10,10,20,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .lang-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 4px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .lang-btn.active { border-color: var(--blue); color: var(--blue); background: rgba(91,141,239,0.1); }
+    .lang-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(91,141,239,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(91,141,239,0.1);
+      border: 1px solid rgba(91,141,239,0.3);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 500;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 0 30px rgba(91,141,239,0.3);
+    }
+    .btn-primary:hover { background: #4a7de0; transform: translateY(-2px); box-shadow: 0 0 40px rgba(91,141,239,0.5); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 400;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
+    .hero-stats { display: flex; gap: 32px; margin-top: 40px; }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--white); }
+    .stat-label { font-size: 12px; color: var(--muted); }
+
+    .phone-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
+    .phone-glow { position: absolute; inset: -20px; background: radial-gradient(ellipse, rgba(91,141,239,0.15) 0%, transparent 70%); pointer-events: none; z-index: -1; }
+    .screens-row { display: flex; gap: 16px; align-items: center; }
+    .screen-thumb {
+      width: 140px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .screen-thumb:nth-child(2) { transform: translateY(-20px); }
+    .screen-thumb:nth-child(3) { transform: translateY(10px); }
+    .screen-thumb img { width: 100%; display: block; }
+    .screen-thumb:hover { transform: translateY(-8px) scale(1.02); }
+
+    section { padding: 100px 24px; max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; margin-bottom: 16px; letter-spacing: -0.02em; }
+    .section-sub { color: var(--muted); font-size: 1rem; max-width: 560px; margin-bottom: 56px; }
+
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--card-accent, var(--blue)); opacity: 0; transition: opacity 0.3s; }
+    .feature-card:hover { border-color: rgba(91,141,239,0.3); transform: translateY(-4px); }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+    .feature-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem; margin-bottom: 8px; }
+    .feature-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+    .card-sms { --card-accent: var(--blue); }
+    .card-wa { --card-accent: var(--green); }
+    .card-tg { --card-accent: var(--teal); }
+    .card-email { --card-accent: var(--amber); }
+    .card-ai { --card-accent: #a855f7; }
+    .card-privacy { --card-accent: var(--red); }
+
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
+    .step { text-align: center; padding: 32px 20px; }
+    .step-num {
+      width: 48px; height: 48px;
+      background: rgba(91,141,239,0.1);
+      border: 1px solid rgba(91,141,239,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-weight: 700; color: var(--blue);
+      margin: 0 auto 16px; font-size: 1.1rem;
+    }
+    .step-title { font-family: 'Syne', sans-serif; font-weight: 600; margin-bottom: 8px; }
+    .step-desc { color: var(--muted); font-size: 0.9rem; }
+
+    .screenshots-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; align-items: end; }
+    .screenshot-item { border-radius: 20px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s; }
+    .screenshot-item:nth-child(1) { transform: rotate(-2deg); }
+    .screenshot-item:nth-child(2) { transform: rotate(1deg) translateY(-20px); }
+    .screenshot-item:nth-child(3) { transform: rotate(-1deg) translateY(10px); }
+    .screenshot-item:nth-child(4) { transform: rotate(2deg) translateY(-15px); }
+    .screenshot-item:nth-child(5) { transform: rotate(-1deg); }
+    .screenshot-item:hover { transform: rotate(0) translateY(-10px) scale(1.05) !important; z-index: 10; }
+    .screenshot-item img { width: 100%; display: block; }
+
+    .privacy-box { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .privacy-points { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .privacy-points li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; }
+    .privacy-check { color: var(--green); font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+    .cta-box { text-align: center; padding: 80px 40px; background: var(--card); border: 1px solid var(--border); border-radius: 24px; position: relative; overflow: hidden; }
+    .cta-box::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, rgba(91,141,239,0.08) 0%, transparent 70%); pointer-events: none; }
+    .cta-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; margin-bottom: 16px; }
+    .cta-sub { color: var(--muted); margin-bottom: 36px; font-size: 1rem; }
+    .cta-note { margin-top: 16px; font-size: 13px; color: var(--muted); }
+
+    /* Badge prezzo */
+    .price-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(76,175,130,0.1);
+      border: 1px solid rgba(76,175,130,0.3);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 14px;
+      color: var(--green);
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; color: var(--muted); font-size: 13px; }
+    footer a { color: var(--blue); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp 0.7s ease forwards; }
+    .delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+    [data-lang="en"] { display: none; }
+    body.en [data-lang="it"] { display: none; }
+    body.en [data-lang="en"] { display: revert; }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+      .hero-sub { margin: 0 auto 36px; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .screens-row { justify-content: center; }
+      .privacy-box { grid-template-columns: 1fr; }
+      .screenshots-grid { grid-template-columns: repeat(3, 1fr); }
+      .screenshots-grid .screenshot-item:nth-child(4),
+      .screenshots-grid .screenshot-item:nth-child(5) { display: none; }
+      .screen-thumb { width: 110px; }
+    }
+    @media (max-width: 480px) {
+      .screenshots-grid { grid-template-columns: repeat(2, 1fr); }
+      .screenshots-grid .screenshot-item:nth-child(3),
+      .screenshots-grid .screenshot-item:nth-child(4),
+      .screenshots-grid .screenshot-item:nth-child(5) { display: none; }
+    }
+  
+.idq-switch{position:relative;display:inline-block;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.2}
+.idq-switch-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid #42425a;background:#23232f;color:#fff;border-radius:10px;cursor:pointer;padding:0;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.idq-switch-btn:hover,.idq-switch.open .idq-switch-btn{border-color:#5c5c78;background:#2e2e3d}
+.idq-switch-menu{position:absolute;top:calc(100% + 8px);right:0;z-index:999;min-width:208px;background:#15151d;border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:6px;box-shadow:0 14px 34px rgba(0,0,0,.45)}
+.idq-switch-menu[hidden]{display:none}
+.idq-switch-menu a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;text-decoration:none;color:#f1f1f5;font-size:14px;font-weight:600}
+.idq-switch-menu a:hover{background:rgba(255,255,255,.08)}
+.idq-switch-menu img{width:24px;height:24px;border-radius:6px;flex:none;display:block}
+.idq-switch-ic{font-size:16px;width:24px;text-align:center;flex:none}
+.idq-switch-sep{height:1px;background:rgba(255,255,255,.14);margin:6px 2px}
+</style>
+</head>
+<body>
+
+  <div class="lang-bar" style="align-items:center;gap:10px"><div class="idq-switch" id="idq-switch">
+<button class="idq-switch-btn" id="idq-switch-btn" type="button" aria-haspopup="true" aria-expanded="false" title="Altri progetti IDQ"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
+<div class="idq-switch-menu" id="idq-switch-menu" hidden>
+<a href="../" class="idq-switch-home"><span class="idq-switch-ic">🏠</span>IDQ Developer</a>
+<div class="idq-switch-sep"></div>
+<a href="../biker/"><img src="../assets/icons/biker.png" alt="">IDQ Biker Maps</a>
+<a href="../navigator/"><img src="../assets/icons/navigator.png" alt="">IDQ Navigator</a>
+<a href="../monitor/"><img src="../assets/icons/monitor.png" alt="">IDQ Monitor User</a>
+<a href="../calendar/"><img src="../assets/icons/calendar.png" alt="">Smart Calendar</a>
+<a href="../converter/"><img src="../assets/icons/converter.png" alt="">IDQ File Converter</a>
+</div>
+</div>
+    <div style="display:flex;gap:8px">
+      <button class="lang-btn active" id="btn-it" onclick="setLang('it')">🇮🇹 IT</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
+    </div>
+  </div>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge fade-up">
+          ✨ <span data-lang="it">Powered by Gemini Nano · AI On-Device</span>
+          <span data-lang="en">Powered by Gemini Nano · On-Device AI</span>
+        </div>
+
+        <h1 class="hero-title fade-up delay-1">
+          <span data-lang="it">Il tuo calendario<br>si aggiorna<br><span>da solo</span></span>
+          <span data-lang="en">Your calendar<br>updates<br><span>itself</span></span>
+        </h1>
+
+        <p class="hero-sub fade-up delay-2">
+          <span data-lang="it">Smart Calendar analizza SMS, WhatsApp, Telegram ed Email con AI on-device e aggiunge automaticamente gli appuntamenti al tuo calendario. Zero cloud, acquisto unico.</span>
+          <span data-lang="en">Smart Calendar scans SMS, WhatsApp, Telegram and Email with on-device AI and automatically adds appointments to your calendar. Zero cloud, one-time purchase.</span>
+        </p>
+
+        <div class="hero-actions fade-up delay-3">
+          <a href="#download" class="btn-primary">
+            🛒 <span data-lang="it">Acquista ora — €2.99</span><span data-lang="en">Buy now — €2.99</span>
+          </a>
+          <a href="#screenshots" class="btn-secondary">
+            📱 <span data-lang="it">Guarda l'app</span><span data-lang="en">See the app</span>
+          </a>
+        </div>
+
+        <div class="hero-stats fade-up delay-4">
+          <div class="stat">
+            <div class="stat-num">4</div>
+            <div class="stat-label" data-lang="it">Sorgenti</div>
+            <div class="stat-label" data-lang="en">Sources</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label" data-lang="it">On-Device</div>
+            <div class="stat-label" data-lang="en">On-Device</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">€2.99</div>
+            <div class="stat-label" data-lang="it">Acquisto unico</div>
+            <div class="stat-label" data-lang="en">One-time</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-wrap fade-up delay-2">
+        <div class="screens-row">
+          <div class="screen-thumb">
+            <img src="screenshots/screen1.png" alt="Smart Calendar - Schermata principale">
+          </div>
+          <div class="screen-thumb">
+            <img src="screenshots/screen5.png" alt="Smart Calendar - Impostazioni">
+          </div>
+          <div class="screen-thumb">
+            <img src="screenshots/screen4.png" alt="Smart Calendar - Bozze">
+          </div>
+        </div>
+        <div class="phone-glow"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FEATURES ── -->
+  <section id="features">
+    <p class="section-label" data-lang="it">Funzionalità</p>
+    <p class="section-label" data-lang="en">Features</p>
+    <h2 class="section-title">
+      <span data-lang="it">Tutto ciò che ti serve,<br>tutto sul tuo telefono</span>
+      <span data-lang="en">Everything you need,<br>all on your phone</span>
+    </h2>
+    <p class="section-sub">
+      <span data-lang="it">Nessun dato inviato a server remoti. L'AI gira direttamente sul tuo dispositivo.</span>
+      <span data-lang="en">No data sent to remote servers. AI runs directly on your device.</span>
+    </p>
+    <div class="features-grid">
+      <div class="feature-card card-sms">
+        <span class="feature-icon">📱</span>
+        <div class="feature-title" data-lang="it">Analisi SMS</div>
+        <div class="feature-title" data-lang="en">SMS Analysis</div>
+        <div class="feature-desc" data-lang="it">Legge tutti gli SMS ricevuti e identifica automaticamente date, orari e luoghi degli appuntamenti.</div>
+        <div class="feature-desc" data-lang="en">Reads all received SMS and automatically identifies dates, times and locations of appointments.</div>
+      </div>
+      <div class="feature-card card-wa">
+        <span class="feature-icon">💬</span>
+        <div class="feature-title">WhatsApp &amp; Telegram</div>
+        <div class="feature-desc" data-lang="it">Monitora le notifiche in tempo reale e rileva appuntamenti nei tuoi messaggi istantanei.</div>
+        <div class="feature-desc" data-lang="en">Monitors notifications in real time and detects appointments in your instant messages.</div>
+      </div>
+      <div class="feature-card card-email">
+        <span class="feature-icon">📧</span>
+        <div class="feature-title" data-lang="it">Email IMAP</div>
+        <div class="feature-title" data-lang="en">IMAP Email</div>
+        <div class="feature-desc" data-lang="it">Supporta Gmail, Outlook, Libero, Yahoo e qualsiasi provider IMAP. Analisi diretta sul dispositivo.</div>
+        <div class="feature-desc" data-lang="en">Supports Gmail, Outlook, Libero, Yahoo and any IMAP provider. Direct analysis on the device.</div>
+      </div>
+      <div class="feature-card card-ai">
+        <span class="feature-icon">🤖</span>
+        <div class="feature-title" data-lang="it">Gemini Nano AI</div>
+        <div class="feature-title" data-lang="en">Gemini Nano AI</div>
+        <div class="feature-desc" data-lang="it">Usa Gemini Nano su Android 14+ per un'estrazione intelligente. Fallback automatico su ML Kit.</div>
+        <div class="feature-desc" data-lang="en">Uses Gemini Nano on Android 14+ for smart extraction. Automatic fallback to ML Kit.</div>
+      </div>
+      <div class="feature-card card-tg">
+        <span class="feature-icon">📊</span>
+        <div class="feature-title" data-lang="it">Widget &amp; Notifiche</div>
+        <div class="feature-title" data-lang="en">Widget &amp; Notifications</div>
+        <div class="feature-desc" data-lang="it">Widget homescreen con i prossimi appuntamenti. Notifiche push istantanee quando trova qualcosa di nuovo.</div>
+        <div class="feature-desc" data-lang="en">Homescreen widget with upcoming appointments. Instant push notifications when it finds something new.</div>
+      </div>
+      <div class="feature-card card-privacy">
+        <span class="feature-icon">🔐</span>
+        <div class="feature-title" data-lang="it">Privacy &amp; Sicurezza</div>
+        <div class="feature-title" data-lang="en">Privacy &amp; Security</div>
+        <div class="feature-desc" data-lang="it">PIN o impronta digitale, backup criptato, filtro spam intelligente. I tuoi dati restano sul dispositivo.</div>
+        <div class="feature-desc" data-lang="en">PIN or fingerprint, encrypted backup, smart spam filter. Your data stays on the device.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section style="background: var(--surface); max-width:100%; padding: 100px 24px;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <p class="section-label" data-lang="it">Come funziona</p>
+      <p class="section-label" data-lang="en">How it works</p>
+      <h2 class="section-title">
+        <span data-lang="it">Semplice come 1, 2, 3</span>
+        <span data-lang="en">Simple as 1, 2, 3</span>
+      </h2>
+      <p class="section-sub">
+        <span data-lang="it">Nessuna configurazione complessa. Acquista, installa, scannerizza, conferma.</span>
+        <span data-lang="en">No complex configuration. Purchase, install, scan, confirm.</span>
+      </p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title" data-lang="it">Acquista e installa</div>
+          <div class="step-title" data-lang="en">Purchase and install</div>
+          <div class="step-desc" data-lang="it">Acquista su Gumroad, scarica l'APK e installalo. Concedi i permessi SMS e calendario.</div>
+          <div class="step-desc" data-lang="en">Purchase on Gumroad, download the APK and install it. Grant SMS and calendar permissions.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title" data-lang="it">Scansiona i messaggi</div>
+          <div class="step-title" data-lang="en">Scan messages</div>
+          <div class="step-desc" data-lang="it">Premi "Scansiona tutto" o lascia che l'app lo faccia automaticamente ogni 6 ore. L'AI analizza tutto in locale.</div>
+          <div class="step-desc" data-lang="en">Press "Scan all" or let the app do it automatically every 6 hours. AI analyzes everything locally.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title" data-lang="it">Conferma e salva</div>
+          <div class="step-title" data-lang="en">Confirm and save</div>
+          <div class="step-desc" data-lang="it">Rivedi le bozze trovate, modifica se necessario e salva direttamente nel tuo calendario Android.</div>
+          <div class="step-desc" data-lang="en">Review found drafts, edit if needed and save directly to your Android calendar.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-title" data-lang="it">Tutto automatico</div>
+          <div class="step-title" data-lang="en">Fully automatic</div>
+          <div class="step-desc" data-lang="it">Il servizio in background monitora continuamente i nuovi messaggi e ti avvisa in tempo reale.</div>
+          <div class="step-desc" data-lang="en">The background service continuously monitors new messages and notifies you in real time.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SCREENSHOTS ── -->
+  <section id="screenshots">
+    <p class="section-label" data-lang="it">Screenshots</p>
+    <p class="section-label" data-lang="en">Screenshots</p>
+    <h2 class="section-title">
+      <span data-lang="it">Guarda l'app in azione</span>
+      <span data-lang="en">See the app in action</span>
+    </h2>
+    <div class="screenshots-grid">
+      <div class="screenshot-item"><img src="screenshots/screen1.png" alt="Smart Calendar - Schermata SMS"></div>
+      <div class="screenshot-item"><img src="screenshots/screen2.png" alt="Smart Calendar - WhatsApp Telegram"></div>
+      <div class="screenshot-item"><img src="screenshots/screen3.png" alt="Smart Calendar - Email"></div>
+      <div class="screenshot-item"><img src="screenshots/screen4.png" alt="Smart Calendar - Bozze"></div>
+      <div class="screenshot-item"><img src="screenshots/screen5.png" alt="Smart Calendar - Impostazioni"></div>
+    </div>
+  </section>
+
+  <!-- ── PRIVACY ── -->
+  <section>
+    <div class="privacy-box">
+      <div>
+        <p class="section-label" data-lang="it">Privacy first</p>
+        <p class="section-label" data-lang="en">Privacy first</p>
+        <h2 class="section-title" style="margin-bottom:24px;">
+          <span data-lang="it">I tuoi dati restano<br>sul tuo telefono</span>
+          <span data-lang="en">Your data stays<br>on your phone</span>
+        </h2>
+        <p style="color:var(--muted); margin-bottom:32px; font-size:0.95rem;">
+          <span data-lang="it">Smart Calendar è progettata con la privacy come priorità assoluta. Nessun server esterno, nessun tracciamento, nessuna pubblicità.</span>
+          <span data-lang="en">Smart Calendar is designed with privacy as the absolute priority. No external servers, no tracking, no ads.</span>
+        </p>
+        <ul class="privacy-points">
+          <li><span class="privacy-check">✓</span><span data-lang="it">AI completamente on-device (ML Kit + Gemini Nano)</span><span data-lang="en">Fully on-device AI (ML Kit + Gemini Nano)</span></li>
+          <li><span class="privacy-check">✓</span><span data-lang="it">Nessun dato inviato a server esterni</span><span data-lang="en">No data sent to external servers</span></li>
+          <li><span class="privacy-check">✓</span><span data-lang="it">Nessuna pubblicità o tracciamento</span><span data-lang="en">No advertising or tracking</span></li>
+          <li><span class="privacy-check">✓</span><span data-lang="it">Backup locale criptato</span><span data-lang="en">Local encrypted backup</span></li>
+          <li><span class="privacy-check">✓</span><span data-lang="it">Acquisto unico, nessun abbonamento</span><span data-lang="en">One-time purchase, no subscription</span></li>
+        </ul>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:6rem; margin-bottom:24px;">🔒</div>
+        <div style="background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:12px; padding:20px;">
+          <div style="font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:600; margin-bottom:8px;" data-lang="it">100% privato per design</div>
+          <div style="font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:600; margin-bottom:8px;" data-lang="en">100% private by design</div>
+          <div style="color:var(--muted); font-size:0.85rem;" data-lang="it">Tutti i dati rimangono sul dispositivo e non vengono mai condivisi con terze parti.</div>
+          <div style="color:var(--muted); font-size:0.85rem;" data-lang="en">All data remains on the device and is never shared with third parties.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DOWNLOAD CTA ── -->
+  <section id="download" style="padding-top:0;">
+    <div class="cta-box">
+      <h2 class="cta-title">
+        <span data-lang="it">Pronto a non perdere<br>più nessun appuntamento?</span>
+        <span data-lang="en">Ready to never miss<br>an appointment again?</span>
+      </h2>
+      <p class="cta-sub">
+        <span data-lang="it">Acquista Smart Calendar una sola volta. Nessun abbonamento, nessun costo nascosto. Compatibile con Android 8.0+.</span>
+        <span data-lang="en">Buy Smart Calendar once. No subscription, no hidden costs. Compatible with Android 8.0+.</span>
+      </p>
+      <div class="price-badge">
+        ✅ <span data-lang="it">Acquisto unico — nessun abbonamento</span><span data-lang="en">One-time purchase — no subscription</span>
+      </div>
+      <br>
+      <a href="https://idqster.gumroad.com/l/smart-calendar" class="btn-primary" style="font-size:16px; padding:16px 36px;">
+        🛒 <span data-lang="it">Acquista ora — €2.99</span><span data-lang="en">Buy now — €2.99</span>
+      </a>
+      <p class="cta-note">
+        <span data-lang="it">Android 8.0+ · Versione 1.0.0 · ~10 MB · Pagamento sicuro tramite Gumroad</span>
+        <span data-lang="en">Android 8.0+ · Version 1.0.0 · ~10 MB · Secure payment via Gumroad</span>
+      </p>
+      <p class="cta-note" style="margin-top:8px;">
+        <span data-lang="it">⚠️ Nota: Android potrebbe mostrare un avviso durante l'installazione. È normale per le app fuori dal Play Store — l'app è sicura al 100%.</span>
+        <span data-lang="en">⚠️ Note: Android may show a warning during installation. This is normal for apps outside the Play Store — the app is 100% safe.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p style="margin-bottom:8px;">
+      <strong>Smart Calendar</strong> —
+      <span data-lang="it">Sviluppato da</span>
+      <span data-lang="en">Developed by</span>
+      <a href="mailto:info.idq.26@gmail.com">Paolo Migliaccio</a>
+    </p>
+    <p>
+      <a href="privacy.html" data-lang="it">Informativa sulla Privacy</a>
+      <a href="privacy.html" data-lang="en">Privacy Policy</a>
+      ·
+      <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a>
+      ·
+      <span data-lang="it">© 2026 Tutti i diritti riservati</span>
+      <span data-lang="en">© 2026 All rights reserved</span>
+    </p>
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      document.body.classList.toggle('en', lang === 'en');
+      document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      localStorage.setItem('sc-lang', lang);
+    }
+    const saved = localStorage.getItem('sc-lang');
+    if (saved === 'en') setLang('en');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeUp 0.7s ease forwards';
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.feature-card, .step, .screenshot-item').forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
+  </script>
+<script>
+(function(){
+  var sw=document.getElementById('idq-switch');if(!sw)return;
+  var btn=document.getElementById('idq-switch-btn');
+  var menu=document.getElementById('idq-switch-menu');
+  function openM(){sw.classList.add('open');menu.hidden=false;btn.setAttribute('aria-expanded','true');}
+  function closeM(){sw.classList.remove('open');menu.hidden=true;btn.setAttribute('aria-expanded','false');}
+  btn.addEventListener('click',function(e){e.stopPropagation();menu.hidden?openM():closeM();});
+  document.addEventListener('click',function(e){if(!sw.contains(e.target))closeM();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+})();
+</script>
+</body>
+</html>

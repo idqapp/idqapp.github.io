@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="it" data-l="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pagina non trovata — IDQ Developer</title>
+<meta name="description" content="La pagina che cercavi non esiste. Torna alla home di IDQ Developer o vai direttamente a uno dei progetti.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0a0a0f">
+
+<!-- percorsi assoluti: questa pagina viene servita anche su URL profondi (es. /abc/def) -->
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+
+<style>
+:root{
+  --bg:#0a0a0f; --surface:#15151d; --surface-2:#1b1b25; --border:#262632;
+  --text:#f5f3f7; --text-dim:#a7a7ba; --text-faint:#6e6e82;
+  --accent:#ff7a00; --accent-ink:#1a0f02; --accent-dim:rgba(255,122,0,.14); --accent2:#4aa8ff;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:
+    radial-gradient(760px 420px at 50% -140px, rgba(255,122,0,.17), transparent 70%),
+    var(--bg);
+  color:var(--text);
+  font-family:"Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:17px;line-height:1.6;
+  display:flex;flex-direction:column;min-height:100vh;
+}
+.wrap{width:100%;max-width:640px;margin-inline:auto;padding-inline:20px}
+main{flex:1;display:flex;align-items:center;padding-block:72px}
+img{max-width:100%;display:block}
+a{color:var(--accent)}
+
+.l{display:none}
+html[data-l=it] .l[data-l=it],html[data-l=en] .l[data-l=en],html[data-l=fr] .l[data-l=fr],html[data-l=de] .l[data-l=de],html[data-l=es] .l[data-l=es]{display:block}
+html[data-l=it] span.l[data-l=it],html[data-l=en] span.l[data-l=en],html[data-l=fr] span.l[data-l=fr],html[data-l=de] span.l[data-l=de],html[data-l=es] span.l[data-l=es]{display:inline}
+
+.topbar{display:flex;justify-content:flex-end;padding:16px 20px 0}
+.lang-switch{position:relative;flex:none}
+.lang-btn{display:flex;align-items:center;gap:7px;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:8px 12px;cursor:pointer;font:inherit;font-size:14px}
+.lang-btn:hover{border-color:#3b3b4c}
+.lang-btn .flag{font-size:17px;line-height:1}
+.lang-btn .code{font-weight:700;letter-spacing:.02em}
+.lang-btn .chev{width:14px;height:14px;transition:transform .15s ease;flex:none}
+.lang-switch.open .lang-btn .chev{transform:rotate(180deg)}
+.lang-menu{position:absolute;top:calc(100% + 8px);right:0;z-index:30;list-style:none;margin:0;padding:6px;min-width:172px;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.lang-menu[hidden]{display:none}
+.lang-menu button{width:100%;display:flex;align-items:center;gap:10px;background:none;border:0;border-radius:9px;padding:9px 10px;color:var(--text);font:inherit;font-size:14.5px;text-align:left;cursor:pointer}
+.lang-menu button:hover{background:var(--surface-2)}
+.lang-menu button.on{color:var(--accent);font-weight:700}
+.lang-menu .flag{font-size:17px}
+
+.eyebrow{font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.bar{width:56px;height:4px;border-radius:99px;margin-top:14px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+
+h1{
+  font-weight:800;letter-spacing:-.015em;line-height:1.1;
+  font-size:clamp(30px,7vw,46px);
+  margin:18px 0 16px;text-wrap:balance;
+}
+h1 .accent{color:var(--accent)}
+p.lead{color:var(--text-dim);margin:0;max-width:52ch}
+
+.btn{
+  display:inline-flex;align-items:center;gap:9px;margin-top:30px;
+  padding:15px 26px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px;
+  background:var(--accent);color:var(--accent-ink);box-shadow:0 14px 34px rgba(255,122,0,.3);
+}
+.btn:hover{box-shadow:0 0 0 1px var(--accent), 0 0 34px rgba(255,122,0,.35)}
+.btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+h2{
+  font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);
+  margin:44px 0 14px;
+}
+ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ul a{
+  display:flex;align-items:center;gap:13px;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:13px 16px;text-decoration:none;color:var(--text);font-weight:700;font-size:15.5px;
+}
+ul a:hover{border-color:var(--accent)}
+ul img{width:34px;height:34px;border-radius:9px;flex:none;border:1px solid var(--border)}
+ul .path{margin-left:auto;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-dim);border-radius:999px;padding:3px 9px}
+@media (max-width:420px){ ul .path{display:none} }
+
+footer{border-top:1px solid var(--border);padding-block:24px}
+footer p{font-size:13px;color:var(--text-dim);margin:0;font-weight:500}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="lang-switch" id="lang-switch">
+    <button class="lang-btn" id="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">
+      <span class="flag" id="lang-flag">🇮🇹</span>
+      <span class="code" id="lang-code">IT</span>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <ul class="lang-menu" id="lang-menu" role="listbox" hidden>
+      <li><button type="button" data-l="it" role="option"><span class="flag">🇮🇹</span>Italiano</button></li>
+      <li><button type="button" data-l="en" role="option"><span class="flag">🇬🇧</span>English</button></li>
+      <li><button type="button" data-l="fr" role="option"><span class="flag">🇫🇷</span>Français</button></li>
+      <li><button type="button" data-l="de" role="option"><span class="flag">🇩🇪</span>Deutsch</button></li>
+      <li><button type="button" data-l="es" role="option"><span class="flag">🇪🇸</span>Español</button></li>
+    </ul>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <p class="eyebrow">
+      <span class="l" data-l="it">Errore 404</span><span class="l" data-l="en">Error 404</span><span class="l" data-l="fr">Erreur 404</span><span class="l" data-l="de">Fehler 404</span><span class="l" data-l="es">Error 404</span>
+    </p>
+    <h1>
+      <span class="l" data-l="it">Questa pagina non esiste<span class="accent">.</span></span>
+      <span class="l" data-l="en">This page doesn't exist<span class="accent">.</span></span>
+      <span class="l" data-l="fr">Cette page n'existe pas<span class="accent">.</span></span>
+      <span class="l" data-l="de">Diese Seite gibt es nicht<span class="accent">.</span></span>
+      <span class="l" data-l="es">Esta página no existe<span class="accent">.</span></span>
+    </h1>
+    <p class="lead">
+      <span class="l" data-l="it">L'indirizzo è sbagliato, oppure la pagina è stata spostata. Nessun problema: da qui torni alla home o vai dritto al progetto che cercavi.</span>
+      <span class="l" data-l="en">The address is wrong, or the page has moved. No problem: from here you can go back home or straight to the project you were looking for.</span>
+      <span class="l" data-l="fr">L'adresse est erronée, ou la page a été déplacée. Aucun problème : d'ici, retournez à l'accueil ou allez directement au projet que vous cherchiez.</span>
+      <span class="l" data-l="de">Die Adresse ist falsch, oder die Seite wurde verschoben. Kein Problem: Von hier aus geht es zurück zur Startseite oder direkt zum gesuchten Projekt.</span>
+      <span class="l" data-l="es">La dirección es incorrecta, o la página se ha movido. No hay problema: desde aquí puedes volver al inicio o ir directo al proyecto que buscabas.</span>
+    </p>
+
+    <a class="btn" href="/">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span class="l" data-l="it">Torna alla home</span>
+      <span class="l" data-l="en">Back to home</span>
+      <span class="l" data-l="fr">Retour à l'accueil</span>
+      <span class="l" data-l="de">Zurück zur Startseite</span>
+      <span class="l" data-l="es">Volver al inicio</span>
+    </a>
+
+    <h2>
+      <span class="l" data-l="it">Oppure vai a un progetto</span>
+      <span class="l" data-l="en">Or go to a project</span>
+      <span class="l" data-l="fr">Ou accédez à un projet</span>
+      <span class="l" data-l="de">Oder zu einem Projekt</span>
+      <span class="l" data-l="es">O ve a un proyecto</span>
+    </h2>
+    <ul>
+      <li><a href="/biker/"><img src="/assets/icons/biker.png" width="34" height="34" alt="">IDQ Biker Maps<span class="path">/biker</span></a></li>
+      <li><a href="/navigator/"><img src="/assets/icons/navigator.png" width="34" height="34" alt="">IDQ Navigator<span class="path">/navigator</span></a></li>
+      <li><a href="/monitor/"><img src="/assets/icons/monitor.png" width="34" height="34" alt="">IDQ Monitor User<span class="path">/monitor</span></a></li>
+      <li><a href="/calendar/"><img src="/assets/icons/calendar.png" width="34" height="34" alt="">Smart Calendar<span class="path">/calendar</span></a></li>
+      <li><a href="/converter/"><img src="/assets/icons/converter.png" width="34" height="34" alt="">IDQ File Converter<span class="path">/converter</span></a></li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="year">2026</span> IDQ · <a href="/#contatti"><span class="l" data-l="it">Contatti</span><span class="l" data-l="en">Contact</span><span class="l" data-l="fr">Contact</span><span class="l" data-l="de">Kontakt</span><span class="l" data-l="es">Contacto</span></a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var L = ["it","en","fr","de","es"];
+  var FLAGS = { it:"🇮🇹", en:"🇬🇧", fr:"🇫🇷", de:"🇩🇪", es:"🇪🇸" };
+  var q = (location.search.match(/[?&]lang=(\w\w)/) || [])[1];
+  var s = null; try { s = localStorage.getItem("l"); } catch (e) {}
+  var n = ((navigator.language || "it").slice(0,2));
+  var l = L.indexOf(q) >= 0 ? q : (L.indexOf(s) >= 0 ? s : (L.indexOf(n) >= 0 ? n : "it"));
+
+  var root = document.documentElement;
+  var langBtn = document.getElementById("lang-btn");
+  var langMenu = document.getElementById("lang-menu");
+  var langSwitch = document.getElementById("lang-switch");
+  var flagEl = document.getElementById("lang-flag");
+  var codeEl = document.getElementById("lang-code");
+
+  function set(x){
+    root.setAttribute("data-l", x);
+    root.lang = x;
+    try { localStorage.setItem("l", x); } catch (e) {}
+    flagEl.textContent = FLAGS[x] || FLAGS.it;
+    codeEl.textContent = x.toUpperCase();
+    langMenu.querySelectorAll("button[data-l]").forEach(function(b){
+      b.classList.toggle("on", b.dataset.l === x);
+    });
+  }
+  function openMenu(){ langSwitch.classList.add("open"); langMenu.hidden = false; langBtn.setAttribute("aria-expanded","true"); }
+  function closeMenu(){ langSwitch.classList.remove("open"); langMenu.hidden = true; langBtn.setAttribute("aria-expanded","false"); }
+  langBtn.addEventListener("click", function(e){ e.stopPropagation(); langMenu.hidden ? openMenu() : closeMenu(); });
+  document.addEventListener("click", function(e){ if (!langSwitch.contains(e.target)) closeMenu(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeMenu(); });
+  langMenu.querySelectorAll("button[data-l]").forEach(function(b){
+    b.addEventListener("click", function(){ set(b.dataset.l); closeMenu(); });
+  });
+
+  set(l);
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+
+</body>
+</html>

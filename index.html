@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="it" data-l="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>IDQ Developer — App Android offline-first</title>
+<meta name="description" content="IDQ Developer: laboratorio indipendente e privato che sviluppa per Android, Ubuntu, Raspberry Pi e Windows. Mappe e giri in moto, navigazione offline, monitoraggio PC, calendario con AI on-device, conversione file. Senza cloud, senza pubblicità, senza account.">
+<meta name="author" content="IDQ">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="canonical" href="https://idq-developer.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IDQ Developer">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="IDQ Developer — App Android offline-first">
+<meta property="og:description" content="Laboratorio indipendente che sviluppa app per Android, Ubuntu, Raspberry Pi e Windows. Mappe e giri in moto, navigazione offline, monitoraggio PC, calendario con AI on-device, conversione file. Senza cloud, senza pubblicità, senza account.">
+<meta property="og:url" content="https://idq-developer.com/">
+<meta property="og:image" content="https://idq-developer.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="IDQ Developer — App Android offline-first">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="IDQ Developer — App Android offline-first">
+<meta name="twitter:description" content="Mappe offline, navigazione, monitoraggio PC, calendario con AI on-device, conversione file. Zero cloud, zero pubblicità.">
+<meta name="twitter:image" content="https://idq-developer.com/assets/og.png">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+
+<!--
+  Modulo contatti: invio reale via EmailJS (nessun server necessario).
+  PRIMA DI PUBBLICARE, sostituisci i 3 segnaposto qui sotto e nello script più in basso
+  (cerca "EMAILJS_PUBLIC_KEY", "EMAILJS_SERVICE_ID", "EMAILJS_TEMPLATE_ID")
+  con le chiavi vere del tuo account gratuito su https://www.emailjs.com
+-->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+/* Tema unico, scuro: identità di brand (stesso linguaggio di IDQ Biker Maps), niente toggle chiaro/scuro. */
+:root{
+  --bg:#0a0a0f;
+  --surface:#15151d;
+  --surface-2:#1b1b25;
+  --border:#262632;
+  --border-hover:#3b3b4c;
+  --text:#f5f3f7;
+  --text-dim:#a7a7ba;
+  --text-faint:#6e6e82;
+  --accent:#ff7a00;
+  --accent-ink:#1a0f02;
+  --accent-dim:rgba(255,122,0,.14);
+  --accent2:#4aa8ff;
+  --ok:#49d17a;
+  --ok-dim:rgba(73,209,122,.14);
+  --danger:#ff5d6c;
+  --danger-dim:rgba(255,93,108,.14);
+  --shadow:0 20px 44px rgba(0,0,0,.5);
+  --glow:0 0 0 1px var(--accent), 0 0 34px rgba(255,122,0,.35);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important;transition:none!important} }
+
+body{
+  margin:0;
+  background:
+    radial-gradient(820px 460px at 50% -140px, rgba(255,122,0,.17), transparent 70%),
+    var(--bg);
+  color:var(--text);
+  font-family:"Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{width:100%;max-width:1100px;margin-inline:auto;padding-inline:20px}
+
+h1,h2,h3{font-family:"Plus Jakarta Sans",system-ui,sans-serif;text-wrap:balance;margin:0;letter-spacing:-.015em;line-height:1.1;font-weight:800}
+p{margin:0}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+img{max-width:100%;display:block}
+.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* ---------- motore multilingua: stesso meccanismo degli altri siti IDQ ---------- */
+.l{display:none}
+html[data-l=it] .l[data-l=it],html[data-l=en] .l[data-l=en],html[data-l=fr] .l[data-l=fr],html[data-l=de] .l[data-l=de],html[data-l=es] .l[data-l=es]{display:block}
+html[data-l=it] span.l[data-l=it],html[data-l=en] span.l[data-l=en],html[data-l=fr] span.l[data-l=fr],html[data-l=de] span.l[data-l=de],html[data-l=es] span.l[data-l=es]{display:inline}
+
+.eyebrow{
+  font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+}
+.sec-head h2 + .bar,.hero .bar{
+  width:64px;height:4px;border-radius:99px;margin-top:16px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+
+/* ---------- intestazione ---------- */
+header.site{
+  position:sticky;top:0;z-index:20;
+  background:rgba(10,10,15,.82);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+header.site .wrap{display:flex;align-items:center;gap:14px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);flex:none}
+.brand img{width:30px;height:30px;border-radius:8px;flex:none}
+.brand .word{font-weight:800;font-size:19px;letter-spacing:-.01em}
+.brand .word .sub{font-weight:500;color:var(--text-dim)}
+
+.live-pill{
+  display:flex;align-items:center;gap:7px;
+  font-size:13px;font-weight:600;color:var(--text-dim);
+  border:1px solid var(--border);border-radius:999px;padding:6px 14px;
+  margin-left:auto;white-space:nowrap;
+}
+.live-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);flex:none}
+@media (max-width:860px){ .live-pill{display:none} }
+
+nav.main{display:flex;align-items:center;gap:4px}
+nav.main a{
+  color:var(--text-dim);text-decoration:none;font-size:15px;font-weight:600;
+  padding:8px 13px;border-radius:999px;white-space:nowrap;
+}
+nav.main a:hover{color:var(--text);background:var(--surface-2)}
+@media (max-width:620px){ nav.main a.hide-s{display:none} }
+
+/* ---------- selettore lingua: bandierina + tendina ---------- */
+.lang-switch{position:relative;flex:none}
+.lang-btn{
+  display:flex;align-items:center;gap:7px;border:1px solid var(--border);background:var(--surface);
+  color:var(--text);border-radius:999px;padding:8px 12px;cursor:pointer;font:inherit;font-size:14px;
+}
+.lang-btn:hover{border-color:var(--border-hover)}
+.lang-btn .flag{font-size:17px;line-height:1}
+.lang-btn .code{font-weight:700;letter-spacing:.02em}
+.lang-btn .chev{width:14px;height:14px;transition:transform .15s ease;flex:none}
+.lang-switch.open .lang-btn .chev{transform:rotate(180deg)}
+.lang-menu{
+  position:absolute;top:calc(100% + 8px);right:0;z-index:30;
+  list-style:none;margin:0;padding:6px;min-width:172px;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);
+}
+.lang-menu button{
+  width:100%;display:flex;align-items:center;gap:10px;background:none;border:0;border-radius:9px;
+  padding:9px 10px;color:var(--text);font:inherit;font-size:14.5px;text-align:left;cursor:pointer;
+}
+.lang-menu button:hover{background:var(--surface-2)}
+.lang-menu button.on{color:var(--accent);font-weight:700}
+.lang-menu .flag{font-size:17px}
+
+/* ---------- hero ---------- */
+.hero{padding-block:84px 56px;text-align:center}
+.hero .eyebrow{display:block}
+.hero h1{font-size:clamp(32px,6.4vw,62px);margin-block:18px 20px;max-width:18ch;margin-inline:auto}
+.hero h1 .accent{color:var(--accent)}
+.hero .lead{font-size:clamp(16px,2.1vw,19px);color:var(--text-dim);max-width:58ch;margin-inline:auto}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;justify-content:center}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:15px 28px;border-radius:999px;font-weight:700;font-size:16px;
+  text-decoration:none;border:1px solid transparent;cursor:pointer;
+  transition:box-shadow .15s ease, transform .15s ease, border-color .15s ease;
+}
+.btn-ac{background:var(--accent);color:var(--accent-ink);box-shadow:0 14px 34px rgba(255,122,0,.3)}
+.btn-ac:hover{box-shadow:var(--glow);transform:translateY(-2px)}
+.btn-gh{background:transparent;color:var(--text);border-color:var(--border)}
+.btn-gh:hover{border-color:var(--border-hover);background:var(--surface)}
+.btn svg{width:17px;height:17px}
+
+.badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:28px}
+.badge{
+  display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--text-dim);
+  background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:7px 14px;
+}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
+
+.stats{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  margin-top:56px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.stats div{
+  flex:1 1 160px;padding:26px 20px;text-align:center;border-left:1px solid var(--border);
+}
+.stats div:first-child{border-left:none}
+.stats .n{font-weight:800;font-size:clamp(28px,4vw,40px);font-variant-numeric:tabular-nums;color:var(--accent);display:flex;align-items:center;justify-content:center;gap:9px}
+.stats .n .dot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);flex:none}
+.stats .l,.stats .l-static{font-size:12.5px;color:var(--text-dim);line-height:1.4;margin-top:6px;font-weight:600;letter-spacing:.02em}
+@media (max-width:620px){ .stats div{flex:1 1 44%;border-left:none;border-top:1px solid var(--border)} .stats div:nth-child(odd){border-right:1px solid var(--border)} }
+
+/* ---------- sezioni ---------- */
+section{padding-block:66px;scroll-margin-top:72px}
+.sec-head{margin-bottom:34px}
+.sec-head h2{font-size:clamp(26px,4vw,36px);margin-top:10px}
+.sec-head p{color:var(--text-dim);margin-top:16px;max-width:62ch;font-size:16px}
+
+/* ---------- progetti ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:760px){
+  .grid{grid-template-columns:1fr}
+}
+
+.proj{
+  --hue:var(--accent);
+  display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:24px 26px;
+  transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.proj:hover{border-color:var(--hue);box-shadow:var(--shadow);transform:translateY(-3px)}
+.proj .meta-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.proj .route{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:600;color:var(--hue);background:color-mix(in srgb, var(--hue) 16%, transparent);border-radius:999px;padding:4px 10px}
+.proj .status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--text-dim);background:var(--surface-2);border-radius:999px;padding:4px 10px}
+.proj .status .dot{width:6px;height:6px;border-radius:50%;flex:none;background:var(--hue)}
+.proj .status.ok .dot{background:var(--ok)}
+
+.proj .top{display:flex;align-items:flex-start;gap:16px}
+.proj .ico{
+  width:64px;height:64px;flex:none;border-radius:16px;border:2px solid var(--hue);
+  box-shadow:0 0 22px color-mix(in srgb, var(--hue) 45%, transparent);
+}
+.proj h3{font-size:21px}
+.proj .kind{font-size:12.5px;font-weight:700;letter-spacing:.03em;color:var(--text-faint);margin-top:5px;text-transform:uppercase}
+.proj .desc{color:var(--text-dim);font-size:15.5px;margin-top:16px;flex:1}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.chip{
+  font-size:12px;font-weight:600;
+  color:var(--text-dim);background:var(--surface-2);border-radius:999px;padding:5px 11px;white-space:nowrap;
+}
+
+.price-note{margin-top:22px;font-size:12.5px;color:var(--text-faint)}
+
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.links a{font-weight:700;font-size:14.5px;text-decoration:none;color:var(--text)}
+.links a:hover{color:var(--hue)}
+.links .sep{color:var(--text-faint);font-size:12px}
+.links a.primary{color:var(--hue)}
+
+/* ---------- approccio ---------- */
+.lab-intro{color:var(--text-dim);max-width:72ch;margin-bottom:36px;font-size:16px}
+.lab-intro strong{color:var(--text);font-weight:800}
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:860px){ .principles{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:560px){ .principles{grid-template-columns:1fr} }
+.pr{
+  background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px 22px;
+}
+.pr .idx{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:10px;background:var(--accent-dim);color:var(--accent);
+  font-weight:800;font-size:14px;margin-bottom:14px;
+}
+.pr h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.pr p{color:var(--text-dim);font-size:14.5px}
+
+/* ---------- contatti ---------- */
+.contact-form{display:flex;flex-direction:column;gap:18px;margin-top:30px;max-width:680px}
+.field-row{display:flex;flex-wrap:wrap;gap:16px}
+.field{flex:1 1 220px;display:flex;flex-direction:column;gap:7px}
+.field label{font-size:13.5px;font-weight:700;color:var(--text-dim)}
+.field label .req{color:var(--accent);font-weight:700}
+.contact-form select,.contact-form textarea,.contact-form input{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;color:var(--text);
+  padding:12px 14px;font:inherit;font-size:15px;width:100%;
+}
+.contact-form select{appearance:auto;cursor:pointer}
+.contact-form select:invalid{color:var(--text-faint)}
+.contact-form textarea{resize:vertical;min-height:130px;line-height:1.55}
+.contact-form select:focus,.contact-form textarea:focus,.contact-form input:focus{
+  outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);
+}
+.contact-form select.invalid,.contact-form textarea.invalid,.contact-form input.invalid{
+  border-color:var(--danger);box-shadow:0 0 0 3px var(--danger-dim);
+}
+.contact-form .btn[disabled]{opacity:.6;cursor:default;transform:none!important}
+.hint{font-size:12.5px;color:var(--text-faint);margin:0}
+.error{font-size:13.5px;font-weight:700;color:var(--danger);margin:0}
+.contact-form .btn{align-self:flex-start}
+
+.modal-overlay{
+  position:fixed;inset:0;z-index:50;
+  background:rgba(5,5,8,.72);backdrop-filter:blur(3px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay[hidden]{display:none}
+.modal{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  max-width:420px;width:100%;padding:30px 28px 28px;text-align:center;
+  box-shadow:var(--shadow);
+}
+.modal-check{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:52px;height:52px;border-radius:50%;background:var(--ok-dim);color:var(--ok);margin-bottom:16px;
+}
+.modal-check svg{width:26px;height:26px}
+.modal-check.error{background:var(--danger-dim);color:var(--danger)}
+.modal h3{font-size:21px;margin-bottom:10px}
+.modal p{color:var(--text-dim);font-size:15px;line-height:1.55}
+.modal p strong{color:var(--text)}
+.modal .btn{margin-top:22px;width:100%;justify-content:center}
+
+/* ---------- footer ---------- */
+footer.site{border-top:1px solid var(--border);margin-top:20px;padding-block:30px 44px}
+footer.site .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between}
+footer.site .left{display:flex;flex-direction:column;gap:4px}
+footer.site p{font-size:13px;color:var(--text-dim);margin:0;font-weight:500}
+footer.site .tag{color:var(--text-faint)}
+footer.site nav{display:flex;flex-wrap:wrap;gap:20px}
+footer.site nav a{font-size:13.5px;color:var(--text-dim);text-decoration:none;font-weight:600}
+footer.site nav a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <img src="assets/favicon-32.png" width="30" height="30" alt="">
+      <span class="word">IDQ <span class="sub">Developer</span></span>
+    </a>
+    <nav class="main">
+      <a href="#progetti"><span class="l" data-l="it">Progetti</span><span class="l" data-l="en">Projects</span><span class="l" data-l="fr">Projets</span><span class="l" data-l="de">Projekte</span><span class="l" data-l="es">Proyectos</span></a>
+      <a href="#approccio" class="hide-s"><span class="l" data-l="it">Approccio</span><span class="l" data-l="en">Approach</span><span class="l" data-l="fr">Approche</span><span class="l" data-l="de">Ansatz</span><span class="l" data-l="es">Enfoque</span></a>
+      <a href="#contatti"><span class="l" data-l="it">Contatti</span><span class="l" data-l="en">Contact</span><span class="l" data-l="fr">Contact</span><span class="l" data-l="de">Kontakt</span><span class="l" data-l="es">Contacto</span></a>
+    </nav>
+    <span class="live-pill"><span class="dot"></span><span class="l" data-l="it">5 progetti · 2 in produzione</span><span class="l" data-l="en">5 projects · 2 live</span><span class="l" data-l="fr">5 projets · 2 en production</span><span class="l" data-l="de">5 Projekte · 2 im Einsatz</span><span class="l" data-l="es">5 proyectos · 2 en producción</span></span>
+
+    <div class="lang-switch" id="lang-switch">
+      <button class="lang-btn" id="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">
+        <span class="flag" id="lang-flag">🇮🇹</span>
+        <span class="code" id="lang-code">IT</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <ul class="lang-menu" id="lang-menu" role="listbox" hidden>
+        <li><button type="button" data-l="it" role="option"><span class="flag">🇮🇹</span>Italiano</button></li>
+        <li><button type="button" data-l="en" role="option"><span class="flag">🇬🇧</span>English</button></li>
+        <li><button type="button" data-l="fr" role="option"><span class="flag">🇫🇷</span>Français</button></li>
+        <li><button type="button" data-l="de" role="option"><span class="flag">🇩🇪</span>Deutsch</button></li>
+        <li><button type="button" data-l="es" role="option"><span class="flag">🇪🇸</span>Español</button></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== HERO ===================== -->
+  <div class="wrap hero">
+    <p class="eyebrow">
+      <span class="l" data-l="it">Laboratorio indipendente e privato</span>
+      <span class="l" data-l="en">Independent, private lab</span>
+      <span class="l" data-l="fr">Laboratoire indépendant et privé</span>
+      <span class="l" data-l="de">Unabhängiges, privates Labor</span>
+      <span class="l" data-l="es">Laboratorio independiente y privado</span>
+    </p>
+    <h1>
+      <span class="l" data-l="it">Offline-first. Privacy-first. <span class="accent">Sempre.</span></span>
+      <span class="l" data-l="en">Offline-first. Privacy-first. <span class="accent">Always.</span></span>
+      <span class="l" data-l="fr">Offline-first. Privacy-first. <span class="accent">Toujours.</span></span>
+      <span class="l" data-l="de">Offline-first. Privacy-first. <span class="accent">Immer.</span></span>
+      <span class="l" data-l="es">Offline-first. Privacy-first. <span class="accent">Siempre.</span></span>
+    </h1>
+    <p class="lead">
+      <span class="l" data-l="it">IDQ Developer progetta e costruisce app Android che fanno il lavoro sul dispositivo: mappe e giri in moto, navigazione senza rete, monitoraggio dei computer, un calendario che legge i messaggi con AI locale, conversione di file.</span>
+      <span class="l" data-l="en">IDQ Developer designs and builds Android apps that do the work on the device: maps and motorcycle rides, navigation without a network, computer monitoring, a calendar that reads your messages with local AI, file conversion.</span>
+      <span class="l" data-l="fr">IDQ Developer conçoit et développe des applications Android qui font le travail sur l'appareil : cartes et balades à moto, navigation sans réseau, surveillance d'ordinateurs, un calendrier qui lit les messages avec une IA locale, conversion de fichiers.</span>
+      <span class="l" data-l="de">IDQ Developer entwirft und entwickelt Android-Apps, die die Arbeit auf dem Gerät erledigen: Karten und Motorradtouren, Navigation ohne Netz, Computerüberwachung, ein Kalender, der Nachrichten mit lokaler KI liest, Dateikonvertierung.</span>
+      <span class="l" data-l="es">IDQ Developer diseña y crea apps de Android que hacen el trabajo en el dispositivo: mapas y rutas en moto, navegación sin red, monitorización de ordenadores, un calendario que lee mensajes con IA local, conversión de archivos.</span>
+    </p>
+    <div class="cta">
+      <a class="btn btn-ac" href="#progetti">
+        <span class="l" data-l="it">Esplora i progetti</span>
+        <span class="l" data-l="en">Explore the projects</span>
+        <span class="l" data-l="fr">Découvrir les projets</span>
+        <span class="l" data-l="de">Projekte entdecken</span>
+        <span class="l" data-l="es">Explora los proyectos</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+      <a class="btn btn-gh" href="#approccio">
+        <span class="l" data-l="it">Scopri l'approccio</span>
+        <span class="l" data-l="en">See the approach</span>
+        <span class="l" data-l="fr">Découvrir l'approche</span>
+        <span class="l" data-l="de">Den Ansatz entdecken</span>
+        <span class="l" data-l="es">Descubre el enfoque</span>
+      </a>
+    </div>
+    <div class="badges">
+      <span class="badge"><span class="dot"></span><span class="l" data-l="it">Zero pubblicità</span><span class="l" data-l="en">No ads</span><span class="l" data-l="fr">Zéro publicité</span><span class="l" data-l="de">Keine Werbung</span><span class="l" data-l="es">Cero publicidad</span></span>
+      <span class="badge"><span class="dot"></span><span class="l" data-l="it">Zero account</span><span class="l" data-l="en">No account</span><span class="l" data-l="fr">Zéro compte</span><span class="l" data-l="de">Kein Konto</span><span class="l" data-l="es">Cero cuentas</span></span>
+      <span class="badge"><span class="dot"></span><span class="l" data-l="it">5 lingue</span><span class="l" data-l="en">5 languages</span><span class="l" data-l="fr">5 langues</span><span class="l" data-l="de">5 Sprachen</span><span class="l" data-l="es">5 idiomas</span></span>
+      <span class="badge"><span class="dot"></span>Offline-first</span>
+    </div>
+
+    <div class="stats">
+      <div><div class="n">5</div><div class="l" data-l="it">PROGETTI ATTIVI</div><div class="l" data-l="en">ACTIVE PROJECTS</div><div class="l" data-l="fr">PROJETS ACTIFS</div><div class="l" data-l="de">AKTIVE PROJEKTE</div><div class="l" data-l="es">PROYECTOS ACTIVOS</div></div>
+      <div><div class="n"><span class="dot"></span>2</div><div class="l" data-l="it">IN PRODUZIONE SU GOOGLE PLAY</div><div class="l" data-l="en">LIVE ON GOOGLE PLAY</div><div class="l" data-l="fr">EN PRODUCTION SUR GOOGLE PLAY</div><div class="l" data-l="de">IM EINSATZ AUF GOOGLE PLAY</div><div class="l" data-l="es">EN PRODUCCIÓN EN GOOGLE PLAY</div></div>
+      <div><div class="n">5</div><div class="l-static mono">LINGUE · IT EN FR DE ES</div></div>
+      <div><div class="n">0</div><div class="l" data-l="it">PUBBLICITÀ E TRACKER</div><div class="l" data-l="en">ADS AND TRACKERS</div><div class="l" data-l="fr">PUBLICITÉ ET TRACKEURS</div><div class="l" data-l="de">WERBUNG UND TRACKER</div><div class="l" data-l="es">PUBLICIDAD Y RASTREADORES</div></div>
+    </div>
+  </div>
+
+  <!-- ===================== PROGETTI ===================== -->
+  <section id="progetti">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="l" data-l="it">Progetti</span><span class="l" data-l="en">Projects</span><span class="l" data-l="fr">Projets</span><span class="l" data-l="de">Projekte</span><span class="l" data-l="es">Proyectos</span></p>
+        <h2><span class="l" data-l="it">I progetti</span><span class="l" data-l="en">The projects</span><span class="l" data-l="fr">Les projets</span><span class="l" data-l="de">Die Projekte</span><span class="l" data-l="es">Los proyectos</span></h2>
+        <div class="bar"></div>
+        <p>
+          <span class="l" data-l="it">Ogni progetto è un'app Android indipendente, con un sito dedicato raggiungibile da un percorso di questo dominio.</span>
+          <span class="l" data-l="en">Each project is an independent Android app, with a dedicated site reachable from a path on this domain.</span>
+          <span class="l" data-l="fr">Chaque projet est une application Android indépendante, avec un site dédié accessible depuis un chemin de ce domaine.</span>
+          <span class="l" data-l="de">Jedes Projekt ist eine eigenständige Android-App mit einer eigenen Website, erreichbar über einen Pfad dieser Domain.</span>
+          <span class="l" data-l="es">Cada proyecto es una app Android independiente, con un sitio propio accesible desde una ruta de este dominio.</span>
+        </p>
+      </div>
+
+      <div class="grid">
+
+        <article class="proj" style="--hue:#ff7a00">
+          <div class="meta-row">
+            <span class="route">/biker</span>
+            <span class="status"><span class="dot"></span><span class="l" data-l="it">SITO LIVE</span><span class="l" data-l="en">LIVE SITE</span><span class="l" data-l="fr">SITE EN LIGNE</span><span class="l" data-l="de">SEITE LIVE</span><span class="l" data-l="es">SITIO EN VIVO</span></span>
+          </div>
+          <div class="top">
+            <img class="ico" src="assets/icons/biker.png" width="64" height="64" alt="Icona di IDQ Biker Maps" loading="lazy">
+            <div>
+              <h3>IDQ Biker Maps</h3>
+              <p class="kind"><span class="l" data-l="it">Android · Moto</span><span class="l" data-l="en">Android · Motorcycle</span><span class="l" data-l="fr">Android · Moto</span><span class="l" data-l="de">Android · Motorrad</span><span class="l" data-l="es">Android · Moto</span></p>
+            </div>
+          </div>
+          <p class="desc">
+            <span class="l" data-l="it">Dici quante ore hai e che strade ami: l'app disegna giri ad anello da dove sei, partendo dai più curvosi. Mappa delle curve, meteo sul percorso, SOS automatico in caso di caduta e giri di gruppo.</span>
+            <span class="l" data-l="en">Tell it how many hours you have and which roads you love: the app draws loop rides from where you are, twistiest first. Bend map, weather on your route, automatic fall SOS and group rides.</span>
+            <span class="l" data-l="fr">Dis-lui combien d'heures tu as et quelles routes tu aimes : l'application trace des boucles depuis l'endroit où tu es, en commençant par les plus sinueuses. Carte des virages, météo sur l'itinéraire, SOS automatique en cas de chute et sorties de groupe.</span>
+            <span class="l" data-l="de">Sag ihr, wie viele Stunden du hast und welche Straßen du liebst: Die App zeichnet Rundtouren von deinem Standort aus, kurvenreichste zuerst. Kurvenkarte, Wetter auf der Strecke, automatischer Sturz-SOS und Gruppentouren.</span>
+            <span class="l" data-l="es">Dile cuántas horas tienes y qué carreteras te gustan: la app traza rutas circulares desde donde estás, empezando por las más curvas. Mapa de curvas, tiempo en la ruta, SOS automático en caso de caída y rutas en grupo.</span>
+          </p>
+          <div class="chips">
+            <span class="chip"><span class="l" data-l="it">mappa curve</span><span class="l" data-l="en">bend map</span><span class="l" data-l="fr">carte des virages</span><span class="l" data-l="de">Kurvenkarte</span><span class="l" data-l="es">mapa de curvas</span></span>
+            <span class="chip"><span class="l" data-l="it">SOS caduta</span><span class="l" data-l="en">fall SOS</span><span class="l" data-l="fr">SOS chute</span><span class="l" data-l="de">Sturz-SOS</span><span class="l" data-l="es">SOS caída</span></span>
+            <span class="chip mono">OpenStreetMap</span>
+            <span class="chip"><span class="l" data-l="it">5 lingue</span><span class="l" data-l="en">5 languages</span><span class="l" data-l="fr">5 langues</span><span class="l" data-l="de">5 Sprachen</span><span class="l" data-l="es">5 idiomas</span></span>
+          </div>
+          <div class="links">
+            <a class="primary" target="_blank" rel="noopener" href="biker/"><span class="l" data-l="it">Vai alla pagina</span><span class="l" data-l="en">Go to the page</span><span class="l" data-l="fr">Aller à la page</span><span class="l" data-l="de">Zur Seite</span><span class="l" data-l="es">Ir a la página</span></a>
+            <span class="sep">·</span>
+            <a href="biker/funzioni.html"><span class="l" data-l="it">Funzioni</span><span class="l" data-l="en">Features</span><span class="l" data-l="fr">Fonctions</span><span class="l" data-l="de">Funktionen</span><span class="l" data-l="es">Funciones</span></a>
+            <span class="sep">·</span>
+            <a href="biker/privacy.html"><span class="l" data-l="it">Privacy</span><span class="l" data-l="en">Privacy</span><span class="l" data-l="fr">Confidentialité</span><span class="l" data-l="de">Datenschutz</span><span class="l" data-l="es">Privacidad</span></a>
+          </div>
+        </article>
+
+        <article class="proj" style="--hue:#4aa8ff">
+          <div class="meta-row">
+            <span class="route">/navigator</span>
+            <span class="status"><span class="dot"></span><span class="l" data-l="it">SITO LIVE</span><span class="l" data-l="en">LIVE SITE</span><span class="l" data-l="fr">SITE EN LIGNE</span><span class="l" data-l="de">SEITE LIVE</span><span class="l" data-l="es">SITIO EN VIVO</span></span>
+          </div>
+          <div class="top">
+            <img class="ico" src="assets/icons/navigator.png" width="64" height="64" alt="Icona di IDQ Navigator" loading="lazy">
+            <div>
+              <h3>IDQ Navigator</h3>
+              <p class="kind">Android · Wear OS</p>
+            </div>
+          </div>
+          <p class="desc">
+            <span class="l" data-l="it">Il navigatore che funziona anche senza internet: mappe offline di OpenStreetMap, percorsi calcolati sul telefono, voce nella tua lingua e avvisi sulla strada. C'è anche l'app per Galaxy Watch.</span>
+            <span class="l" data-l="en">The navigator that works even without internet: offline OpenStreetMap maps, routes calculated on your phone, voice in your language and road alerts. There's also an app for Galaxy Watch.</span>
+            <span class="l" data-l="fr">Le navigateur qui fonctionne même sans internet : cartes OpenStreetMap hors ligne, itinéraires calculés sur le téléphone, voix dans votre langue et alertes routières. Il y a aussi l'application pour Galaxy Watch.</span>
+            <span class="l" data-l="de">Die Navigation, die auch ohne Internet funktioniert: Offline-Karten von OpenStreetMap, auf dem Telefon berechnete Routen, Sprachführung in Ihrer Sprache und Hinweise auf der Straße. Es gibt auch die App für die Galaxy Watch.</span>
+            <span class="l" data-l="es">El navegador que funciona incluso sin internet: mapas sin conexión de OpenStreetMap, rutas calculadas en el teléfono, voz en tu idioma y avisos en la carretera. También hay una app para Galaxy Watch.</span>
+          </p>
+          <div class="chips">
+            <span class="chip"><span class="l" data-l="it">mappe offline</span><span class="l" data-l="en">offline maps</span><span class="l" data-l="fr">cartes hors ligne</span><span class="l" data-l="de">Offline-Karten</span><span class="l" data-l="es">mapas sin conexión</span></span>
+            <span class="chip mono">OpenStreetMap</span>
+            <span class="chip mono">Galaxy Watch</span>
+            <span class="chip"><span class="l" data-l="it">5 lingue</span><span class="l" data-l="en">5 languages</span><span class="l" data-l="fr">5 langues</span><span class="l" data-l="de">5 Sprachen</span><span class="l" data-l="es">5 idiomas</span></span>
+          </div>
+          <div class="links">
+            <a class="primary" target="_blank" rel="noopener" href="navigator/"><span class="l" data-l="it">Vai alla pagina</span><span class="l" data-l="en">Go to the page</span><span class="l" data-l="fr">Aller à la page</span><span class="l" data-l="de">Zur Seite</span><span class="l" data-l="es">Ir a la página</span></a>
+            <span class="sep">·</span>
+            <a href="navigator/funzioni.html"><span class="l" data-l="it">Funzioni</span><span class="l" data-l="en">Features</span><span class="l" data-l="fr">Fonctions</span><span class="l" data-l="de">Funktionen</span><span class="l" data-l="es">Funciones</span></a>
+            <span class="sep">·</span>
+            <a href="navigator/privacy.html"><span class="l" data-l="it">Privacy</span><span class="l" data-l="en">Privacy</span><span class="l" data-l="fr">Confidentialité</span><span class="l" data-l="de">Datenschutz</span><span class="l" data-l="es">Privacidad</span></a>
+          </div>
+        </article>
+
+        <article class="proj" style="--hue:#49d17a">
+          <div class="meta-row">
+            <span class="route">/monitor</span>
+            <span class="status"><span class="dot"></span><span class="l" data-l="it">DOWNLOAD DIRETTO</span><span class="l" data-l="en">DIRECT DOWNLOAD</span><span class="l" data-l="fr">TÉLÉCHARGEMENT DIRECT</span><span class="l" data-l="de">DIREKTER DOWNLOAD</span><span class="l" data-l="es">DESCARGA DIRECTA</span></span>
+          </div>
+          <div class="top">
+            <img class="ico" src="assets/icons/monitor.png" width="64" height="64" alt="Icona di IDQ Monitor User" loading="lazy">
+            <div>
+              <h3>IDQ Monitor User</h3>
+              <p class="kind">Android · Windows · Linux</p>
+            </div>
+          </div>
+          <p class="desc">
+            <span class="l" data-l="it">Lo stato dei tuoi computer in tempo reale sul telefono: ogni core, ogni disco, temperature, servizi e processi. Se qualcosa non va, arriva l'avviso push. Prova gratuita di 24 ore.</span>
+            <span class="l" data-l="en">Your computers' status in real time on your phone: every core, every disk, temperatures, services and processes. If something's wrong, a push alert arrives. Free 24-hour trial.</span>
+            <span class="l" data-l="fr">L'état de vos ordinateurs en temps réel sur votre téléphone : chaque cœur, chaque disque, températures, services et processus. Si quelque chose ne va pas, une alerte push arrive. Essai gratuit de 24 heures.</span>
+            <span class="l" data-l="de">Der Status Ihrer Computer in Echtzeit auf dem Telefon: jeder Kern, jede Festplatte, Temperaturen, Dienste und Prozesse. Wenn etwas nicht stimmt, kommt eine Push-Benachrichtigung. Kostenlose 24-Stunden-Testversion.</span>
+            <span class="l" data-l="es">El estado de tus ordenadores en tiempo real en el teléfono: cada núcleo, cada disco, temperaturas, servicios y procesos. Si algo falla, llega un aviso push. Prueba gratuita de 24 horas.</span>
+          </p>
+          <div class="chips">
+            <span class="chip"><span class="l" data-l="it">prova 24h</span><span class="l" data-l="en">24h trial</span><span class="l" data-l="fr">essai 24h</span><span class="l" data-l="de">24-Std.-Test</span><span class="l" data-l="es">prueba 24h</span></span>
+            <span class="chip"><span class="l" data-l="it">avvisi push</span><span class="l" data-l="en">push alerts</span><span class="l" data-l="fr">alertes push</span><span class="l" data-l="de">Push-Benachrichtigungen</span><span class="l" data-l="es">avisos push</span></span>
+            <span class="chip mono">.deb · .exe · .apk</span>
+            <span class="chip"><span class="l" data-l="it">5 lingue</span><span class="l" data-l="en">5 languages</span><span class="l" data-l="fr">5 langues</span><span class="l" data-l="de">5 Sprachen</span><span class="l" data-l="es">5 idiomas</span></span>
+          </div>
+          <div class="links">
+            <a class="primary" target="_blank" rel="noopener" href="monitor/"><span class="l" data-l="it">Vai alla pagina</span><span class="l" data-l="en">Go to the page</span><span class="l" data-l="fr">Aller à la page</span><span class="l" data-l="de">Zur Seite</span><span class="l" data-l="es">Ir a la página</span></a>
+            <span class="sep">·</span>
+            <a href="monitor/guida.html"><span class="l" data-l="it">Guida</span><span class="l" data-l="en">Guide</span><span class="l" data-l="fr">Guide</span><span class="l" data-l="de">Anleitung</span><span class="l" data-l="es">Guía</span></a>
+            <span class="sep">·</span>
+            <a href="monitor/privacy.html"><span class="l" data-l="it">Privacy</span><span class="l" data-l="en">Privacy</span><span class="l" data-l="fr">Confidentialité</span><span class="l" data-l="de">Datenschutz</span><span class="l" data-l="es">Privacidad</span></a>
+          </div>
+        </article>
+
+        <article class="proj" style="--hue:#c879ff">
+          <div class="meta-row">
+            <span class="route">/calendar</span>
+            <span class="status ok"><span class="dot"></span>GOOGLE PLAY</span>
+          </div>
+          <div class="top">
+            <img class="ico" src="assets/icons/calendar.png" width="64" height="64" alt="Icona di Smart Calendar" loading="lazy">
+            <div>
+              <h3>Smart Calendar</h3>
+              <p class="kind"><span class="l" data-l="it">Android · AI on-device</span><span class="l" data-l="en">Android · On-device AI</span><span class="l" data-l="fr">Android · IA embarquée</span><span class="l" data-l="de">Android · KI auf dem Gerät</span><span class="l" data-l="es">Android · IA en el dispositivo</span></p>
+            </div>
+          </div>
+          <p class="desc">
+            <span class="l" data-l="it">Analizza SMS, WhatsApp, Telegram ed Email con intelligenza artificiale che gira sul telefono e aggiunge da solo gli appuntamenti al calendario. Niente cloud, niente server: i messaggi non escono dal dispositivo.</span>
+            <span class="l" data-l="en">Scans SMS, WhatsApp, Telegram and Email with AI running on your phone and automatically adds appointments to your calendar. No cloud, no server: messages never leave the device.</span>
+            <span class="l" data-l="fr">Analyse les SMS, WhatsApp, Telegram et les emails avec une IA qui tourne sur le téléphone et ajoute automatiquement les rendez-vous à l'agenda. Pas de cloud, pas de serveur : les messages ne quittent jamais l'appareil.</span>
+            <span class="l" data-l="de">Analysiert SMS, WhatsApp, Telegram und E-Mails mit einer KI, die auf dem Telefon läuft, und trägt Termine automatisch in den Kalender ein. Keine Cloud, kein Server: Nachrichten verlassen nie das Gerät.</span>
+            <span class="l" data-l="es">Analiza SMS, WhatsApp, Telegram y Email con IA que funciona en el teléfono y añade automáticamente las citas al calendario. Sin nube, sin servidor: los mensajes nunca salen del dispositivo.</span>
+          </p>
+          <div class="chips">
+            <span class="chip"><span class="l" data-l="it">2,99 € una tantum*</span><span class="l" data-l="en">€2.99 one-time*</span><span class="l" data-l="fr">2,99 € à vie*</span><span class="l" data-l="de">2,99 € einmalig*</span><span class="l" data-l="es">2,99 € pago único*</span></span>
+            <span class="chip"><span class="l" data-l="it">AI on-device</span><span class="l" data-l="en">on-device AI</span><span class="l" data-l="fr">IA embarquée</span><span class="l" data-l="de">KI auf dem Gerät</span><span class="l" data-l="es">IA en el dispositivo</span></span>
+            <span class="chip mono">zero cloud</span>
+          </div>
+          <div class="links">
+            <a class="primary" target="_blank" rel="noopener" href="calendar/"><span class="l" data-l="it">Vai alla pagina</span><span class="l" data-l="en">Go to the page</span><span class="l" data-l="fr">Aller à la page</span><span class="l" data-l="de">Zur Seite</span><span class="l" data-l="es">Ir a la página</span></a>
+            <span class="sep">·</span>
+            <a href="calendar/privacy.html"><span class="l" data-l="it">Privacy</span><span class="l" data-l="en">Privacy</span><span class="l" data-l="fr">Confidentialité</span><span class="l" data-l="de">Datenschutz</span><span class="l" data-l="es">Privacidad</span></a>
+          </div>
+        </article>
+
+        <article class="proj" style="--hue:#9b7cff">
+          <div class="meta-row">
+            <span class="route">/converter</span>
+            <span class="status ok"><span class="dot"></span>GOOGLE PLAY</span>
+          </div>
+          <div class="top">
+            <img class="ico" src="assets/icons/converter.png" width="64" height="64" alt="Icona di IDQ File Converter" loading="lazy">
+            <div>
+              <h3>IDQ File Converter</h3>
+              <p class="kind"><span class="l" data-l="it">Android · Documenti</span><span class="l" data-l="en">Android · Documents</span><span class="l" data-l="fr">Android · Documents</span><span class="l" data-l="de">Android · Dokumente</span><span class="l" data-l="es">Android · Documentos</span></p>
+            </div>
+          </div>
+          <p class="desc">
+            <span class="l" data-l="it">Converti PDF e immagini direttamente sul telefono: unisci, dividi, ruota ed estrai pagine, aggiungi numeri, timbri e filigrana, usa l'OCR. Tutto in locale, anche senza internet. Acquisto una tantum.</span>
+            <span class="l" data-l="en">Convert PDFs and images right on your phone: merge, split, rotate and extract pages, add page numbers, stamps and watermarks, use OCR. All offline, even without internet. One-time purchase.</span>
+            <span class="l" data-l="fr">Convertis PDF et images directement sur ton téléphone : fusionne, divise, tourne et extrait des pages, ajoute des numéros, tampons et filigranes, utilise l'OCR. Tout en local, même sans internet. Achat unique.</span>
+            <span class="l" data-l="de">Konvertiere PDFs und Bilder direkt auf dem Telefon: Seiten zusammenführen, teilen, drehen und extrahieren, Seitenzahlen, Stempel und Wasserzeichen hinzufügen, OCR nutzen. Alles lokal, auch ohne Internet. Einmaliger Kauf.</span>
+            <span class="l" data-l="es">Convierte PDF e imágenes directamente en el teléfono: une, divide, gira y extrae páginas, añade números, sellos y marcas de agua, usa el OCR. Todo en local, incluso sin internet. Compra única.</span>
+          </p>
+          <div class="chips">
+            <span class="chip"><span class="l" data-l="it">4,99 € una tantum*</span><span class="l" data-l="en">€4.99 one-time*</span><span class="l" data-l="fr">4,99 € à vie*</span><span class="l" data-l="de">4,99 € einmalig*</span><span class="l" data-l="es">4,99 € pago único*</span></span>
+            <span class="chip mono">OCR</span>
+            <span class="chip"><span class="l" data-l="it">timbri PDF</span><span class="l" data-l="en">PDF stamps</span><span class="l" data-l="fr">tampons PDF</span><span class="l" data-l="de">PDF-Stempel</span><span class="l" data-l="es">sellos PDF</span></span>
+            <span class="chip mono">offline</span>
+          </div>
+          <div class="links">
+            <a class="primary" target="_blank" rel="noopener" href="converter/"><span class="l" data-l="it">Vai alla pagina</span><span class="l" data-l="en">Go to the page</span><span class="l" data-l="fr">Aller à la page</span><span class="l" data-l="de">Zur Seite</span><span class="l" data-l="es">Ir a la página</span></a>
+            <span class="sep">·</span>
+            <a href="converter/privacy.html"><span class="l" data-l="it">Privacy</span><span class="l" data-l="en">Privacy</span><span class="l" data-l="fr">Confidentialité</span><span class="l" data-l="de">Datenschutz</span><span class="l" data-l="es">Privacidad</span></a>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="price-note">
+        <span class="l" data-l="it">* Prezzi per l'Italia; nel resto del mondo possono variare in base al paese, secondo le regole di Google Play.</span>
+        <span class="l" data-l="en">* Prices for Italy; in the rest of the world they may vary by country, per Google Play's rules.</span>
+        <span class="l" data-l="fr">* Prix pour l'Italie ; dans le reste du monde, ils peuvent varier selon le pays, selon les règles de Google Play.</span>
+        <span class="l" data-l="de">* Preise für Italien; im Rest der Welt können sie je nach Land gemäß den Regeln von Google Play variieren.</span>
+        <span class="l" data-l="es">* Precios para Italia; en el resto del mundo pueden variar según el país, según las normas de Google Play.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== APPROCCIO ===================== -->
+  <section id="approccio">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="l" data-l="it">Approccio</span><span class="l" data-l="en">Approach</span><span class="l" data-l="fr">Approche</span><span class="l" data-l="de">Ansatz</span><span class="l" data-l="es">Enfoque</span></p>
+        <h2><span class="l" data-l="it">Principi di progettazione</span><span class="l" data-l="en">Design principles</span><span class="l" data-l="fr">Principes de conception</span><span class="l" data-l="de">Gestaltungsprinzipien</span><span class="l" data-l="es">Principios de diseño</span></h2>
+        <div class="bar"></div>
+      </div>
+      <p class="lab-intro">
+        <span class="l" data-l="it"><strong>IDQ</strong> è un laboratorio indipendente e privato che progetta app per Android, Ubuntu, Raspberry Pi e Windows: niente team, niente investitori, nessuna raccolta dati che non serva a far funzionare l'app. Sei principi guidano ogni progetto, dal primo wireframe alla build pubblicata.</span>
+        <span class="l" data-l="en"><strong>IDQ</strong> is an independent, private lab that designs apps for Android, Ubuntu, Raspberry Pi and Windows: no team, no investors, no data collection beyond what the app needs to work. Six principles guide every project, from the first wireframe to the published build.</span>
+        <span class="l" data-l="fr"><strong>IDQ</strong> est un laboratoire indépendant et privé qui conçoit des applications pour Android, Ubuntu, Raspberry Pi et Windows : pas d'équipe, pas d'investisseurs, aucune collecte de données qui ne serve pas au fonctionnement de l'application. Six principes guident chaque projet, du premier wireframe à la version publiée.</span>
+        <span class="l" data-l="de"><strong>IDQ</strong> ist ein unabhängiges, privates Labor, das Apps für Android, Ubuntu, Raspberry Pi und Windows entwirft: kein Team, keine Investoren, keine Datenerfassung, die nicht für den Betrieb der App nötig ist. Sechs Prinzipien leiten jedes Projekt, vom ersten Wireframe bis zum veröffentlichten Build.</span>
+        <span class="l" data-l="es"><strong>IDQ</strong> es un laboratorio independiente y privado que diseña apps para Android, Ubuntu, Raspberry Pi y Windows: sin equipo, sin inversores, sin recopilar datos que no sean necesarios para que la app funcione. Seis principios guían cada proyecto, desde el primer boceto hasta la versión publicada.</span>
+      </p>
+      <div class="principles">
+        <div class="pr">
+          <p class="idx">01</p>
+          <h3><span class="l" data-l="it">Elaborazione locale</span><span class="l" data-l="en">Local processing</span><span class="l" data-l="fr">Traitement local</span><span class="l" data-l="de">Lokale Verarbeitung</span><span class="l" data-l="es">Procesamiento local</span></h3>
+          <p>
+            <span class="l" data-l="it">Mappe, intelligenza artificiale, conversioni: tutto gira sul dispositivo. Nessun server, nessun cloud.</span>
+            <span class="l" data-l="en">Maps, AI, conversions: everything runs on the device. No server, no cloud.</span>
+            <span class="l" data-l="fr">Cartes, intelligence artificielle, conversions : tout tourne sur l'appareil. Pas de serveur, pas de cloud.</span>
+            <span class="l" data-l="de">Karten, künstliche Intelligenz, Konvertierungen: alles läuft auf dem Gerät. Kein Server, keine Cloud.</span>
+            <span class="l" data-l="es">Mapas, inteligencia artificial, conversiones: todo funciona en el dispositivo. Sin servidor, sin nube.</span>
+          </p>
+        </div>
+        <div class="pr">
+          <p class="idx">02</p>
+          <h3><span class="l" data-l="it">Nessuna pubblicità</span><span class="l" data-l="en">No advertising</span><span class="l" data-l="fr">Aucune publicité</span><span class="l" data-l="de">Keine Werbung</span><span class="l" data-l="es">Sin publicidad</span></h3>
+          <p>
+            <span class="l" data-l="it">Mai un banner, mai un tracker pubblicitario, mai dati venduti a terzi.</span>
+            <span class="l" data-l="en">Never a banner, never an ad tracker, never data sold to third parties.</span>
+            <span class="l" data-l="fr">Jamais de bannière, jamais de traqueur publicitaire, jamais de données vendues à des tiers.</span>
+            <span class="l" data-l="de">Nie ein Banner, nie ein Werbe-Tracker, nie Daten an Dritte verkauft.</span>
+            <span class="l" data-l="es">Nunca un banner, nunca un rastreador publicitario, nunca datos vendidos a terceros.</span>
+          </p>
+        </div>
+        <div class="pr">
+          <p class="idx">03</p>
+          <h3><span class="l" data-l="it">Nessun account</span><span class="l" data-l="en">No account</span><span class="l" data-l="fr">Aucun compte</span><span class="l" data-l="de">Kein Konto</span><span class="l" data-l="es">Sin cuenta</span></h3>
+          <p>
+            <span class="l" data-l="it">Si installa e si usa. Nessuna registrazione, nessuna password da ricordare.</span>
+            <span class="l" data-l="en">Install and use. No sign-up, no password to remember.</span>
+            <span class="l" data-l="fr">On installe et on utilise. Aucune inscription, aucun mot de passe à retenir.</span>
+            <span class="l" data-l="de">Installieren und nutzen. Keine Registrierung, kein Passwort zum Merken.</span>
+            <span class="l" data-l="es">Se instala y se usa. Sin registro, sin contraseña que recordar.</span>
+          </p>
+        </div>
+        <div class="pr">
+          <p class="idx">04</p>
+          <h3><span class="l" data-l="it">Acquisto singolo</span><span class="l" data-l="en">One-time purchase</span><span class="l" data-l="fr">Achat unique</span><span class="l" data-l="de">Einmaliger Kauf</span><span class="l" data-l="es">Compra única</span></h3>
+          <p>
+            <span class="l" data-l="it">Dove c'è un prezzo, è una tantum. Nessun abbonamento che si rinnova da solo.</span>
+            <span class="l" data-l="en">Where there's a price, it's one-time. No subscription that renews itself.</span>
+            <span class="l" data-l="fr">Là où il y a un prix, c'est un achat unique. Aucun abonnement qui se renouvelle tout seul.</span>
+            <span class="l" data-l="de">Wo es einen Preis gibt, ist er einmalig. Kein Abo, das sich von selbst verlängert.</span>
+            <span class="l" data-l="es">Donde hay un precio, es de pago único. Ninguna suscripción que se renueve sola.</span>
+          </p>
+        </div>
+        <div class="pr">
+          <p class="idx">05</p>
+          <h3><span class="l" data-l="it">Cinque lingue</span><span class="l" data-l="en">Five languages</span><span class="l" data-l="fr">Cinq langues</span><span class="l" data-l="de">Fünf Sprachen</span><span class="l" data-l="es">Cinco idiomas</span></h3>
+          <p>
+            <span class="l" data-l="it">Italiano, inglese, francese, tedesco, spagnolo: ogni app, stessa copertura.</span>
+            <span class="l" data-l="en">Italian, English, French, German, Spanish: every app, the same coverage.</span>
+            <span class="l" data-l="fr">Italien, anglais, français, allemand, espagnol : chaque application, la même couverture.</span>
+            <span class="l" data-l="de">Italienisch, Englisch, Französisch, Deutsch, Spanisch: jede App, die gleiche Abdeckung.</span>
+            <span class="l" data-l="es">Italiano, inglés, francés, alemán, español: cada app, la misma cobertura.</span>
+          </p>
+        </div>
+        <div class="pr">
+          <p class="idx">06</p>
+          <h3><span class="l" data-l="it">Dati aperti</span><span class="l" data-l="en">Open data</span><span class="l" data-l="fr">Données ouvertes</span><span class="l" data-l="de">Offene Daten</span><span class="l" data-l="es">Datos abiertos</span></h3>
+          <p>
+            <span class="l" data-l="it">Le mappe usano dati OpenStreetMap: aperti, verificabili, senza vincoli di licenza chiusi.</span>
+            <span class="l" data-l="en">Maps use OpenStreetMap data: open, verifiable, with no closed licence constraints.</span>
+            <span class="l" data-l="fr">Les cartes utilisent les données OpenStreetMap : ouvertes, vérifiables, sans contraintes de licence fermée.</span>
+            <span class="l" data-l="de">Karten nutzen OpenStreetMap-Daten: offen, überprüfbar, ohne Einschränkungen durch geschlossene Lizenzen.</span>
+            <span class="l" data-l="es">Los mapas usan datos de OpenStreetMap: abiertos, verificables, sin restricciones de licencias cerradas.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTATTI ===================== -->
+  <section id="contatti">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="l" data-l="it">Contatti</span><span class="l" data-l="en">Contact</span><span class="l" data-l="fr">Contact</span><span class="l" data-l="de">Kontakt</span><span class="l" data-l="es">Contacto</span></p>
+        <h2><span class="l" data-l="it">Parliamone</span><span class="l" data-l="en">Let's talk</span><span class="l" data-l="fr">Discutons-en</span><span class="l" data-l="de">Sprechen wir</span><span class="l" data-l="es">Hablemos</span></h2>
+        <div class="bar"></div>
+        <p>
+          <span class="l" data-l="it">Due domande veloci prima di scrivere: così il messaggio arriva già con tutto il contesto che serve per risponderti bene.</span>
+          <span class="l" data-l="en">Two quick questions before you write: that way the message arrives with all the context needed to answer you well.</span>
+          <span class="l" data-l="fr">Deux questions rapides avant d'écrire : ainsi le message arrive avec tout le contexte nécessaire pour bien vous répondre.</span>
+          <span class="l" data-l="de">Zwei kurze Fragen, bevor Sie schreiben: So kommt die Nachricht gleich mit allem nötigen Kontext an, um Ihnen gut antworten zu können.</span>
+          <span class="l" data-l="es">Dos preguntas rápidas antes de escribir: así el mensaje llega ya con todo el contexto necesario para responderte bien.</span>
+        </p>
+      </div>
+
+      <form class="contact-form" id="contact-form" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="cf-project" id="cf-project-label">Progetto <span class="req">*</span></label>
+            <select id="cf-project" name="project" required>
+              <option value="" disabled selected id="cf-project-ph">Seleziona un progetto</option>
+              <option value="Sito / generale" id="cf-opt-general">Sito / generale</option>
+              <option value="IDQ Biker Maps">IDQ Biker Maps</option>
+              <option value="IDQ Navigator">IDQ Navigator</option>
+              <option value="IDQ Monitor User">IDQ Monitor User</option>
+              <option value="Smart Calendar">Smart Calendar</option>
+              <option value="IDQ File Converter">IDQ File Converter</option>
+              <option value="Altro" id="cf-opt-other-p">Altro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="cf-type" id="cf-type-label">Tipo di richiesta <span class="req">*</span></label>
+            <select id="cf-type" name="type" required>
+              <option value="" disabled selected id="cf-type-ph">Seleziona il tipo</option>
+              <option value="Segnalazione bug" id="cf-opt-bug">Segnalazione di un bug</option>
+              <option value="Idea o nuova funzione" id="cf-opt-idea">Idea o nuova funzione</option>
+              <option value="Domanda generale" id="cf-opt-question">Domanda generale</option>
+              <option value="Collaborazione" id="cf-opt-collab">Proposta di collaborazione</option>
+              <option value="Altro" id="cf-opt-other-t">Altro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="cf-email" id="cf-email-label">La tua email <span class="req">*</span></label>
+          <input type="email" id="cf-email" name="email" required>
+        </div>
+
+        <div class="field">
+          <label for="cf-message" id="cf-message-label">Messaggio <span class="req">*</span></label>
+          <textarea id="cf-message" name="message" rows="5" required></textarea>
+          <p class="hint" id="cf-hint"></p>
+        </div>
+
+        <p class="error" id="cf-error" hidden></p>
+
+        <button type="submit" class="btn btn-ac">
+          <span id="cf-submit-label">Invia messaggio</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+
+      <div class="modal-overlay" id="cf-modal-overlay" hidden>
+        <div class="modal" role="alertdialog" aria-labelledby="cf-modal-title" aria-describedby="cf-modal-desc">
+          <span class="modal-check" id="cf-modal-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <h3 id="cf-modal-title">Email inviata</h3>
+          <p id="cf-modal-desc">Il tuo messaggio è stato inviato.</p>
+          <button type="button" class="btn btn-ac" id="cf-modal-close">Ho capito</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="left">
+      <p>© <span id="year">2026</span> IDQ</p>
+      <p class="tag">
+        <span class="l" data-l="it">Laboratorio indipendente e privato · nessun tracker su questa pagina</span>
+        <span class="l" data-l="en">Independent, private lab · no tracker on this page</span>
+        <span class="l" data-l="fr">Laboratoire indépendant et privé · aucun traqueur sur cette page</span>
+        <span class="l" data-l="de">Unabhängiges, privates Labor · kein Tracker auf dieser Seite</span>
+        <span class="l" data-l="es">Laboratorio independiente y privado · sin rastreadores en esta página</span>
+      </p>
+    </div>
+    <nav>
+      <a href="#progetti"><span class="l" data-l="it">Progetti</span><span class="l" data-l="en">Projects</span><span class="l" data-l="fr">Projets</span><span class="l" data-l="de">Projekte</span><span class="l" data-l="es">Proyectos</span></a>
+      <a href="#approccio"><span class="l" data-l="it">Approccio</span><span class="l" data-l="en">Approach</span><span class="l" data-l="fr">Approche</span><span class="l" data-l="de">Ansatz</span><span class="l" data-l="es">Enfoque</span></a>
+      <a href="#contatti"><span class="l" data-l="it">Contatti</span><span class="l" data-l="en">Contact</span><span class="l" data-l="fr">Contact</span><span class="l" data-l="de">Kontakt</span><span class="l" data-l="es">Contacto</span></a>
+      <a href="privacy.html"><span class="l" data-l="it">Privacy</span><span class="l" data-l="en">Privacy</span><span class="l" data-l="fr">Confidentialité</span><span class="l" data-l="de">Datenschutz</span><span class="l" data-l="es">Privacidad</span></a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var L = ["it","en","fr","de","es"];
+  var FLAGS = { it:"🇮🇹", en:"🇬🇧", fr:"🇫🇷", de:"🇩🇪", es:"🇪🇸" };
+  var q = (location.search.match(/[?&]lang=(\w\w)/) || [])[1];
+  var s = null; try { s = localStorage.getItem("l"); } catch (e) {}
+  var n = ((navigator.language || "it").slice(0,2));
+  var l = L.indexOf(q) >= 0 ? q : (L.indexOf(s) >= 0 ? s : (L.indexOf(n) >= 0 ? n : "it"));
+
+  var root = document.documentElement;
+  var langBtn = document.getElementById("lang-btn");
+  var langMenu = document.getElementById("lang-menu");
+  var langSwitch = document.getElementById("lang-switch");
+  var flagEl = document.getElementById("lang-flag");
+  var codeEl = document.getElementById("lang-code");
+
+  function set(x){
+    root.setAttribute("data-l", x);
+    root.lang = x;
+    try { localStorage.setItem("l", x); } catch (e) {}
+    flagEl.textContent = FLAGS[x] || FLAGS.it;
+    codeEl.textContent = x.toUpperCase();
+    langMenu.querySelectorAll("button[data-l]").forEach(function(b){
+      b.classList.toggle("on", b.dataset.l === x);
+    });
+    if (window.renderContactI18n) window.renderContactI18n(x);
+  }
+
+  function openMenu(){ langSwitch.classList.add("open"); langMenu.hidden = false; langBtn.setAttribute("aria-expanded","true"); }
+  function closeMenu(){ langSwitch.classList.remove("open"); langMenu.hidden = true; langBtn.setAttribute("aria-expanded","false"); }
+  langBtn.addEventListener("click", function(e){ e.stopPropagation(); langMenu.hidden ? openMenu() : closeMenu(); });
+  document.addEventListener("click", function(e){ if (!langSwitch.contains(e.target)) closeMenu(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeMenu(); });
+  langMenu.querySelectorAll("button[data-l]").forEach(function(b){
+    b.addEventListener("click", function(){ set(b.dataset.l); closeMenu(); });
+  });
+
+  set(l);
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+
+<script>
+(function(){
+  // ============================================================
+  // CONFIGURAZIONE EMAILJS — sostituisci questi 3 segnaposto
+  // con le chiavi del tuo account gratuito su https://www.emailjs.com
+  // (vedi le istruzioni passo passo fornite a parte).
+  // ============================================================
+  var EMAILJS_PUBLIC_KEY  = "EMAILJS_PUBLIC_KEY";
+  var EMAILJS_SERVICE_ID  = "EMAILJS_SERVICE_ID";
+  var EMAILJS_TEMPLATE_ID = "EMAILJS_TEMPLATE_ID";
+
+  var FALLBACK_EMAIL = "info@idq-developer.com";
+
+  if (window.emailjs) { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+
+  // ---------- dizionario i18n del modulo (gli <option>/placeholder non possono
+  // contenere gli span .l usati nel resto della pagina, quindi qui si traduce via JS) ----------
+  var I18N = {
+    it: {
+      project_label:"Progetto", project_ph:"Seleziona un progetto", opt_general:"Sito / generale", opt_other:"Altro",
+      type_label:"Tipo di richiesta", type_ph:"Seleziona il tipo",
+      opt_bug:"Segnalazione di un bug", opt_idea:"Idea o nuova funzione", opt_question:"Domanda generale", opt_collab:"Proposta di collaborazione",
+      email_label:"La tua email",
+      message_label:"Messaggio", message_ph:"Scegli prima progetto e tipo di richiesta qui sopra.",
+      hint_bug:"Cosa doveva succedere, cosa è successo invece, e — se le conosci — modello di telefono e versione di Android.",
+      hint_idea:"Descrivi la funzione che vorresti e perché ti servirebbe.",
+      hint_question:"Scrivi pure la tua domanda.",
+      hint_collab:"Raccontami di cosa si tratta e come pensi di collaborare.",
+      hint_other:"Scrivi qui il tuo messaggio.",
+      error:"Compila correttamente progetto, tipo di richiesta, la tua email e il messaggio prima di inviare.",
+      submit:"Invia messaggio", sending:"Invio in corso…",
+      modal_ok_title:"Email inviata", modal_ok_desc:"Il tuo messaggio è stato inviato. Ti rispondo appena posso all'indirizzo che hai scritto.",
+      modal_err_title:"Invio non riuscito",
+      modal_err_config:"Configurazione email mancante. Scrivi nel frattempo a " + FALLBACK_EMAIL + ".",
+      modal_err_network:"Non è stato possibile inviare il messaggio. Riprova tra poco, oppure scrivi nel frattempo a " + FALLBACK_EMAIL + ".",
+      modal_close:"Ho capito"
+    },
+    en: {
+      project_label:"Project", project_ph:"Select a project", opt_general:"Site / general", opt_other:"Other",
+      type_label:"Request type", type_ph:"Select the type",
+      opt_bug:"Bug report", opt_idea:"Idea or new feature", opt_question:"General question", opt_collab:"Collaboration proposal",
+      email_label:"Your email",
+      message_label:"Message", message_ph:"First choose project and request type above.",
+      hint_bug:"What should have happened, what happened instead, and — if you know them — phone model and Android version.",
+      hint_idea:"Describe the feature you'd like and why you'd need it.",
+      hint_question:"Go ahead and ask.",
+      hint_collab:"Tell me what it's about and how you're thinking of collaborating.",
+      hint_other:"Write your message here.",
+      error:"Fill in project, request type, your email and the message correctly before sending.",
+      submit:"Send message", sending:"Sending…",
+      modal_ok_title:"Message sent", modal_ok_desc:"Your message has been sent. I'll reply as soon as I can to the address you wrote.",
+      modal_err_title:"Sending failed",
+      modal_err_config:"Email not configured yet. In the meantime, write to " + FALLBACK_EMAIL + ".",
+      modal_err_network:"The message could not be sent. Try again shortly, or write in the meantime to " + FALLBACK_EMAIL + ".",
+      modal_close:"Got it"
+    },
+    fr: {
+      project_label:"Projet", project_ph:"Sélectionnez un projet", opt_general:"Site / général", opt_other:"Autre",
+      type_label:"Type de demande", type_ph:"Sélectionnez le type",
+      opt_bug:"Signalement d'un bug", opt_idea:"Idée ou nouvelle fonction", opt_question:"Question générale", opt_collab:"Proposition de collaboration",
+      email_label:"Votre email",
+      message_label:"Message", message_ph:"Choisissez d'abord le projet et le type de demande ci-dessus.",
+      hint_bug:"Ce qui aurait dû se passer, ce qui s'est passé à la place, et — si vous les connaissez — le modèle du téléphone et la version d'Android.",
+      hint_idea:"Décrivez la fonction que vous aimeriez et pourquoi elle vous serait utile.",
+      hint_question:"N'hésitez pas à poser votre question.",
+      hint_collab:"Expliquez-moi de quoi il s'agit et comment vous envisagez de collaborer.",
+      hint_other:"Écrivez votre message ici.",
+      error:"Remplissez correctement le projet, le type de demande, votre email et le message avant d'envoyer.",
+      submit:"Envoyer le message", sending:"Envoi en cours…",
+      modal_ok_title:"Message envoyé", modal_ok_desc:"Votre message a été envoyé. Je vous répondrai dès que possible à l'adresse indiquée.",
+      modal_err_title:"Envoi échoué",
+      modal_err_config:"Configuration email manquante. En attendant, écrivez à " + FALLBACK_EMAIL + ".",
+      modal_err_network:"Le message n'a pas pu être envoyé. Réessayez bientôt, ou écrivez en attendant à " + FALLBACK_EMAIL + ".",
+      modal_close:"J'ai compris"
+    },
+    de: {
+      project_label:"Projekt", project_ph:"Projekt auswählen", opt_general:"Website / allgemein", opt_other:"Sonstiges",
+      type_label:"Art der Anfrage", type_ph:"Art auswählen",
+      opt_bug:"Fehlermeldung", opt_idea:"Idee oder neue Funktion", opt_question:"Allgemeine Frage", opt_collab:"Kooperationsvorschlag",
+      email_label:"Ihre E-Mail",
+      message_label:"Nachricht", message_ph:"Wählen Sie zuerst oben Projekt und Anfrageart aus.",
+      hint_bug:"Was hätte passieren sollen, was ist stattdessen passiert, und — falls bekannt — Telefonmodell und Android-Version.",
+      hint_idea:"Beschreiben Sie die gewünschte Funktion und warum Sie sie bräuchten.",
+      hint_question:"Stellen Sie einfach Ihre Frage.",
+      hint_collab:"Erzählen Sie mir, worum es geht und wie Sie sich eine Zusammenarbeit vorstellen.",
+      hint_other:"Schreiben Sie hier Ihre Nachricht.",
+      error:"Füllen Sie Projekt, Anfrageart, Ihre E-Mail und die Nachricht korrekt aus, bevor Sie senden.",
+      submit:"Nachricht senden", sending:"Wird gesendet…",
+      modal_ok_title:"Nachricht gesendet", modal_ok_desc:"Ihre Nachricht wurde gesendet. Ich antworte Ihnen so bald wie möglich an die angegebene Adresse.",
+      modal_err_title:"Senden fehlgeschlagen",
+      modal_err_config:"E-Mail noch nicht konfiguriert. Schreiben Sie in der Zwischenzeit an " + FALLBACK_EMAIL + ".",
+      modal_err_network:"Die Nachricht konnte nicht gesendet werden. Versuchen Sie es bald erneut oder schreiben Sie in der Zwischenzeit an " + FALLBACK_EMAIL + ".",
+      modal_close:"Verstanden"
+    },
+    es: {
+      project_label:"Proyecto", project_ph:"Selecciona un proyecto", opt_general:"Sitio / general", opt_other:"Otro",
+      type_label:"Tipo de solicitud", type_ph:"Selecciona el tipo",
+      opt_bug:"Informe de un error", opt_idea:"Idea o nueva función", opt_question:"Pregunta general", opt_collab:"Propuesta de colaboración",
+      email_label:"Tu email",
+      message_label:"Mensaje", message_ph:"Elige primero el proyecto y el tipo de solicitud arriba.",
+      hint_bug:"Qué debía ocurrir, qué ocurrió en su lugar y — si los conoces — modelo de teléfono y versión de Android.",
+      hint_idea:"Describe la función que te gustaría y por qué la necesitarías.",
+      hint_question:"Escribe tu pregunta con confianza.",
+      hint_collab:"Cuéntame de qué se trata y cómo piensas colaborar.",
+      hint_other:"Escribe aquí tu mensaje.",
+      error:"Completa correctamente el proyecto, el tipo de solicitud, tu email y el mensaje antes de enviar.",
+      submit:"Enviar mensaje", sending:"Enviando…",
+      modal_ok_title:"Mensaje enviado", modal_ok_desc:"Tu mensaje ha sido enviado. Te responderé en cuanto pueda a la dirección que escribiste.",
+      modal_err_title:"Envío fallido",
+      modal_err_config:"Configuración de email pendiente. Mientras tanto, escribe a " + FALLBACK_EMAIL + ".",
+      modal_err_network:"No se pudo enviar el mensaje. Vuelve a intentarlo en breve, o escribe mientras tanto a " + FALLBACK_EMAIL + ".",
+      modal_close:"Entendido"
+    }
+  };
+  var HINT_KEYS = { "Segnalazione bug":"hint_bug", "Idea o nuova funzione":"hint_idea", "Domanda generale":"hint_question", "Collaborazione":"hint_collab", "Altro":"hint_other" };
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  var form = document.getElementById("contact-form");
+  if (!form) return;
+  var projectEl = document.getElementById("cf-project");
+  var typeEl = document.getElementById("cf-type");
+  var emailEl = document.getElementById("cf-email");
+  var msgEl = document.getElementById("cf-message");
+  var hintEl = document.getElementById("cf-hint");
+  var errorEl = document.getElementById("cf-error");
+  var submitBtn = form.querySelector("button[type=submit]");
+  var submitLabelEl = document.getElementById("cf-submit-label");
+  var fields = [projectEl, typeEl, emailEl, msgEl];
+  var currentLang = "it";
+
+  window.renderContactI18n = function(lang){
+    var t = I18N[lang] || I18N.it;
+    currentLang = lang;
+    document.getElementById("cf-project-label").firstChild.textContent = t.project_label + " ";
+    document.getElementById("cf-project-ph").textContent = t.project_ph;
+    document.getElementById("cf-opt-general").textContent = t.opt_general;
+    document.getElementById("cf-opt-other-p").textContent = t.opt_other;
+    document.getElementById("cf-type-label").firstChild.textContent = t.type_label + " ";
+    document.getElementById("cf-type-ph").textContent = t.type_ph;
+    document.getElementById("cf-opt-bug").textContent = t.opt_bug;
+    document.getElementById("cf-opt-idea").textContent = t.opt_idea;
+    document.getElementById("cf-opt-question").textContent = t.opt_question;
+    document.getElementById("cf-opt-collab").textContent = t.opt_collab;
+    document.getElementById("cf-opt-other-t").textContent = t.opt_other;
+    document.getElementById("cf-email-label").firstChild.textContent = t.email_label + " ";
+    document.getElementById("cf-message-label").firstChild.textContent = t.message_label + " ";
+    submitLabelEl.textContent = submitBtn.disabled ? t.sending : t.submit;
+    errorEl.textContent = t.error;
+    updateHint();
+  };
+
+  function updateHint(){
+    var t = I18N[currentLang] || I18N.it;
+    var key = HINT_KEYS[typeEl.value];
+    if (!key) { hintEl.textContent = ""; msgEl.placeholder = t.message_ph; return; }
+    hintEl.textContent = t[key];
+    msgEl.placeholder = t[key];
+  }
+  typeEl.addEventListener("change", updateHint);
+
+  function fieldValue(el){ return el.value.trim(); }
+  function clearInvalid(el){ el.classList.remove("invalid"); }
+  fields.forEach(function(el){
+    el.addEventListener("input", function(){ clearInvalid(el); errorEl.hidden = true; });
+    el.addEventListener("change", function(){ clearInvalid(el); errorEl.hidden = true; });
+  });
+
+  // Nessun invio è possibile finché progetto, tipo, email e messaggio non sono tutti
+  // compilati correttamente: l'invio parte solo dopo questa validazione, mai prima.
+  function validate(){
+    var ok = true;
+    fields.forEach(function(el){
+      var val = fieldValue(el);
+      var good = val && (el !== emailEl || EMAIL_RE.test(val));
+      if (good) { clearInvalid(el); } else { el.classList.add("invalid"); ok = false; }
+    });
+    return ok;
+  }
+
+  function setSending(on){
+    var t = I18N[currentLang] || I18N.it;
+    submitBtn.disabled = on;
+    submitLabelEl.textContent = on ? t.sending : t.submit;
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var t = I18N[currentLang] || I18N.it;
+
+    if (!validate()) {
+      errorEl.hidden = false;
+      var firstInvalid = form.querySelector(".invalid");
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+    errorEl.hidden = true;
+
+    var project = projectEl.value;
+    var type = typeEl.value;
+    var fromEmail = emailEl.value.trim();
+    var message = msgEl.value.trim();
+
+    var params = {
+      project: project, request_type: type, from_email: fromEmail, reply_to: fromEmail,
+      message: message, subject: "[IDQ] " + type + " — " + project, lang: currentLang
+    };
+
+    if (!window.emailjs || EMAILJS_PUBLIC_KEY === "EMAILJS_PUBLIC_KEY") {
+      showModal(false, t.modal_err_config);
+      return;
+    }
+
+    setSending(true);
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params).then(
+      function(){
+        setSending(false);
+        showModal(true);
+        form.reset();
+        updateHint();
+      },
+      function(){
+        setSending(false);
+        showModal(false, t.modal_err_network);
+      }
+    );
+  });
+
+  var modalOverlay = document.getElementById("cf-modal-overlay");
+  var modalIcon = document.getElementById("cf-modal-icon");
+  var modalTitle = document.getElementById("cf-modal-title");
+  var modalDesc = document.getElementById("cf-modal-desc");
+  var modalClose = document.getElementById("cf-modal-close");
+  var lastFocused = null;
+
+  function showModal(success, errorText){
+    var t = I18N[currentLang] || I18N.it;
+    if (success) {
+      modalIcon.classList.remove("error");
+      modalIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+      modalTitle.textContent = t.modal_ok_title;
+      modalDesc.textContent = t.modal_ok_desc;
+    } else {
+      modalIcon.classList.add("error");
+      modalIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>';
+      modalTitle.textContent = t.modal_err_title;
+      modalDesc.textContent = errorText || t.modal_err_network;
+    }
+    modalClose.textContent = t.modal_close;
+    lastFocused = document.activeElement;
+    modalOverlay.hidden = false;
+    modalClose.focus();
+  }
+  function hideModal(){
+    modalOverlay.hidden = true;
+    if (lastFocused) lastFocused.focus();
+  }
+  modalClose.addEventListener("click", hideModal);
+  modalOverlay.addEventListener("click", function(e){ if (e.target === modalOverlay) hideModal(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !modalOverlay.hidden) hideModal(); });
+
+  window.renderContactI18n("it");
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "IDQ Developer",
+  "url": "https://idq-developer.com/",
+  "email": "mailto:info@idq-developer.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Riccione", "addressCountry": "IT" }
+}
+</script>
+
+</body>
+</html>

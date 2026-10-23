@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Smart Calendar</title>
+  <meta name="description" content="Informativa sulla privacy di Smart Calendar. L'app non raccoglie né trasmette dati personali.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://idq-developer.com/calendar/privacy.html">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a14; --surface: #12121f; --card: #1a1a2e;
+      --border: #2a2a45; --blue: #5b8def; --white: #e8e8f0; --muted: #8888aa;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:var(--bg); color:var(--white); font-family:'DM Sans',sans-serif; font-weight:300; line-height:1.7; }
+    .container { max-width:800px; margin:0 auto; padding:80px 24px; }
+    .back { display:inline-flex; align-items:center; gap:8px; color:var(--blue); text-decoration:none; margin-bottom:48px; font-size:14px; }
+    .back:hover { text-decoration:underline; }
+    h1 { font-family:'Syne',sans-serif; font-size:2.2rem; font-weight:700; margin-bottom:8px; }
+    .version { color:var(--muted); font-size:14px; margin-bottom:48px; }
+    h2 { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:600; margin:40px 0 12px; color:var(--blue); }
+    p { color:var(--muted); margin-bottom:16px; font-size:0.95rem; }
+    ul { color:var(--muted); padding-left:20px; margin-bottom:16px; font-size:0.95rem; }
+    li { margin-bottom:8px; }
+    a { color:var(--blue); }
+    hr { border:none; border-top:1px solid var(--border); margin:40px 0; }
+    footer { text-align:center; color:var(--muted); font-size:13px; padding:40px 24px; border-top:1px solid var(--border); }
+  
+.idq-switch{position:relative;display:inline-block;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.2}
+.idq-switch-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid #42425a;background:#23232f;color:#fff;border-radius:10px;cursor:pointer;padding:0;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.idq-switch-btn:hover,.idq-switch.open .idq-switch-btn{border-color:#5c5c78;background:#2e2e3d}
+.idq-switch-menu{position:absolute;top:calc(100% + 8px);right:0;z-index:999;min-width:208px;background:#15151d;border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:6px;box-shadow:0 14px 34px rgba(0,0,0,.45)}
+.idq-switch-menu[hidden]{display:none}
+.idq-switch-menu a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;text-decoration:none;color:#f1f1f5;font-size:14px;font-weight:600}
+.idq-switch-menu a:hover{background:rgba(255,255,255,.08)}
+.idq-switch-menu img{width:24px;height:24px;border-radius:6px;flex:none;display:block}
+.idq-switch-ic{font-size:16px;width:24px;text-align:center;flex:none}
+.idq-switch-sep{height:1px;background:rgba(255,255,255,.14);margin:6px 2px}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><a href="index.html" class="back">← Smart Calendar</a><div class="idq-switch" id="idq-switch">
+<button class="idq-switch-btn" id="idq-switch-btn" type="button" aria-haspopup="true" aria-expanded="false" title="Altri progetti IDQ"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
+<div class="idq-switch-menu" id="idq-switch-menu" hidden>
+<a href="../" class="idq-switch-home"><span class="idq-switch-ic">🏠</span>IDQ Developer</a>
+<div class="idq-switch-sep"></div>
+<a href="../biker/"><img src="../assets/icons/biker.png" alt="">IDQ Biker Maps</a>
+<a href="../navigator/"><img src="../assets/icons/navigator.png" alt="">IDQ Navigator</a>
+<a href="../monitor/"><img src="../assets/icons/monitor.png" alt="">IDQ Monitor User</a>
+<a href="../calendar/"><img src="../assets/icons/calendar.png" alt="">Smart Calendar</a>
+<a href="../converter/"><img src="../assets/icons/converter.png" alt="">IDQ File Converter</a>
+</div>
+</div></div>
+    <h1>Informativa sulla Privacy</h1>
+    <p class="version">Versione 1.0 — Giugno 2026</p>
+
+    <h2>1. Dati raccolti</h2>
+    <p>Smart Calendar accede ai seguenti dati presenti sul dispositivo:</p>
+    <ul>
+      <li><strong>SMS</strong> — per rilevare automaticamente appuntamenti nei messaggi ricevuti</li>
+      <li><strong>Notifiche</strong> — per analizzare i messaggi di WhatsApp e Telegram in tempo reale</li>
+      <li><strong>Calendario</strong> — per creare eventi direttamente nel calendario dell'utente</li>
+      <li><strong>Contatti</strong> — per mostrare il nome del mittente al posto del numero di telefono</li>
+      <li><strong>Email (IMAP)</strong> — se configurato, per cercare appuntamenti nelle email</li>
+    </ul>
+    <p>Tutti i dati vengono elaborati esclusivamente sul dispositivo dell'utente. Nessun dato viene trasmesso a server esterni.</p>
+
+    <h2>2. Come utilizziamo i dati</h2>
+    <p>I dati vengono utilizzati esclusivamente per:</p>
+    <ul>
+      <li>Rilevare automaticamente appuntamenti, riunioni ed eventi nei messaggi</li>
+      <li>Suggerire eventi da aggiungere al calendario</li>
+      <li>Mostrare statistiche di utilizzo anonime (solo locali, mai condivise)</li>
+    </ul>
+    <p>Non vendiamo, non condividiamo e non trasmettiamo alcun dato personale a terze parti.</p>
+
+    <h2>3. Archiviazione locale</h2>
+    <p>Tutti i dati elaborati da Smart Calendar vengono salvati esclusivamente sul dispositivo dell'utente tramite SharedPreferences di Android. L'utente può eliminare tutti i dati in qualsiasi momento disinstallando l'app.</p>
+
+    <h2>4. Connessione a Internet</h2>
+    <p>Smart Calendar utilizza Internet solo per:</p>
+    <ul>
+      <li>Scaricare il modello ML Kit di Google al primo avvio (una tantum)</li>
+      <li>Connettersi al server IMAP dell'account email dell'utente (solo se configurato)</li>
+    </ul>
+    <p>L'app non effettua connessioni a server di analisi, pubblicità o tracciamento.</p>
+
+    <h2>5. Minori</h2>
+    <p>Smart Calendar non è destinata a utenti di età inferiore ai 13 anni. Non raccogliamo consapevolmente dati personali di minori.</p>
+
+    <h2>6. Modifiche all'informativa</h2>
+    <p>Eventuali modifiche a questa informativa saranno comunicate tramite aggiornamento dell'app. La versione corrente è sempre disponibile a questo indirizzo.</p>
+
+    <h2>7. Contatti</h2>
+    <p>Per qualsiasi domanda sulla privacy o per esercitare i diritti ai sensi del GDPR:</p>
+    <p><a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a></p>
+
+    <hr>
+    <p style="font-size:13px;">© 2026 Paolo Migliaccio. Tutti i diritti riservati.</p>
+  </div>
+  <footer>
+    <a href="index.html">← Torna a Smart Calendar</a>
+  </footer>
+<script>
+(function(){
+  var sw=document.getElementById('idq-switch');if(!sw)return;
+  var btn=document.getElementById('idq-switch-btn');
+  var menu=document.getElementById('idq-switch-menu');
+  function openM(){sw.classList.add('open');menu.hidden=false;btn.setAttribute('aria-expanded','true');}
+  function closeM(){sw.classList.remove('open');menu.hidden=true;btn.setAttribute('aria-expanded','false');}
+  btn.addEventListener('click',function(e){e.stopPropagation();menu.hidden?openM():closeM();});
+  document.addEventListener('click',function(e){if(!sw.contains(e.target))closeM();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+})();
+</script>
+</body>
+</html>
