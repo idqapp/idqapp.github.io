@@ -3,36 +3,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>IDQ Navigator</title>
 <meta name="description" content="IDQ Navigator: navigatore Android con mappe offline OpenStreetMap, voce in 5 lingue, avvisi sulla strada e app per Galaxy Watch.">
+<meta name="theme-color" content="#07070a">
 <link rel="icon" href="immagini/icona.png">
 <style>
-:root{--bg:#fff;--tx:#1b2330;--mu:#5b6677;--ac:#1a73e8;--card:#f1f4f9;--bd:#d9dfe9;--hero:#0d1b3d}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1420;--tx:#e6ebf5;--mu:#98a3b8;--ac:#7db3ff;--card:#1a2230;--bd:#2b3548;--hero:#07101f}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-a{color:var(--ac)}
-header.top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:12px 20px;border-bottom:1px solid var(--bd)}
-header.top .brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;color:var(--tx)}
-header.top img{width:36px;height:36px;border-radius:9px}
-.lingue button{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:999px;padding:6px 12px;margin:2px;cursor:pointer;font:inherit;font-size:14px}
-.lingue button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
-main{max-width:900px;margin:0 auto;padding:0 20px 60px}
-.hero{background:var(--hero);color:#fff;padding:56px 20px 48px;text-align:center}
-.hero img{width:120px;height:120px;border-radius:28px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
-.hero h1{font-size:clamp(30px,6vw,48px);margin:18px 0 8px}
-.hero p{max-width:640px;margin:0 auto;color:#cfd8ee;font-size:19px}
-.soon{display:inline-block;margin-top:22px;background:#1a73e8;color:#fff;border-radius:999px;padding:12px 26px;font-weight:600}
-h2{margin:44px 0 14px;font-size:26px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px 18px}
-.card b{display:block;margin-bottom:4px}
-.shots{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px}
-.shots img{height:440px;border-radius:14px;border:1px solid var(--bd)}
+:root{--bg:#07070a;--bg2:#0e0e13;--tx:#f4f4f6;--mu:#a9a9b4;--ac:#4aa8ff;--ac2:#22d3ee;--card:#14141a;--bd:#2a2a33}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--ac)}b{color:#fff}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.top{position:sticky;top:0;z-index:20;background:rgba(7,7,10,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd)}
+header.top .wrap{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px;text-decoration:none;color:var(--tx)}
+.brand img{width:38px;height:38px;border-radius:10px}
+.brand span em{font-style:normal;color:var(--ac)}
+.hdr-right{display:flex;align-items:center;gap:10px}
+
+.hero{position:relative;overflow:hidden;text-align:center;padding:64px 0 56px;background:radial-gradient(ellipse at 50% -10%,#142a46 0%,#07070a 68%)}
+.hero .wrap{position:relative}
+.hero img.logo{width:min(140px,40vw);height:auto;border-radius:30px;box-shadow:0 0 0 3px var(--ac),0 14px 60px rgba(74,168,255,.4)}
+.tag{display:inline-block;margin:22px 0 4px;color:var(--ac);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+.hero h1{font-size:clamp(30px,6vw,52px);line-height:1.1;margin:6px 0 14px;font-weight:900;max-width:18ch;margin-inline:auto}
+.hero p.lead{max-width:680px;margin:0 auto;color:#d3d3dc;font-size:clamp(16px,2.2vw,19px)}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-block;border-radius:999px;padding:13px 26px;font-weight:700;text-decoration:none}
+.btn.p{background:var(--ac);color:#000}.btn.s{border:2px solid var(--ac2);color:#fff}
+.btn.p.off{cursor:default;box-shadow:0 0 0 0 rgba(74,168,255,.6);animation:pulsa 2.4s infinite}
+@keyframes pulsa{70%{box-shadow:0 0 0 16px rgba(74,168,255,0)}100%{box-shadow:0 0 0 0 rgba(74,168,255,0)}}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.chips>span{border:1px solid var(--bd);background:rgba(20,20,26,.8);border-radius:999px;padding:5px 14px;font-size:14px;color:#dedee6}
+.chips>span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ac2);margin-right:8px}
+
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;border-block:1px solid var(--bd);background:var(--bg2)}
+.nums div{padding:26px 16px;text-align:center;border-right:1px solid var(--bd)}.nums div:last-child{border-right:0}
+.nums b{display:block;font-size:clamp(30px,5vw,44px);color:var(--ac);line-height:1.1;font-weight:900}.nums span{color:var(--mu);font-size:15px}
+
+section{padding:60px 0}
+h2.t{font-size:clamp(26px,4.4vw,38px);margin:0 0 8px;font-weight:900;line-height:1.15}
+h2.t::after{content:"";display:block;width:64px;height:5px;border-radius:3px;background:linear-gradient(90deg,var(--ac),var(--ac2));margin-top:12px}
+p.sub{color:var(--mu);max-width:760px;margin:12px 0 30px}
+
+.aree{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.area{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:22px;position:relative;overflow:hidden}
+.area::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--ac),var(--ac2))}
+.area h3{margin:0 0 10px;font-size:20px;line-height:1.25;color:#fff}
+.area p{margin:0;color:#d6d6de;font-size:15.5px;line-height:1.6}
+.piu{margin-top:8px}.piu a{font-weight:700;text-decoration:none}.piu a:hover{text-decoration:underline}
+
+footer{border-top:1px solid var(--bd);padding:26px 20px;text-align:center;color:var(--mu);font-size:15px}
+footer a{margin:0 8px}
+
 .l{display:none}
 html[data-l=it] .l[data-l=it],html[data-l=en] .l[data-l=en],html[data-l=fr] .l[data-l=fr],html[data-l=de] .l[data-l=de],html[data-l=es] .l[data-l=es]{display:block}
-footer{border-top:1px solid var(--bd);padding:24px 20px;text-align:center;color:var(--mu);font-size:15px}
-.policy h2{font-size:21px;margin-top:30px}.policy p,.policy li{color:var(--tx)}
-.upd{color:var(--mu);font-size:15px}
+html[data-l=it] span.l[data-l=it],html[data-l=en] span.l[data-l=en],html[data-l=fr] span.l[data-l=fr],html[data-l=de] span.l[data-l=de],html[data-l=es] span.l[data-l=es]{display:inline}
 
+@media(max-width:640px){.hero{padding:44px 0 40px}.nums div{border-right:0;border-bottom:1px solid var(--bd)}section{padding:44px 0}}
+@media(prefers-reduced-motion:reduce){.btn.p.off{animation:none}html{scroll-behavior:auto}}
 .idq-switch{position:relative;display:inline-block;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.2}
 .idq-switch-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid #42425a;background:#23232f;color:#fff;border-radius:10px;cursor:pointer;padding:0;box-shadow:0 1px 3px rgba(0,0,0,.3)}
 .idq-switch-btn:hover,.idq-switch.open .idq-switch-btn{border-color:#5c5c78;background:#2e2e3d}
@@ -43,6 +68,19 @@ footer{border-top:1px solid var(--bd);padding:24px 20px;text-align:center;color:
 .idq-switch-menu img{width:24px;height:24px;border-radius:6px;flex:none;display:block}
 .idq-switch-ic{font-size:16px;width:24px;text-align:center;flex:none}
 .idq-switch-sep{height:1px;background:rgba(255,255,255,.14);margin:6px 2px}
+.lang-switch{position:relative;flex:none}
+.lang-btn{display:flex;align-items:center;gap:7px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:999px;padding:7px 12px;cursor:pointer;font:inherit;font-size:14px}
+.lang-btn:hover{border-color:var(--ac)}
+.lang-btn .flag{font-size:17px;line-height:1}
+.lang-btn .code{font-weight:700;letter-spacing:.02em}
+.lang-btn .chev{width:14px;height:14px;transition:transform .15s ease;flex:none}
+.lang-switch.open .lang-btn .chev{transform:rotate(180deg)}
+.lang-menu{position:absolute;top:calc(100% + 8px);right:0;z-index:30;list-style:none;margin:0;padding:6px;min-width:168px;background:var(--card);border:1px solid var(--bd);border-radius:14px;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.lang-menu[hidden]{display:none}
+.lang-menu button{width:100%;display:flex;align-items:center;gap:10px;background:none;border:0;border-radius:9px;padding:9px 10px;color:var(--tx);font:inherit;font-size:14.5px;text-align:left;cursor:pointer}
+.lang-menu button:hover{background:var(--bg2,rgba(255,255,255,.06))}
+.lang-menu button.on{color:var(--ac);font-weight:700}
+.lang-menu .flag{font-size:17px}
 
 .pcf-input{background:var(--card);border:1px solid var(--bd);border-radius:10px;color:var(--tx);padding:11px 13px;font:inherit;font-size:15px;width:100%}
 .pcf-input:focus{outline:none;border-color:var(--ac)}
@@ -51,9 +89,27 @@ footer{border-top:1px solid var(--bd);padding:24px 20px;text-align:center;color:
 #contatti .btn[disabled]{opacity:.6;cursor:default}
 [data-pcf-overlay]{display:none}
 [data-pcf-overlay]:not([hidden]){display:flex}
-</style></head>
+</style>
+</head>
 <body>
-<header class="top"><a class="brand" href="index.html"><img src="immagini/icona.png" alt="">IDQ Navigator</a><div class="lingue"><button data-l="it">Italiano</button><button data-l="en">English</button><button data-l="fr">Français</button><button data-l="de">Deutsch</button><button data-l="es">Español</button></div><div class="idq-switch" id="idq-switch">
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html"><img src="immagini/icona.png" alt="">IDQ <em>Navigator</em></a>
+<div class="hdr-right">
+<div class="lang-switch" id="lang-switch">
+<button class="lang-btn" id="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">
+<span class="flag" id="lang-flag">🇮🇹</span><span class="code" id="lang-code">IT</span>
+<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+<ul class="lang-menu" id="lang-menu" role="listbox" hidden>
+<li><button type="button" data-l="it" role="option"><span class="flag">🇮🇹</span>Italiano</button></li>
+<li><button type="button" data-l="en" role="option"><span class="flag">🇬🇧</span>English</button></li>
+<li><button type="button" data-l="fr" role="option"><span class="flag">🇫🇷</span>Français</button></li>
+<li><button type="button" data-l="de" role="option"><span class="flag">🇩🇪</span>Deutsch</button></li>
+<li><button type="button" data-l="es" role="option"><span class="flag">🇪🇸</span>Español</button></li>
+</ul>
+</div>
+
+<div class="idq-switch" id="idq-switch">
 <button class="idq-switch-btn" id="idq-switch-btn" type="button" aria-haspopup="true" aria-expanded="false" title="Altri progetti IDQ"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
 <div class="idq-switch-menu" id="idq-switch-menu" hidden>
 <a href="../" class="idq-switch-home"><span class="idq-switch-ic">🏠</span>IDQ Developer</a>
@@ -64,9 +120,71 @@ footer{border-top:1px solid var(--bd);padding:24px 20px;text-align:center;color:
 <a href="../calendar/"><img src="../assets/icons/calendar.png" alt="">IDQ Smart Calendar</a>
 <a href="../converter/"><img src="../assets/icons/converter.png" alt="">IDQ File Converter</a>
 </div>
+</div>
+</div>
 </div></header>
-<section class="hero"><img src="immagini/icona.png" alt="IDQ Navigator"><div class="l" data-l="it"><h1>Il navigatore che funziona anche senza internet</h1><p>Mappe offline di OpenStreetMap, percorsi calcolati sul telefono, voce nella tua lingua e avvisi sulla strada. Senza pubblicità e senza account.</p><div class="soon">Presto su Google Play</div></div><div class="l" data-l="en"><h1>The navigator that works even without internet</h1><p>Offline OpenStreetMap maps, routes calculated on your phone, voice in your language and road alerts. No ads, no account.</p><div class="soon">Coming soon on Google Play</div></div><div class="l" data-l="fr"><h1>Le navigateur qui fonctionne même sans internet</h1><p>Cartes OpenStreetMap hors ligne, itinéraires calculés sur le téléphone, voix dans votre langue et alertes routières. Sans publicité ni compte.</p><div class="soon">Bientôt sur Google Play</div></div><div class="l" data-l="de"><h1>Die Navigation, die auch ohne Internet funktioniert</h1><p>Offline-Karten von OpenStreetMap, auf dem Telefon berechnete Routen, Sprachführung in Ihrer Sprache und Hinweise auf der Straße. Ohne Werbung, ohne Konto.</p><div class="soon">Bald bei Google Play</div></div><div class="l" data-l="es"><h1>El navegador que funciona incluso sin internet</h1><p>Mapas sin conexión de OpenStreetMap, rutas calculadas en el teléfono, voz en tu idioma y avisos en la carretera. Sin publicidad ni cuenta.</p><div class="soon">Próximamente en Google Play</div></div></section>
-<main><div class="l" data-l="it"><h2>Cosa fa</h2><div class="grid"><div class="card"><b>Mappe offline</b>Scarichi l'Italia una volta sola (mappa, percorsi e ricerca indirizzi) e poi navighi anche senza rete. Gli aggiornamenti arrivano ogni mese, da soli con Wi-Fi e in carica.</div><div class="card"><b>Voce in 5 lingue</b>Italiano, inglese, francese, tedesco e spagnolo, con voce maschile o femminile. Tutta l'app cambia lingua.</div><div class="card"><b>Avvisi sulla strada</b>Autovelox, Tutor, telecamere ai semafori, varchi ZTL, passaggi a livello, dossi, e segnalazioni degli altri utenti: controlli mobili, incidenti, traffico, strade chiuse.</div><div class="card"><b>Limiti di velocità</b>Il limite sul percorso e la tua velocità sempre in vista; rosso se lo superi.</div><div class="card"><b>Auto, moto, camion, bici, a piedi</b>Percorsi diversi per ogni mezzo, con le misure del camion o del camper (ponti bassi, strade strette, limiti di peso).</div><div class="card"><b>Online e offline</b>Funziona subito con internet, senza scaricare niente; se vuoi, scarichi le mappe e vai anche senza rete. Con internet anche percorsi e ricerca in Austria, Svizzera, Slovenia, Croazia, Francia, Germania e Spagna.</div><div class="card"><b>Servizi e distributori</b>Cerca distributori (con il prezzo aggiornato), ristoranti, farmacie, parcheggi...: li vedi con distanza e orari di apertura.</div><div class="card"><b>Segnalazioni in tempo reale</b>Controlli mobili, posti di blocco, incidenti, strade bloccate: un tocco per segnalare, e agli altri l'app chiede "c'è ancora?" quando passano.</div><div class="card"><b>Mappa 2D o 3D</b>Grafica chiara in stile navigatore, di giorno e di notte, in 3D inclinata o in 2D piatta, con l'auto sempre al centro.</div><div class="card"><b>Orologio</b>L'app IDQ Navi Wear mostra freccia, distanza e via sul Galaxy Watch (e altri Wear OS) con vibrazioni diverse per destra e sinistra.</div><div class="card"><b>Itinerari e tracce</b>Salva le destinazioni, registra i tuoi percorsi, condividili con indirizzo, coordinate e link o come file GPX.</div><div class="card"><b>Rispetto della privacy</b>Nessun account, nessuna pubblicità, nessun tracciamento. Con le mappe scaricate la tua posizione non lascia il telefono; con i servizi online l'app invia al nostro server solo ciò che serve per rispondere, senza account né identificatori.</div><p class="piu" style="margin-top:14px"><a href="funzioni.html">Scopri tutto quello che fa l'app, nel dettaglio →</a></p></div></div><div class="l" data-l="en"><h2>What it does</h2><div class="grid"><div class="card"><b>Offline maps</b>Download Italy once (map, routes and address search) and navigate even without a network. Updates arrive every month, by themselves on Wi-Fi while charging.</div><div class="card"><b>Voice in 5 languages</b>Italian, English, French, German and Spanish, with a male or female voice. The whole app changes language.</div><div class="card"><b>Road alerts</b>Speed cameras, Tutor section control, red light cameras, restricted traffic zone gates, level crossings, speed bumps, plus reports from other users: mobile checks, accidents, traffic, road closures.</div><div class="card"><b>Speed limits</b>The limit on your route and your speed always in view; red if you exceed it.</div><div class="card"><b>Car, motorcycle, truck, bike, on foot</b>Different routes for each vehicle, with truck or camper dimensions (low bridges, narrow roads, weight limits).</div><div class="card"><b>Online and offline</b>Works right away with internet, nothing to download; if you want, download the maps and go without a network too. Online, routes and search also cover Austria, Switzerland, Slovenia, Croatia, France, Germany and Spain.</div><div class="card"><b>Services and fuel stations</b>Search fuel stations (with updated prices), restaurants, pharmacies, parking...: you see distance and opening hours.</div><div class="card"><b>Live reports</b>Mobile checks, checkpoints, accidents, blocked roads: one tap to report, and the app asks other drivers "is it still there?" when they pass.</div><div class="card"><b>2D or 3D map</b>Clear navigator-style graphics, day and night, tilted 3D or flat 2D, with the car always in the centre.</div><div class="card"><b>Smartwatch</b>The IDQ Navi Wear app shows arrow, distance and street on your Galaxy Watch (and other Wear OS watches) with different vibrations for right and left.</div><div class="card"><b>Routes and tracks</b>Save destinations, record your tracks, share them with address, coordinates and link or as a GPX file.</div><div class="card"><b>Respect for privacy</b>No account, no ads, no tracking. With downloaded maps your position never leaves the phone; with the online services the app sends our server only what is needed to answer, with no account and no identifiers.</div><p class="piu" style="margin-top:14px"><a href="funzioni.html">See everything the app does, in detail →</a></p></div></div><div class="l" data-l="fr"><h2>Ce qu'elle fait</h2><div class="grid"><div class="card"><b>Cartes hors ligne</b>Téléchargez l'Italie une seule fois (carte, itinéraires et recherche d'adresses) puis naviguez même sans réseau. Les mises à jour arrivent chaque mois, toutes seules en Wi-Fi et en charge.</div><div class="card"><b>Voix en 5 langues</b>Italien, anglais, français, allemand et espagnol, avec une voix masculine ou féminine. Toute l'application change de langue.</div><div class="card"><b>Alertes routières</b>Radars, Tutor, radars de feu rouge, accès ZTL, passages à niveau, ralentisseurs, et signalements des autres utilisateurs : contrôles mobiles, accidents, trafic, routes fermées.</div><div class="card"><b>Limites de vitesse</b>La limite sur votre itinéraire et votre vitesse toujours visibles ; rouge si vous la dépassez.</div><div class="card"><b>Voiture, moto, camion, vélo, à pied</b>Des itinéraires différents pour chaque véhicule, avec les dimensions du camion ou du camping-car (ponts bas, routes étroites, limites de poids).</div><div class="card"><b>En ligne et hors ligne</b>Fonctionne tout de suite avec internet, sans rien télécharger ; si vous voulez, téléchargez les cartes et roulez aussi sans réseau. Avec internet, itinéraires et recherche couvrent aussi l'Autriche, la Suisse, la Slovénie, la Croatie, la France, l'Allemagne et l'Espagne.</div><div class="card"><b>Services et stations-service</b>Cherchez des stations-service (prix à jour), restaurants, pharmacies, parkings... : vous voyez distance et horaires d'ouverture.</div><div class="card"><b>Signalements en direct</b>Contrôles mobiles, contrôles routiers, accidents, routes bloquées : un toucher pour signaler, et l'application demande aux autres « est-il toujours là ? » quand ils passent.</div><div class="card"><b>Carte 2D ou 3D</b>Graphisme clair de type navigateur, de jour et de nuit, en 3D inclinée ou en 2D plate, avec la voiture toujours au centre.</div><div class="card"><b>Montre</b>L'application IDQ Navi Wear affiche flèche, distance et rue sur votre Galaxy Watch (et d'autres montres Wear OS) avec des vibrations différentes pour droite et gauche.</div><div class="card"><b>Itinéraires et traces</b>Enregistrez vos destinations, enregistrez vos parcours, partagez-les avec adresse, coordonnées et lien ou en fichier GPX.</div><div class="card"><b>Respect de la vie privée</b>Pas de compte, pas de publicité, pas de suivi. Avec les cartes téléchargées, votre position ne quitte pas le téléphone ; avec les services en ligne, l'application envoie à notre serveur uniquement ce qui est nécessaire pour répondre, sans compte ni identifiant.</div><p class="piu" style="margin-top:14px"><a href="funzioni.html">Découvrez tout ce que fait l'application, en détail →</a></p></div></div><div class="l" data-l="de"><h2>Was sie kann</h2><div class="grid"><div class="card"><b>Offline-Karten</b>Italien einmal herunterladen (Karte, Routen und Adresssuche) und auch ohne Netz navigieren. Aktualisierungen kommen jeden Monat, von selbst mit WLAN und beim Laden.</div><div class="card"><b>Sprachführung in 5 Sprachen</b>Italienisch, Englisch, Französisch, Deutsch und Spanisch, mit männlicher oder weiblicher Stimme. Die ganze App wechselt die Sprache.</div><div class="card"><b>Hinweise auf der Straße</b>Blitzer, Tutor-Abschnittskontrollen, Rotlichtkameras, ZTL-Zufahrten, Bahnübergänge, Bodenschwellen sowie Meldungen anderer Nutzer: mobile Kontrollen, Unfälle, Verkehr, Straßensperrungen.</div><div class="card"><b>Tempolimits</b>Das Limit auf Ihrer Route und Ihre Geschwindigkeit immer im Blick; rot, wenn Sie es überschreiten.</div><div class="card"><b>Auto, Motorrad, Lkw, Fahrrad, zu Fuß</b>Eigene Routen für jedes Fahrzeug, mit den Maßen von Lkw oder Wohnmobil (niedrige Brücken, enge Straßen, Gewichtsgrenzen).</div><div class="card"><b>Smartwatch</b>Die App IDQ Navi Wear zeigt Pfeil, Entfernung und Straße auf Ihrer Galaxy Watch (und anderen Wear-OS-Uhren) mit unterschiedlichen Vibrationen für rechts und links.</div><div class="card"><b>Routen und Tracks</b>Ziele speichern, eigene Tracks aufzeichnen und mit Adresse, Koordinaten und Link oder als GPX-Datei teilen.</div><div class="card"><b>Datenschutz</b>Kein Konto, keine Werbung, kein Tracking. Mit heruntergeladenen Karten verlässt Ihre Position das Telefon nicht; bei den Online-Diensten sendet die App an unseren Server nur, was zur Antwort nötig ist, ohne Konto und ohne Kennungen.</div><p class="piu" style="margin-top:14px"><a href="funzioni.html">Alles, was die App kann, im Detail →</a></p></div></div><div class="l" data-l="es"><h2>Qué hace</h2><div class="grid"><div class="card"><b>Mapas sin conexión</b>Descargas Italia una sola vez (mapa, rutas y búsqueda de direcciones) y navegas incluso sin red. Las actualizaciones llegan cada mes, solas con Wi-Fi y cargando.</div><div class="card"><b>Voz en 5 idiomas</b>Italiano, inglés, francés, alemán y español, con voz masculina o femenina. Toda la app cambia de idioma.</div><div class="card"><b>Avisos en la carretera</b>Radares, Tutor, cámaras de semáforo, accesos ZTL, pasos a nivel, resaltos y avisos de otros usuarios: controles móviles, accidentes, tráfico, carreteras cortadas.</div><div class="card"><b>Límites de velocidad</b>El límite de tu ruta y tu velocidad siempre a la vista; rojo si lo superas.</div><div class="card"><b>Coche, moto, camión, bici, a pie</b>Rutas distintas para cada vehículo, con las medidas del camión o la autocaravana (puentes bajos, carreteras estrechas, límites de peso).</div><div class="card"><b>En línea y sin conexión</b>Funciona enseguida con internet, sin descargar nada; si quieres, descargas los mapas y vas también sin red. Con internet, rutas y búsqueda cubren también Austria, Suiza, Eslovenia, Croacia, Francia, Alemania y España.</div><div class="card"><b>Servicios y gasolineras</b>Busca gasolineras (con precio actualizado), restaurantes, farmacias, aparcamientos...: con distancia y horario.</div><div class="card"><b>Avisos en directo</b>Controles móviles, controles policiales, accidentes, carreteras cortadas: un toque para avisar, y la app pregunta a los demás "¿sigue ahí?" cuando pasan.</div><div class="card"><b>Mapa 2D o 3D</b>Gráficos claros estilo navegador, de día y de noche, en 3D inclinado o en 2D plano, con el coche siempre en el centro.</div><div class="card"><b>Reloj</b>La app IDQ Navi Wear muestra flecha, distancia y calle en tu Galaxy Watch (y otros relojes Wear OS) con vibraciones distintas para derecha e izquierda.</div><div class="card"><b>Rutas y tracks</b>Guarda destinos, graba tus recorridos y compártelos con dirección, coordenadas y enlace o como archivo GPX.</div><div class="card"><b>Respeto a la privacidad</b>Sin cuenta, sin publicidad, sin rastreo. Con los mapas descargados tu posición no sale del teléfono; con los servicios en línea la app envía a nuestro servidor solo lo necesario para responder, sin cuenta ni identificadores.</div><p class="piu" style="margin-top:14px"><a href="funzioni.html">Descubre todo lo que hace la app, al detalle →</a></p></div></div></main>
+
+<section class="hero">
+<div class="wrap">
+<img class="logo" src="immagini/icona.png" alt="IDQ Navigator">
+<p class="tag">
+<span class="l" data-l="it">Navigazione offline · Android</span>
+<span class="l" data-l="en">Offline navigation · Android</span>
+<span class="l" data-l="fr">Navigation hors ligne · Android</span>
+<span class="l" data-l="de">Offline-Navigation · Android</span>
+<span class="l" data-l="es">Navegación sin conexión · Android</span>
+</p>
+<h1>
+<span class="l" data-l="it">Il navigatore che funziona anche senza internet</span>
+<span class="l" data-l="en">The navigator that works even without internet</span>
+<span class="l" data-l="fr">Le navigateur qui fonctionne même sans internet</span>
+<span class="l" data-l="de">Die Navigation, die auch ohne Internet funktioniert</span>
+<span class="l" data-l="es">El navegador que funciona incluso sin internet</span>
+</h1>
+<p class="lead">
+<span class="l" data-l="it">Mappe offline di OpenStreetMap, percorsi calcolati sul telefono, voce nella tua lingua e avvisi sulla strada. Senza pubblicità e senza account.</span>
+<span class="l" data-l="en">Offline OpenStreetMap maps, routes calculated on your phone, voice in your language and road alerts. No ads, no account.</span>
+<span class="l" data-l="fr">Cartes OpenStreetMap hors ligne, itinéraires calculés sur le téléphone, voix dans votre langue et alertes routières. Sans publicité ni compte.</span>
+<span class="l" data-l="de">Offline-Karten von OpenStreetMap, auf dem Telefon berechnete Routen, Sprachführung in Ihrer Sprache und Hinweise auf der Straße. Ohne Werbung, ohne Konto.</span>
+<span class="l" data-l="es">Mapas sin conexión de OpenStreetMap, rutas calculadas en el teléfono, voz en tu idioma y avisos en la carretera. Sin publicidad ni cuenta.</span>
+</p>
+<div class="btns">
+<span class="btn p off">
+<span class="l" data-l="it">Presto su Google Play</span>
+<span class="l" data-l="en">Coming soon on Google Play</span>
+<span class="l" data-l="fr">Bientôt sur Google Play</span>
+<span class="l" data-l="de">Bald bei Google Play</span>
+<span class="l" data-l="es">Próximamente en Google Play</span>
+</span>
+<a class="btn s" href="funzioni.html">
+<span class="l" data-l="it">Tutte le funzioni</span>
+<span class="l" data-l="en">All features</span>
+<span class="l" data-l="fr">Toutes les fonctions</span>
+<span class="l" data-l="de">Alle Funktionen</span>
+<span class="l" data-l="es">Todas las funciones</span>
+</a>
+</div>
+<div class="chips">
+<span><span class="l" data-l="it">Mappe offline</span><span class="l" data-l="en">Offline maps</span><span class="l" data-l="fr">Cartes hors ligne</span><span class="l" data-l="de">Offline-Karten</span><span class="l" data-l="es">Mapas sin conexión</span></span>
+<span><span class="l" data-l="it">Senza pubblicità</span><span class="l" data-l="en">No ads</span><span class="l" data-l="fr">Sans publicité</span><span class="l" data-l="de">Keine Werbung</span><span class="l" data-l="es">Sin publicidad</span></span>
+<span><span class="l" data-l="it">Senza account</span><span class="l" data-l="en">No account</span><span class="l" data-l="fr">Sans compte</span><span class="l" data-l="de">Kein Konto</span><span class="l" data-l="es">Sin cuenta</span></span>
+<span><span class="l" data-l="it">5 lingue</span><span class="l" data-l="en">5 languages</span><span class="l" data-l="fr">5 langues</span><span class="l" data-l="de">5 Sprachen</span><span class="l" data-l="es">5 idiomas</span></span>
+</div>
+</div>
+</section>
+
+<div class="nums">
+<div><b>5</b><span class="l" data-l="it">lingue, voce inclusa</span><span class="l" data-l="en">languages, voice included</span><span class="l" data-l="fr">langues, voix incluse</span><span class="l" data-l="de">Sprachen, mit Sprachführung</span><span class="l" data-l="es">idiomas, con voz</span></div>
+<div><b>8</b><span class="l" data-l="it">paesi coperti online</span><span class="l" data-l="en">countries covered online</span><span class="l" data-l="fr">pays couverts en ligne</span><span class="l" data-l="de">online abgedeckte Länder</span><span class="l" data-l="es">países cubiertos online</span></div>
+<div><b>0</b><span class="l" data-l="it">pubblicità</span><span class="l" data-l="en">ads</span><span class="l" data-l="fr">publicité</span><span class="l" data-l="de">Werbung</span><span class="l" data-l="es">publicidad</span></div>
+<div><b>0</b><span class="l" data-l="it">account richiesti</span><span class="l" data-l="en">accounts required</span><span class="l" data-l="fr">compte requis</span><span class="l" data-l="de">erforderliche Konten</span><span class="l" data-l="es">cuentas requeridas</span></div>
+</div>
+
+
+<main><div class="wrap">
+<div class="l" data-l="it"><h2 class="t">Cosa fa</h2><div class="aree"><div class="area"><h3>Mappe offline</h3><p>Scarichi l'Italia una volta sola (mappa, percorsi e ricerca indirizzi) e poi navighi anche senza rete. Gli aggiornamenti arrivano ogni mese, da soli con Wi-Fi e in carica.</p></div><div class="area"><h3>Voce in 5 lingue</h3><p>Italiano, inglese, francese, tedesco e spagnolo, con voce maschile o femminile. Tutta l'app cambia lingua.</p></div><div class="area"><h3>Avvisi sulla strada</h3><p>Autovelox, Tutor, telecamere ai semafori, varchi ZTL, passaggi a livello, dossi, e segnalazioni degli altri utenti: controlli mobili, incidenti, traffico, strade chiuse.</p></div><div class="area"><h3>Limiti di velocità</h3><p>Il limite sul percorso e la tua velocità sempre in vista; rosso se lo superi.</p></div><div class="area"><h3>Auto, moto, camion, bici, a piedi</h3><p>Percorsi diversi per ogni mezzo, con le misure del camion o del camper (ponti bassi, strade strette, limiti di peso).</p></div><div class="area"><h3>Online e offline</h3><p>Funziona subito con internet, senza scaricare niente; se vuoi, scarichi le mappe e vai anche senza rete. Con internet anche percorsi e ricerca in Austria, Svizzera, Slovenia, Croazia, Francia, Germania e Spagna.</p></div><div class="area"><h3>Servizi e distributori</h3><p>Cerca distributori (con il prezzo aggiornato), ristoranti, farmacie, parcheggi...: li vedi con distanza e orari di apertura.</p></div><div class="area"><h3>Segnalazioni in tempo reale</h3><p>Controlli mobili, posti di blocco, incidenti, strade bloccate: un tocco per segnalare, e agli altri l'app chiede "c'è ancora?" quando passano.</p></div><div class="area"><h3>Mappa 2D o 3D</h3><p>Grafica chiara in stile navigatore, di giorno e di notte, in 3D inclinata o in 2D piatta, con l'auto sempre al centro.</p></div><div class="area"><h3>Orologio</h3><p>L'app IDQ Navi Wear mostra freccia, distanza e via sul Galaxy Watch (e altri Wear OS) con vibrazioni diverse per destra e sinistra.</p></div><div class="area"><h3>Itinerari e tracce</h3><p>Salva le destinazioni, registra i tuoi percorsi, condividili con indirizzo, coordinate e link o come file GPX.</p></div><div class="area"><h3>Rispetto della privacy</h3><p>Nessun account, nessuna pubblicità, nessun tracciamento. Con le mappe scaricate la tua posizione non lascia il telefono; con i servizi online l'app invia al nostro server solo ciò che serve per rispondere, senza account né identificatori.</p></div><p class="piu" style="margin-top:14px"><a href="funzioni.html">Scopri tutto quello che fa l'app, nel dettaglio →</a></p></div></div><div class="l" data-l="en"><h2 class="t">What it does</h2><div class="aree"><div class="area"><h3>Offline maps</h3><p>Download Italy once (map, routes and address search) and navigate even without a network. Updates arrive every month, by themselves on Wi-Fi while charging.</p></div><div class="area"><h3>Voice in 5 languages</h3><p>Italian, English, French, German and Spanish, with a male or female voice. The whole app changes language.</p></div><div class="area"><h3>Road alerts</h3><p>Speed cameras, Tutor section control, red light cameras, restricted traffic zone gates, level crossings, speed bumps, plus reports from other users: mobile checks, accidents, traffic, road closures.</p></div><div class="area"><h3>Speed limits</h3><p>The limit on your route and your speed always in view; red if you exceed it.</p></div><div class="area"><h3>Car, motorcycle, truck, bike, on foot</h3><p>Different routes for each vehicle, with truck or camper dimensions (low bridges, narrow roads, weight limits).</p></div><div class="area"><h3>Online and offline</h3><p>Works right away with internet, nothing to download; if you want, download the maps and go without a network too. Online, routes and search also cover Austria, Switzerland, Slovenia, Croatia, France, Germany and Spain.</p></div><div class="area"><h3>Services and fuel stations</h3><p>Search fuel stations (with updated prices), restaurants, pharmacies, parking...: you see distance and opening hours.</p></div><div class="area"><h3>Live reports</h3><p>Mobile checks, checkpoints, accidents, blocked roads: one tap to report, and the app asks other drivers "is it still there?" when they pass.</p></div><div class="area"><h3>2D or 3D map</h3><p>Clear navigator-style graphics, day and night, tilted 3D or flat 2D, with the car always in the centre.</p></div><div class="area"><h3>Smartwatch</h3><p>The IDQ Navi Wear app shows arrow, distance and street on your Galaxy Watch (and other Wear OS watches) with different vibrations for right and left.</p></div><div class="area"><h3>Routes and tracks</h3><p>Save destinations, record your tracks, share them with address, coordinates and link or as a GPX file.</p></div><div class="area"><h3>Respect for privacy</h3><p>No account, no ads, no tracking. With downloaded maps your position never leaves the phone; with the online services the app sends our server only what is needed to answer, with no account and no identifiers.</p></div><p class="piu" style="margin-top:14px"><a href="funzioni.html">See everything the app does, in detail →</a></p></div></div><div class="l" data-l="fr"><h2 class="t">Ce qu'elle fait</h2><div class="aree"><div class="area"><h3>Cartes hors ligne</h3><p>Téléchargez l'Italie une seule fois (carte, itinéraires et recherche d'adresses) puis naviguez même sans réseau. Les mises à jour arrivent chaque mois, toutes seules en Wi-Fi et en charge.</p></div><div class="area"><h3>Voix en 5 langues</h3><p>Italien, anglais, français, allemand et espagnol, avec une voix masculine ou féminine. Toute l'application change de langue.</p></div><div class="area"><h3>Alertes routières</h3><p>Radars, Tutor, radars de feu rouge, accès ZTL, passages à niveau, ralentisseurs, et signalements des autres utilisateurs : contrôles mobiles, accidents, trafic, routes fermées.</p></div><div class="area"><h3>Limites de vitesse</h3><p>La limite sur votre itinéraire et votre vitesse toujours visibles ; rouge si vous la dépassez.</p></div><div class="area"><h3>Voiture, moto, camion, vélo, à pied</h3><p>Des itinéraires différents pour chaque véhicule, avec les dimensions du camion ou du camping-car (ponts bas, routes étroites, limites de poids).</p></div><div class="area"><h3>En ligne et hors ligne</h3><p>Fonctionne tout de suite avec internet, sans rien télécharger ; si vous voulez, téléchargez les cartes et roulez aussi sans réseau. Avec internet, itinéraires et recherche couvrent aussi l'Autriche, la Suisse, la Slovénie, la Croatie, la France, l'Allemagne et l'Espagne.</p></div><div class="area"><h3>Services et stations-service</h3><p>Cherchez des stations-service (prix à jour), restaurants, pharmacies, parkings... : vous voyez distance et horaires d'ouverture.</p></div><div class="area"><h3>Signalements en direct</h3><p>Contrôles mobiles, contrôles routiers, accidents, routes bloquées : un toucher pour signaler, et l'application demande aux autres « est-il toujours là ? » quand ils passent.</p></div><div class="area"><h3>Carte 2D ou 3D</h3><p>Graphisme clair de type navigateur, de jour et de nuit, en 3D inclinée ou en 2D plate, avec la voiture toujours au centre.</p></div><div class="area"><h3>Montre</h3><p>L'application IDQ Navi Wear affiche flèche, distance et rue sur votre Galaxy Watch (et d'autres montres Wear OS) avec des vibrations différentes pour droite et gauche.</p></div><div class="area"><h3>Itinéraires et traces</h3><p>Enregistrez vos destinations, enregistrez vos parcours, partagez-les avec adresse, coordonnées et lien ou en fichier GPX.</p></div><div class="area"><h3>Respect de la vie privée</h3><p>Pas de compte, pas de publicité, pas de suivi. Avec les cartes téléchargées, votre position ne quitte pas le téléphone ; avec les services en ligne, l'application envoie à notre serveur uniquement ce qui est nécessaire pour répondre, sans compte ni identifiant.</p></div><p class="piu" style="margin-top:14px"><a href="funzioni.html">Découvrez tout ce que fait l'application, en détail →</a></p></div></div><div class="l" data-l="de"><h2 class="t">Was sie kann</h2><div class="aree"><div class="area"><h3>Offline-Karten</h3><p>Italien einmal herunterladen (Karte, Routen und Adresssuche) und auch ohne Netz navigieren. Aktualisierungen kommen jeden Monat, von selbst mit WLAN und beim Laden.</p></div><div class="area"><h3>Sprachführung in 5 Sprachen</h3><p>Italienisch, Englisch, Französisch, Deutsch und Spanisch, mit männlicher oder weiblicher Stimme. Die ganze App wechselt die Sprache.</p></div><div class="area"><h3>Hinweise auf der Straße</h3><p>Blitzer, Tutor-Abschnittskontrollen, Rotlichtkameras, ZTL-Zufahrten, Bahnübergänge, Bodenschwellen sowie Meldungen anderer Nutzer: mobile Kontrollen, Unfälle, Verkehr, Straßensperrungen.</p></div><div class="area"><h3>Tempolimits</h3><p>Das Limit auf Ihrer Route und Ihre Geschwindigkeit immer im Blick; rot, wenn Sie es überschreiten.</p></div><div class="area"><h3>Auto, Motorrad, Lkw, Fahrrad, zu Fuß</h3><p>Eigene Routen für jedes Fahrzeug, mit den Maßen von Lkw oder Wohnmobil (niedrige Brücken, enge Straßen, Gewichtsgrenzen).</p></div><div class="area"><h3>Smartwatch</h3><p>Die App IDQ Navi Wear zeigt Pfeil, Entfernung und Straße auf Ihrer Galaxy Watch (und anderen Wear-OS-Uhren) mit unterschiedlichen Vibrationen für rechts und links.</p></div><div class="area"><h3>Routen und Tracks</h3><p>Ziele speichern, eigene Tracks aufzeichnen und mit Adresse, Koordinaten und Link oder als GPX-Datei teilen.</p></div><div class="area"><h3>Datenschutz</h3><p>Kein Konto, keine Werbung, kein Tracking. Mit heruntergeladenen Karten verlässt Ihre Position das Telefon nicht; bei den Online-Diensten sendet die App an unseren Server nur, was zur Antwort nötig ist, ohne Konto und ohne Kennungen.</p></div><p class="piu" style="margin-top:14px"><a href="funzioni.html">Alles, was die App kann, im Detail →</a></p></div></div><div class="l" data-l="es"><h2 class="t">Qué hace</h2><div class="aree"><div class="area"><h3>Mapas sin conexión</h3><p>Descargas Italia una sola vez (mapa, rutas y búsqueda de direcciones) y navegas incluso sin red. Las actualizaciones llegan cada mes, solas con Wi-Fi y cargando.</p></div><div class="area"><h3>Voz en 5 idiomas</h3><p>Italiano, inglés, francés, alemán y español, con voz masculina o femenina. Toda la app cambia de idioma.</p></div><div class="area"><h3>Avisos en la carretera</h3><p>Radares, Tutor, cámaras de semáforo, accesos ZTL, pasos a nivel, resaltos y avisos de otros usuarios: controles móviles, accidentes, tráfico, carreteras cortadas.</p></div><div class="area"><h3>Límites de velocidad</h3><p>El límite de tu ruta y tu velocidad siempre a la vista; rojo si lo superas.</p></div><div class="area"><h3>Coche, moto, camión, bici, a pie</h3><p>Rutas distintas para cada vehículo, con las medidas del camión o la autocaravana (puentes bajos, carreteras estrechas, límites de peso).</p></div><div class="area"><h3>En línea y sin conexión</h3><p>Funciona enseguida con internet, sin descargar nada; si quieres, descargas los mapas y vas también sin red. Con internet, rutas y búsqueda cubren también Austria, Suiza, Eslovenia, Croacia, Francia, Alemania y España.</p></div><div class="area"><h3>Servicios y gasolineras</h3><p>Busca gasolineras (con precio actualizado), restaurantes, farmacias, aparcamientos...: con distancia y horario.</p></div><div class="area"><h3>Avisos en directo</h3><p>Controles móviles, controles policiales, accidentes, carreteras cortadas: un toque para avisar, y la app pregunta a los demás "¿sigue ahí?" cuando pasan.</p></div><div class="area"><h3>Mapa 2D o 3D</h3><p>Gráficos claros estilo navegador, de día y de noche, en 3D inclinado o en 2D plano, con el coche siempre en el centro.</p></div><div class="area"><h3>Reloj</h3><p>La app IDQ Navi Wear muestra flecha, distancia y calle en tu Galaxy Watch (y otros relojes Wear OS) con vibraciones distintas para derecha e izquierda.</p></div><div class="area"><h3>Rutas y tracks</h3><p>Guarda destinos, graba tus recorridos y compártelos con dirección, coordenadas y enlace o como archivo GPX.</p></div><div class="area"><h3>Respeto a la privacidad</h3><p>Sin cuenta, sin publicidad, sin rastreo. Con los mapas descargados tu posición no sale del teléfono; con los servicios en línea la app envía a nuestro servidor solo lo necesario para responder, sin cuenta ni identificadores.</p></div><p class="piu" style="margin-top:14px"><a href="funzioni.html">Descubre todo lo que hace la app, al detalle →</a></p></div></div>
+</div></main>
+
 <!-- PARLIAMONE -->
 <section id="contatti" style="padding:64px 0">
   <div class="wrap">
@@ -144,31 +262,39 @@ footer{border-top:1px solid var(--bd);padding:24px 20px;text-align:center;color:
 <span class="l" data-l="de">© IDQ Developer · <a href="funzioni.html">Alle Funktionen</a> · <a href="privacy.html">Datenschutzerklärung</a> · <a href="mailto:info@idq-developer.com">info@idq-developer.com</a></span>
 <span class="l" data-l="es">© IDQ Developer · <a href="funzioni.html">Todas las funciones</a> · <a href="privacy.html">Política de privacidad</a> · <a href="mailto:info@idq-developer.com">info@idq-developer.com</a></span>
 <br>Map data © OpenStreetMap contributors (ODbL)</footer>
+
 <script>
 (function(){
  var L=["it","en","fr","de","es"],q=(location.search.match(/[?&]lang=(\w\w)/)||[])[1];
+ var FLAGS={it:"🇮🇹",en:"🇬🇧",fr:"🇫🇷",de:"🇩🇪",es:"🇪🇸"};
  var s=null;try{s=localStorage.getItem("l")}catch(e){}
  var n=((navigator.language||"it").slice(0,2));
  var l=L.indexOf(q)>=0?q:(L.indexOf(s)>=0?s:(L.indexOf(n)>=0?n:"it"));
- function set(x){document.documentElement.setAttribute("data-l",x);document.documentElement.lang=x;try{localStorage.setItem("l",x)}catch(e){}
-  document.querySelectorAll(".lingue button").forEach(function(b){b.classList.toggle("on",b.dataset.l===x)})}
- document.querySelectorAll(".lingue button").forEach(function(b){b.onclick=function(){set(b.dataset.l)}});
+
+ var langBtn=document.getElementById("lang-btn");
+ var langMenu=document.getElementById("lang-menu");
+ var langSwitch=document.getElementById("lang-switch");
+ var flagEl=document.getElementById("lang-flag");
+ var codeEl=document.getElementById("lang-code");
+
+ function set(x){
+   document.documentElement.setAttribute("data-l",x);document.documentElement.lang=x;
+   try{localStorage.setItem("l",x)}catch(e){}
+   flagEl.textContent=FLAGS[x]||FLAGS.it;
+   codeEl.textContent=x.toUpperCase();
+   langMenu.querySelectorAll("button[data-l]").forEach(function(b){b.classList.toggle("on",b.dataset.l===x)});
+ }
+ function openMenu(){langSwitch.classList.add("open");langMenu.hidden=false;langBtn.setAttribute("aria-expanded","true")}
+ function closeMenu(){langSwitch.classList.remove("open");langMenu.hidden=true;langBtn.setAttribute("aria-expanded","false")}
+ langBtn.addEventListener("click",function(e){e.stopPropagation();langMenu.hidden?openMenu():closeMenu()});
+ document.addEventListener("click",function(e){if(!langSwitch.contains(e.target))closeMenu()});
+ document.addEventListener("keydown",function(e){if(e.key==="Escape")closeMenu()});
+ langMenu.querySelectorAll("button[data-l]").forEach(function(b){b.addEventListener("click",function(){set(b.dataset.l);closeMenu()})});
+
  set(l);
 })();
 </script>
-<script>
-(function(){
-  var sw=document.getElementById('idq-switch');if(!sw)return;
-  var btn=document.getElementById('idq-switch-btn');
-  var menu=document.getElementById('idq-switch-menu');
-  function openM(){sw.classList.add('open');menu.hidden=false;btn.setAttribute('aria-expanded','true');}
-  function closeM(){sw.classList.remove('open');menu.hidden=true;btn.setAttribute('aria-expanded','false');}
-  btn.addEventListener('click',function(e){e.stopPropagation();menu.hidden?openM():closeM();});
-  document.addEventListener('click',function(e){if(!sw.contains(e.target))closeM();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
-})();
-</script>
-<!-- EmailJS + Parliamone -->
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function(){
@@ -349,6 +475,18 @@ footer{border-top:1px solid var(--bd);padding:24px 20px;text-align:center;color:
   modalClose.addEventListener("click", hideModal);
   modalOverlay.addEventListener("click", function(e){ if (e.target === modalOverlay) hideModal(); });
   document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !modalOverlay.hidden) hideModal(); });
+})();
+</script>
+<script>
+(function(){
+  var sw=document.getElementById('idq-switch');if(!sw)return;
+  var btn=document.getElementById('idq-switch-btn');
+  var menu=document.getElementById('idq-switch-menu');
+  function openM(){sw.classList.add('open');menu.hidden=false;btn.setAttribute('aria-expanded','true');}
+  function closeM(){sw.classList.remove('open');menu.hidden=true;btn.setAttribute('aria-expanded','false');}
+  btn.addEventListener('click',function(e){e.stopPropagation();menu.hidden?openM():closeM();});
+  document.addEventListener('click',function(e){if(!sw.contains(e.target))closeM();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
 })();
 </script>
 </body></html>
