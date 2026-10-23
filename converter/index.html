@@ -860,7 +860,7 @@
 <body>
 
 <!-- LANG SWITCHER -->
-<div class="lang-bar" style="align-items:center;gap:10px"><div class="idq-switch" id="idq-switch">
+<div class="idq-switch" id="idq-switch" style="position:fixed;top:64px;right:calc(1.5rem + 108px);z-index:99">
 <button class="idq-switch-btn" id="idq-switch-btn" type="button" aria-haspopup="true" aria-expanded="false" title="Altri progetti IDQ"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
 <div class="idq-switch-menu" id="idq-switch-menu" hidden>
 <a href="../" class="idq-switch-home"><span class="idq-switch-ic">🏠</span>IDQ Developer</a>
@@ -872,6 +872,7 @@
 <a href="../converter/"><img src="../assets/icons/converter.png" alt="">IDQ File Converter</a>
 </div>
 </div>
+<div class="lang-bar" style="align-items:center;gap:10px">
   <button class="lang-btn active" onclick="setLang('it')">🇮🇹 IT</button>
   <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
 </div>
