@@ -48,6 +48,14 @@ footer{border-top:1px solid var(--bd);padding:24px 20px;text-align:center;color:
 .idq-switch-menu img{width:24px;height:24px;border-radius:6px;flex:none;display:block}
 .idq-switch-ic{font-size:16px;width:24px;text-align:center;flex:none}
 .idq-switch-sep{height:1px;background:rgba(255,255,255,.14);margin:6px 2px}
+
+.pcf-input{background:var(--card);border:1px solid var(--bd);border-radius:10px;color:var(--tx);padding:11px 13px;font:inherit;font-size:15px;width:100%}
+.pcf-input:focus{outline:none;border-color:var(--ac)}
+.pcf-input.invalid{border-color:#ff5d6c}
+.pcf select.pcf-input{cursor:pointer}
+#contatti .btn[disabled]{opacity:.6;cursor:default}
+[data-pcf-overlay]{display:none}
+[data-pcf-overlay]:not([hidden]){display:flex}
 </style></head>
 <body>
 <header class="top"><a class="brand" href="index.html"><img src="immagini/icona.png" alt="">IDQ Navigator</a><div class="lingue"><button data-l="it">Italiano</button><button data-l="en">English</button><button data-l="fr">Français</button><button data-l="de">Deutsch</button><button data-l="es">Español</button></div><div class="idq-switch" id="idq-switch">
@@ -58,7 +66,7 @@ footer{border-top:1px solid var(--bd);padding:24px 20px;text-align:center;color:
 <a href="../biker/"><img src="../assets/icons/biker.png" alt="">IDQ Biker Maps</a>
 <a href="../navigator/"><img src="../assets/icons/navigator.png" alt="">IDQ Navigator</a>
 <a href="../monitor/"><img src="../assets/icons/monitor.png" alt="">IDQ Monitor User</a>
-<a href="../calendar/"><img src="../assets/icons/calendar.png" alt="">Smart Calendar</a>
+<a href="../calendar/"><img src="../assets/icons/calendar.png" alt="">IDQ Smart Calendar</a>
 <a href="../converter/"><img src="../assets/icons/converter.png" alt="">IDQ File Converter</a>
 </div>
 </div></header>
@@ -285,7 +293,7 @@ footer{border-top:1px solid var(--bd);padding:24px 20px;text-align:center;color:
 <tr><td>Il limite di velocità manca o è tratteggiato</td><td>Il dato non c'è su OpenStreetMap: il tratteggio indica un limite presunto.</td></tr>
 <tr><td>Il download non parte</td><td>Controlla la connessione e lo spazio libero: servono diversi GB.</td></tr>
 </table>
-<p>Se il problema resta, scrivi a <b>info.idq.26@gmail.com</b> dicendo cosa stavi facendo e la versione dell'app (Menu › Informazioni).</p>
+<p>Se il problema resta, scrivi a <b>info@idq-developer.com</b> dicendo cosa stavi facendo e la versione dell'app (Menu › Informazioni).</p>
 
 <h2 id="online-it">19. Servizi online, ricerca di luoghi e 2D/3D</h2>
 <div class="vid"><video controls muted playsinline preload="metadata" src="video/ricerca.mp4"></video><p>Cerca "distributore gasolio" o "pizzeria": i più vicini, con prezzo, distanza e orari.</p></div>
@@ -537,7 +545,7 @@ function tema(n){ document.body.className = n ? 'notte' : ''; }
 <tr><td>The speed limit is missing or dashed</td><td>The data is not on OpenStreetMap: the dashes indicate a presumed limit.</td></tr>
 <tr><td>The download does not start</td><td>Check the connection and the free space: several GB are needed.</td></tr>
 </table>
-<p>If the problem remains, write to <b>info.idq.26@gmail.com</b> saying what you were doing and the app version (Menu › About).</p>
+<p>If the problem remains, write to <b>info@idq-developer.com</b> saying what you were doing and the app version (Menu › About).</p>
 
 <h2 id="online-en">19. Online services, place search and 2D/3D</h2>
 <div class="vid"><video controls muted playsinline preload="metadata" src="video/ricerca.mp4"></video><p>Search "diesel station" or "pizzeria": the nearest ones, with price, distance and opening hours.</p></div>
@@ -789,7 +797,7 @@ function tema(n){ document.body.className = n ? 'notte' : ''; }
 <tr><td>La limite de vitesse manque ou est en pointillés</td><td>La donnée n'est pas sur OpenStreetMap : les pointillés indiquent une limite présumée.</td></tr>
 <tr><td>Le téléchargement ne démarre pas</td><td>Vérifiez la connexion et l'espace libre : il faut plusieurs Go.</td></tr>
 </table>
-<p>Si le problème persiste, écrivez à <b>info.idq.26@gmail.com</b> en précisant ce que vous faisiez et la version de l'application (Menu › À propos).</p>
+<p>Si le problème persiste, écrivez à <b>info@idq-developer.com</b> en précisant ce que vous faisiez et la version de l'application (Menu › À propos).</p>
 
 <h2 id="online-fr">19. Services en ligne, recherche de lieux et 2D/3D</h2>
 <div class="vid"><video controls muted playsinline preload="metadata" src="video/ricerca.mp4"></video><p>Cherchez « station gazole » ou « pizzeria » : les plus proches, avec prix, distance et horaires.</p></div>
@@ -1041,7 +1049,7 @@ function tema(n){ document.body.className = n ? 'notte' : ''; }
 <tr><td>Das Tempolimit fehlt oder ist gestrichelt</td><td>Die Angabe fehlt bei OpenStreetMap: Die Striche zeigen ein angenommenes Limit an.</td></tr>
 <tr><td>Der Download startet nicht</td><td>Prüfen Sie die Verbindung und den freien Speicher: Es werden mehrere GB benötigt.</td></tr>
 </table>
-<p>Bleibt das Problem bestehen, schreiben Sie an <b>info.idq.26@gmail.com</b> und nennen Sie, was Sie getan haben, sowie die App-Version (Menü › Info).</p>
+<p>Bleibt das Problem bestehen, schreiben Sie an <b>info@idq-developer.com</b> und nennen Sie, was Sie getan haben, sowie die App-Version (Menü › Info).</p>
 
 <h2 id="online-de">19. Online-Dienste, Ortssuche und 2D/3D</h2>
 <div class="vid"><video controls muted playsinline preload="metadata" src="video/ricerca.mp4"></video><p>Suchen Sie "Diesel-Tankstelle" oder "Pizzeria": die nächsten, mit Preis, Entfernung und Öffnungszeiten.</p></div>
@@ -1293,7 +1301,7 @@ function tema(n){ document.body.className = n ? 'notte' : ''; }
 <tr><td>El límite de velocidad falta o es discontinuo</td><td>El dato no está en OpenStreetMap: la línea discontinua indica un límite presunto.</td></tr>
 <tr><td>La descarga no empieza</td><td>Comprueba la conexión y el espacio libre: hacen falta varios GB.</td></tr>
 </table>
-<p>Si el problema continúa, escribe a <b>info.idq.26@gmail.com</b> indicando qué estabas haciendo y la versión de la app (Menú › Información).</p>
+<p>Si el problema continúa, escribe a <b>info@idq-developer.com</b> indicando qué estabas haciendo y la versión de la app (Menú › Información).</p>
 
 <h2 id="online-es">19. Servicios en línea, búsqueda de lugares y 2D/3D</h2>
 <div class="vid"><video controls muted playsinline preload="metadata" src="video/ricerca.mp4"></video><p>Busca "gasolinera diésel" o "pizzería": los más cercanos, con precio, distancia y horario.</p></div>
@@ -1323,11 +1331,82 @@ function tema(n){ document.body.className = n ? 'notte' : ''; }
 </script>
 </div>
 </main>
-<footer><span class="l" data-l="it">© IDQ Developer · <a href="funzioni.html">Tutte le funzioni</a> · <a href="privacy.html">Informativa sulla privacy</a> · <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a></span>
-<span class="l" data-l="en">© IDQ Developer · <a href="funzioni.html">All features</a> · <a href="privacy.html">Privacy policy</a> · <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a></span>
-<span class="l" data-l="fr">© IDQ Developer · <a href="funzioni.html">Toutes les fonctions</a> · <a href="privacy.html">Politique de confidentialité</a> · <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a></span>
-<span class="l" data-l="de">© IDQ Developer · <a href="funzioni.html">Alle Funktionen</a> · <a href="privacy.html">Datenschutzerklärung</a> · <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a></span>
-<span class="l" data-l="es">© IDQ Developer · <a href="funzioni.html">Todas las funciones</a> · <a href="privacy.html">Política de privacidad</a> · <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a></span>
+<!-- PARLIAMONE -->
+<section id="contatti" style="padding:64px 0">
+  <div class="wrap">
+    <p class="eyebrow" style="display:block;color:var(--ac);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:13px;margin-bottom:10px">
+      <span class="l" data-l="it">Contatti</span><span class="l" data-l="en">Contact</span><span class="l" data-l="fr">Contact</span><span class="l" data-l="de">Kontakt</span><span class="l" data-l="es">Contacto</span>
+    </p>
+    <h2 class="t" style="margin-bottom:14px">
+      <span class="l" data-l="it">Parliamone</span><span class="l" data-l="en">Let's talk</span><span class="l" data-l="fr">Discutons-en</span><span class="l" data-l="de">Sprechen wir</span><span class="l" data-l="es">Hablemos</span>
+    </h2>
+    <p class="sub" style="margin-bottom:28px">
+      <span class="l" data-l="it">Due domande veloci prima di scrivere: così il messaggio arriva già con tutto il contesto che serve per risponderti bene.</span>
+      <span class="l" data-l="en">Two quick questions before you write: that way the message arrives with all the context needed to answer you well.</span>
+      <span class="l" data-l="fr">Deux questions rapides avant d'écrire : ainsi le message arrive avec tout le contexte nécessaire pour bien vous répondre.</span>
+      <span class="l" data-l="de">Zwei kurze Fragen, bevor Sie schreiben: So kommt die Nachricht gleich mit allem nötigen Kontext an.</span>
+      <span class="l" data-l="es">Dos preguntas rápidas antes de escribir: así el mensaje llega ya con todo el contexto necesario.</span>
+    </p>
+
+    <form class="pcf" id="contact-form" novalidate style="display:flex;flex-direction:column;gap:16px;max-width:620px">
+      <div style="display:flex;flex-wrap:wrap;gap:14px">
+        <div style="flex:1 1 220px;display:flex;flex-direction:column;gap:6px">
+          <label for="cf-project" style="font-size:13px;font-weight:700;color:var(--mu)">Progetto <span style="color:var(--ac)">*</span></label>
+          <select id="cf-project" class="pcf-input" required>
+            <option value="" disabled selected id="cf-project-ph">Seleziona un progetto</option>
+            <option value="Sito / generale" id="cf-opt-general">Sito / generale</option>
+            <option value="IDQ Biker Maps">IDQ Biker Maps</option>
+            <option value="IDQ Navigator">IDQ Navigator</option>
+            <option value="IDQ Monitor User">IDQ Monitor User</option>
+            <option value="IDQ Smart Calendar">IDQ Smart Calendar</option>
+            <option value="IDQ File Converter">IDQ File Converter</option>
+            <option value="Altro" id="cf-opt-other-p">Altro</option>
+          </select>
+        </div>
+        <div style="flex:1 1 220px;display:flex;flex-direction:column;gap:6px">
+          <label for="cf-type" style="font-size:13px;font-weight:700;color:var(--mu)">Tipo di richiesta <span style="color:var(--ac)">*</span></label>
+          <select id="cf-type" class="pcf-input" required>
+            <option value="" disabled selected id="cf-type-ph">Seleziona il tipo</option>
+            <option value="Segnalazione bug" id="cf-opt-bug">Segnalazione di un bug</option>
+            <option value="Idea o nuova funzione" id="cf-opt-idea">Idea o nuova funzione</option>
+            <option value="Domanda generale" id="cf-opt-question">Domanda generale</option>
+            <option value="Collaborazione" id="cf-opt-collab">Proposta di collaborazione</option>
+            <option value="Altro" id="cf-opt-other-t">Altro</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label for="cf-email" id="cf-email-label" style="font-size:13px;font-weight:700;color:var(--mu)">La tua email <span style="color:var(--ac)">*</span></label>
+        <input type="email" id="cf-email" class="pcf-input" required>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label for="cf-message" id="cf-message-label" style="font-size:13px;font-weight:700;color:var(--mu)">Messaggio <span style="color:var(--ac)">*</span></label>
+        <textarea id="cf-message" class="pcf-input" rows="5" required style="resize:vertical;min-height:120px"></textarea>
+      </div>
+      <p class="error" id="cf-error" hidden style="color:#ff5d6c;font-weight:700;font-size:13.5px;margin:0"></p>
+      <button type="submit" class="btn p" style="border:none;cursor:pointer;width:fit-content">
+        <span id="cf-submit-label">Invia messaggio</span>
+      </button>
+    </form>
+
+    <div class="modal-overlay" id="cf-modal-overlay" hidden style="position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:20px" data-pcf-overlay>
+      <div style="background:var(--card);border:1px solid var(--bd);border-radius:18px;max-width:400px;width:100%;padding:28px 26px;text-align:center">
+        <span id="cf-modal-icon" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:rgba(95,217,122,.14);color:#5fd97a;margin-bottom:14px">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>
+        <h3 id="cf-modal-title" style="margin:0 0 8px">Email inviata</h3>
+        <p id="cf-modal-desc" style="color:var(--mu);font-size:14.5px;margin:0">Il tuo messaggio è stato inviato.</p>
+        <button type="button" class="btn p" id="cf-modal-close" style="border:none;cursor:pointer;margin-top:18px;width:100%">Ho capito</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><span class="l" data-l="it">© IDQ Developer · <a href="funzioni.html">Tutte le funzioni</a> · <a href="privacy.html">Informativa sulla privacy</a> · <a href="mailto:info@idq-developer.com">info@idq-developer.com</a></span>
+<span class="l" data-l="en">© IDQ Developer · <a href="funzioni.html">All features</a> · <a href="privacy.html">Privacy policy</a> · <a href="mailto:info@idq-developer.com">info@idq-developer.com</a></span>
+<span class="l" data-l="fr">© IDQ Developer · <a href="funzioni.html">Toutes les fonctions</a> · <a href="privacy.html">Politique de confidentialité</a> · <a href="mailto:info@idq-developer.com">info@idq-developer.com</a></span>
+<span class="l" data-l="de">© IDQ Developer · <a href="funzioni.html">Alle Funktionen</a> · <a href="privacy.html">Datenschutzerklärung</a> · <a href="mailto:info@idq-developer.com">info@idq-developer.com</a></span>
+<span class="l" data-l="es">© IDQ Developer · <a href="funzioni.html">Todas las funciones</a> · <a href="privacy.html">Política de privacidad</a> · <a href="mailto:info@idq-developer.com">info@idq-developer.com</a></span>
 <br>Map data © OpenStreetMap contributors (ODbL)</footer>
 <script>
 (function(){
@@ -1351,6 +1430,189 @@ function tema(n){ document.body.className = n ? 'notte' : ''; }
   btn.addEventListener('click',function(e){e.stopPropagation();menu.hidden?openM():closeM();});
   document.addEventListener('click',function(e){if(!sw.contains(e.target))closeM();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+})();
+</script>
+<!-- EmailJS + Parliamone -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function(){
+  var EMAILJS_PUBLIC_KEY = "5G9tkTfFUdPZAEQgS";
+  var EMAILJS_SERVICE_ID = "service_4zywimj";
+  var EMAILJS_TEMPLATE_ID = "template_8vojqyh";
+  var FALLBACK_EMAIL = "info@idq-developer.com";
+  if (window.emailjs) { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+
+  var I18N = {
+    it: { project_label:"Progetto", project_ph:"Seleziona un progetto", opt_general:"Sito / generale", opt_other:"Altro",
+      type_label:"Tipo di richiesta", type_ph:"Seleziona il tipo",
+      opt_bug:"Segnalazione di un bug", opt_idea:"Idea o nuova funzione", opt_question:"Domanda generale", opt_collab:"Proposta di collaborazione",
+      email_label:"La tua email", message_label:"Messaggio",
+      error:"Compila correttamente progetto, tipo di richiesta, la tua email e il messaggio prima di inviare.",
+      submit:"Invia messaggio", sending:"Invio in corso…",
+      modal_ok_title:"Email inviata", modal_ok_desc:"Il tuo messaggio è stato inviato. Ti rispondo appena posso all'indirizzo che hai scritto.",
+      modal_err_title:"Invio non riuscito",
+      modal_err_config:"Configurazione email mancante. Scrivi nel frattempo a " + FALLBACK_EMAIL + ".",
+      modal_err_network:"Non è stato possibile inviare il messaggio. Riprova tra poco, oppure scrivi a " + FALLBACK_EMAIL + ".",
+      modal_close:"Ho capito" },
+    en: { project_label:"Project", project_ph:"Select a project", opt_general:"Site / general", opt_other:"Other",
+      type_label:"Request type", type_ph:"Select the type",
+      opt_bug:"Bug report", opt_idea:"Idea or new feature", opt_question:"General question", opt_collab:"Collaboration proposal",
+      email_label:"Your email", message_label:"Message",
+      error:"Fill in project, request type, your email and the message correctly before sending.",
+      submit:"Send message", sending:"Sending…",
+      modal_ok_title:"Message sent", modal_ok_desc:"Your message has been sent. I'll reply as soon as I can to the address you wrote.",
+      modal_err_title:"Sending failed",
+      modal_err_config:"Email not configured yet. Write in the meantime to " + FALLBACK_EMAIL + ".",
+      modal_err_network:"The message could not be sent. Try again shortly, or write to " + FALLBACK_EMAIL + ".",
+      modal_close:"Got it" },
+    fr: { project_label:"Projet", project_ph:"Sélectionnez un projet", opt_general:"Site / général", opt_other:"Autre",
+      type_label:"Type de demande", type_ph:"Sélectionnez le type",
+      opt_bug:"Signalement d'un bug", opt_idea:"Idée ou nouvelle fonction", opt_question:"Question générale", opt_collab:"Proposition de collaboration",
+      email_label:"Votre email", message_label:"Message",
+      error:"Remplissez correctement le projet, le type de demande, votre email et le message avant d'envoyer.",
+      submit:"Envoyer le message", sending:"Envoi en cours…",
+      modal_ok_title:"Message envoyé", modal_ok_desc:"Votre message a été envoyé. Je vous répondrai dès que possible.",
+      modal_err_title:"Envoi échoué",
+      modal_err_config:"Configuration email manquante. En attendant, écrivez à " + FALLBACK_EMAIL + ".",
+      modal_err_network:"Le message n'a pas pu être envoyé. Réessayez bientôt, ou écrivez à " + FALLBACK_EMAIL + ".",
+      modal_close:"J'ai compris" },
+    de: { project_label:"Projekt", project_ph:"Projekt auswählen", opt_general:"Website / allgemein", opt_other:"Sonstiges",
+      type_label:"Art der Anfrage", type_ph:"Art auswählen",
+      opt_bug:"Fehlermeldung", opt_idea:"Idee oder neue Funktion", opt_question:"Allgemeine Frage", opt_collab:"Kooperationsvorschlag",
+      email_label:"Ihre E-Mail", message_label:"Nachricht",
+      error:"Füllen Sie Projekt, Anfrageart, Ihre E-Mail und die Nachricht korrekt aus.",
+      submit:"Nachricht senden", sending:"Wird gesendet…",
+      modal_ok_title:"Nachricht gesendet", modal_ok_desc:"Ihre Nachricht wurde gesendet. Ich antworte Ihnen so bald wie möglich.",
+      modal_err_title:"Senden fehlgeschlagen",
+      modal_err_config:"E-Mail noch nicht konfiguriert. Schreiben Sie an " + FALLBACK_EMAIL + ".",
+      modal_err_network:"Die Nachricht konnte nicht gesendet werden. Versuchen Sie es erneut oder schreiben Sie an " + FALLBACK_EMAIL + ".",
+      modal_close:"Verstanden" },
+    es: { project_label:"Proyecto", project_ph:"Selecciona un proyecto", opt_general:"Sitio / general", opt_other:"Otro",
+      type_label:"Tipo de solicitud", type_ph:"Selecciona el tipo",
+      opt_bug:"Informe de un error", opt_idea:"Idea o nueva función", opt_question:"Pregunta general", opt_collab:"Propuesta de colaboración",
+      email_label:"Tu email", message_label:"Mensaje",
+      error:"Completa correctamente el proyecto, el tipo de solicitud, tu email y el mensaje antes de enviar.",
+      submit:"Enviar mensaje", sending:"Enviando…",
+      modal_ok_title:"Mensaje enviado", modal_ok_desc:"Tu mensaje ha sido enviado. Te responderé en cuanto pueda.",
+      modal_err_title:"Envío fallido",
+      modal_err_config:"Configuración de email pendiente. Mientras tanto, escribe a " + FALLBACK_EMAIL + ".",
+      modal_err_network:"No se pudo enviar el mensaje. Vuelve a intentarlo, o escribe a " + FALLBACK_EMAIL + ".",
+      modal_close:"Entendido" }
+  };
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  var form = document.getElementById("contact-form");
+  if (!form) return;
+  var projectEl = document.getElementById("cf-project");
+  var typeEl = document.getElementById("cf-type");
+  var emailEl = document.getElementById("cf-email");
+  var msgEl = document.getElementById("cf-message");
+  var errorEl = document.getElementById("cf-error");
+  var submitBtn = form.querySelector("button[type=submit]");
+  var submitLabelEl = document.getElementById("cf-submit-label");
+  var fields = [projectEl, typeEl, emailEl, msgEl];
+  var currentLang = "it";
+
+  function renderI18n(lang){
+    var t = I18N[lang] || I18N.it;
+    currentLang = lang;
+    document.getElementById("cf-project-ph").textContent = t.project_ph;
+    document.getElementById("cf-opt-general").textContent = t.opt_general;
+    document.getElementById("cf-opt-other-p").textContent = t.opt_other;
+    document.getElementById("cf-type-ph").textContent = t.type_ph;
+    document.getElementById("cf-opt-bug").textContent = t.opt_bug;
+    document.getElementById("cf-opt-idea").textContent = t.opt_idea;
+    document.getElementById("cf-opt-question").textContent = t.opt_question;
+    document.getElementById("cf-opt-collab").textContent = t.opt_collab;
+    document.getElementById("cf-opt-other-t").textContent = t.opt_other;
+    document.getElementById("cf-email-label").firstChild.textContent = t.email_label + " ";
+    document.getElementById("cf-message-label").firstChild.textContent = t.message_label + " ";
+    submitLabelEl.textContent = submitBtn.disabled ? t.sending : t.submit;
+    errorEl.textContent = t.error;
+  }
+  window.renderContactI18n = renderI18n;
+
+  // osserva i cambi di lingua del sito (attributo data-l su <html>) senza toccare
+  // il motore linguistico gia' esistente di questa pagina
+  new MutationObserver(function(){
+    renderI18n(document.documentElement.getAttribute("data-l") || "it");
+  }).observe(document.documentElement, { attributes:true, attributeFilter:["data-l"] });
+  renderI18n(document.documentElement.getAttribute("data-l") || "it");
+
+  function fieldValue(el){ return el.value.trim(); }
+  function clearInvalid(el){ el.classList.remove("invalid"); }
+  fields.forEach(function(el){
+    el.addEventListener("input", function(){ clearInvalid(el); errorEl.hidden = true; });
+    el.addEventListener("change", function(){ clearInvalid(el); errorEl.hidden = true; });
+  });
+
+  function validate(){
+    var ok = true;
+    fields.forEach(function(el){
+      var val = fieldValue(el);
+      var good = val && (el !== emailEl || EMAIL_RE.test(val));
+      if (good) { clearInvalid(el); } else { el.classList.add("invalid"); ok = false; }
+    });
+    return ok;
+  }
+
+  function setSending(on){
+    var t = I18N[currentLang] || I18N.it;
+    submitBtn.disabled = on;
+    submitLabelEl.textContent = on ? t.sending : t.submit;
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var t = I18N[currentLang] || I18N.it;
+    if (!validate()) {
+      errorEl.hidden = false;
+      var firstInvalid = form.querySelector(".invalid");
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+    errorEl.hidden = true;
+    var project = projectEl.value, type = typeEl.value, fromEmail = emailEl.value.trim(), message = msgEl.value.trim();
+    var params = { project:project, request_type:type, from_email:fromEmail, reply_to:fromEmail, message:message, subject:"[IDQ] " + type + " — " + project, lang:currentLang };
+
+    if (!window.emailjs) {
+      showModal(false, t.modal_err_config);
+      return;
+    }
+    setSending(true);
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params).then(
+      function(){ setSending(false); showModal(true); form.reset(); },
+      function(){ setSending(false); showModal(false, t.modal_err_network); }
+    );
+  });
+
+  var modalOverlay = document.getElementById("cf-modal-overlay");
+  var modalIcon = document.getElementById("cf-modal-icon");
+  var modalTitle = document.getElementById("cf-modal-title");
+  var modalDesc = document.getElementById("cf-modal-desc");
+  var modalClose = document.getElementById("cf-modal-close");
+  var lastFocused = null;
+
+  function showModal(success, errorText){
+    var t = I18N[currentLang] || I18N.it;
+    if (success) {
+      modalIcon.style.background = "rgba(95,217,122,.14)"; modalIcon.style.color = "#5fd97a";
+      modalIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+      modalTitle.textContent = t.modal_ok_title; modalDesc.textContent = t.modal_ok_desc;
+    } else {
+      modalIcon.style.background = "rgba(255,93,108,.14)"; modalIcon.style.color = "#ff5d6c";
+      modalIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>';
+      modalTitle.textContent = t.modal_err_title; modalDesc.textContent = errorText || t.modal_err_network;
+    }
+    modalClose.textContent = t.modal_close;
+    lastFocused = document.activeElement;
+    modalOverlay.hidden = false;
+    modalClose.focus();
+  }
+  function hideModal(){ modalOverlay.hidden = true; if (lastFocused) lastFocused.focus(); }
+  modalClose.addEventListener("click", hideModal);
+  modalOverlay.addEventListener("click", function(e){ if (e.target === modalOverlay) hideModal(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !modalOverlay.hidden) hideModal(); });
 })();
 </script>
 </body></html>

@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO Meta Tags IT -->
-  <title>Smart Calendar — L'app Android che trova appuntamenti nei tuoi messaggi</title>
-  <meta name="description" content="Smart Calendar analizza automaticamente SMS, WhatsApp, Telegram ed Email per trovare appuntamenti e aggiungerli al tuo calendario. AI on-device, privacy garantita. €2.99 acquisto unico.">
+  <title>IDQ Smart Calendar — L'app Android che trova appuntamenti nei tuoi messaggi</title>
+  <meta name="description" content="IDQ Smart Calendar analizza automaticamente SMS, WhatsApp, Telegram ed Email per trovare appuntamenti e aggiungerli al tuo calendario. AI on-device, privacy garantita. €2.99 acquisto unico.">
   <meta name="keywords" content="smart calendar, app calendario android, trova appuntamenti sms, analisi messaggi calendario, whatsapp calendario, telegram calendario, app appuntamenti automatica, ai calendario android">
   <meta name="author" content="Paolo Migliaccio">
   <meta name="google-site-verification" content="3npJc6HKGWKH9mHmBPD9Yo5rgmFN76CoKo7L2zWyhr8" />
@@ -14,7 +14,7 @@
   <link rel="canonical" href="https://idq-developer.com/calendar">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Smart Calendar — Appuntamenti automatici dai tuoi messaggi">
+  <meta property="og:title" content="IDQ Smart Calendar — Appuntamenti automatici dai tuoi messaggi">
   <meta property="og:description" content="L'app Android che usa AI on-device per trovare appuntamenti in SMS, WhatsApp, Telegram ed Email. Tutto privato, tutto offline. €2.99 acquisto unico.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://idq-developer.com/calendar">
@@ -22,7 +22,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Smart Calendar — AI per il tuo calendario">
+  <meta name="twitter:title" content="IDQ Smart Calendar — AI per il tuo calendario">
   <meta name="twitter:description" content="Trova automaticamente appuntamenti in SMS, WhatsApp, Telegram ed Email con AI on-device. €2.99 acquisto unico.">
   <meta name="twitter:image" content="https://idq-developer.com/calendar/screenshots/screen1.png">
 
@@ -31,7 +31,7 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Smart Calendar",
+    "name": "IDQ Smart Calendar",
     "operatingSystem": "Android",
     "applicationCategory": "ProductivityApplication",
     "offers": {
@@ -336,6 +336,14 @@
 .idq-switch-menu img{width:24px;height:24px;border-radius:6px;flex:none;display:block}
 .idq-switch-ic{font-size:16px;width:24px;text-align:center;flex:none}
 .idq-switch-sep{height:1px;background:rgba(255,255,255,.14);margin:6px 2px}
+.pcf-input{background:var(--card);border:1px solid var(--bd);border-radius:10px;color:var(--tx);padding:11px 13px;font:inherit;font-size:15px;width:100%}
+.pcf-input:focus{outline:none;border-color:var(--ac)}
+.pcf-input.invalid{border-color:#ff5d6c}
+.pcf select.pcf-input{cursor:pointer}
+#contatti .btn[disabled]{opacity:.6;cursor:default}
+
+[data-pcf-overlay]{display:none}
+[data-pcf-overlay]:not([hidden]){display:flex}
 </style>
 </head>
 <body>
@@ -348,7 +356,7 @@
 <a href="../biker/"><img src="../assets/icons/biker.png" alt="">IDQ Biker Maps</a>
 <a href="../navigator/"><img src="../assets/icons/navigator.png" alt="">IDQ Navigator</a>
 <a href="../monitor/"><img src="../assets/icons/monitor.png" alt="">IDQ Monitor User</a>
-<a href="../calendar/"><img src="../assets/icons/calendar.png" alt="">Smart Calendar</a>
+<a href="../calendar/"><img src="../assets/icons/calendar.png" alt="">IDQ Smart Calendar</a>
 <a href="../converter/"><img src="../assets/icons/converter.png" alt="">IDQ File Converter</a>
 </div>
 </div>
@@ -373,13 +381,13 @@
         </h1>
 
         <p class="hero-sub fade-up delay-2">
-          <span data-lang="it">Smart Calendar analizza SMS, WhatsApp, Telegram ed Email con AI on-device e aggiunge automaticamente gli appuntamenti al tuo calendario. Zero cloud, acquisto unico.</span>
-          <span data-lang="en">Smart Calendar scans SMS, WhatsApp, Telegram and Email with on-device AI and automatically adds appointments to your calendar. Zero cloud, one-time purchase.</span>
+          <span data-lang="it">IDQ Smart Calendar analizza SMS, WhatsApp, Telegram ed Email con AI on-device e aggiunge automaticamente gli appuntamenti al tuo calendario. Zero cloud, acquisto unico.</span>
+          <span data-lang="en">IDQ Smart Calendar scans SMS, WhatsApp, Telegram and Email with on-device AI and automatically adds appointments to your calendar. Zero cloud, one-time purchase.</span>
         </p>
 
         <div class="hero-actions fade-up delay-3">
-          <a href="#download" class="btn-primary">
-            🛒 <span data-lang="it">Acquista ora — €2.99</span><span data-lang="en">Buy now — €2.99</span>
+          <a href="https://play.google.com/store/apps/details?id=com.joker78.smartcalendar" class="btn-primary" target="_blank" rel="noopener">
+            🛒 <span data-lang="it">2,99 € su Google Play</span><span data-lang="en">€2.99 on Google Play</span>
           </a>
           <a href="#screenshots" class="btn-secondary">
             📱 <span data-lang="it">Guarda l'app</span><span data-lang="en">See the app</span>
@@ -408,13 +416,13 @@
       <div class="phone-wrap fade-up delay-2">
         <div class="screens-row">
           <div class="screen-thumb">
-            <img src="screenshots/screen1.png" alt="Smart Calendar - Schermata principale">
+            <img src="screenshots/screen1.png" alt="IDQ Smart Calendar - Schermata principale">
           </div>
           <div class="screen-thumb">
-            <img src="screenshots/screen5.png" alt="Smart Calendar - Impostazioni">
+            <img src="screenshots/screen5.png" alt="IDQ Smart Calendar - Impostazioni">
           </div>
           <div class="screen-thumb">
-            <img src="screenshots/screen4.png" alt="Smart Calendar - Bozze">
+            <img src="screenshots/screen4.png" alt="IDQ Smart Calendar - Bozze">
           </div>
         </div>
         <div class="phone-glow"></div>
@@ -497,8 +505,8 @@
           <div class="step-num">1</div>
           <div class="step-title" data-lang="it">Acquista e installa</div>
           <div class="step-title" data-lang="en">Purchase and install</div>
-          <div class="step-desc" data-lang="it">Acquista su Gumroad, scarica l'APK e installalo. Concedi i permessi SMS e calendario.</div>
-          <div class="step-desc" data-lang="en">Purchase on Gumroad, download the APK and install it. Grant SMS and calendar permissions.</div>
+          <div class="step-desc" data-lang="it">Scaricala da Google Play e installala. Concedi i permessi SMS e calendario.</div>
+          <div class="step-desc" data-lang="en">Get it on Google Play and install it. Grant SMS and calendar permissions.</div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
@@ -534,11 +542,11 @@
       <span data-lang="en">See the app in action</span>
     </h2>
     <div class="screenshots-grid">
-      <div class="screenshot-item"><img src="screenshots/screen1.png" alt="Smart Calendar - Schermata SMS"></div>
-      <div class="screenshot-item"><img src="screenshots/screen2.png" alt="Smart Calendar - WhatsApp Telegram"></div>
-      <div class="screenshot-item"><img src="screenshots/screen3.png" alt="Smart Calendar - Email"></div>
-      <div class="screenshot-item"><img src="screenshots/screen4.png" alt="Smart Calendar - Bozze"></div>
-      <div class="screenshot-item"><img src="screenshots/screen5.png" alt="Smart Calendar - Impostazioni"></div>
+      <div class="screenshot-item"><img src="screenshots/screen1.png" alt="IDQ Smart Calendar - Schermata SMS"></div>
+      <div class="screenshot-item"><img src="screenshots/screen2.png" alt="IDQ Smart Calendar - WhatsApp Telegram"></div>
+      <div class="screenshot-item"><img src="screenshots/screen3.png" alt="IDQ Smart Calendar - Email"></div>
+      <div class="screenshot-item"><img src="screenshots/screen4.png" alt="IDQ Smart Calendar - Bozze"></div>
+      <div class="screenshot-item"><img src="screenshots/screen5.png" alt="IDQ Smart Calendar - Impostazioni"></div>
     </div>
   </section>
 
@@ -553,8 +561,8 @@
           <span data-lang="en">Your data stays<br>on your phone</span>
         </h2>
         <p style="color:var(--muted); margin-bottom:32px; font-size:0.95rem;">
-          <span data-lang="it">Smart Calendar è progettata con la privacy come priorità assoluta. Nessun server esterno, nessun tracciamento, nessuna pubblicità.</span>
-          <span data-lang="en">Smart Calendar is designed with privacy as the absolute priority. No external servers, no tracking, no ads.</span>
+          <span data-lang="it">IDQ Smart Calendar è progettata con la privacy come priorità assoluta. Nessun server esterno, nessun tracciamento, nessuna pubblicità.</span>
+          <span data-lang="en">IDQ Smart Calendar is designed with privacy as the absolute priority. No external servers, no tracking, no ads.</span>
         </p>
         <ul class="privacy-points">
           <li><span class="privacy-check">✓</span><span data-lang="it">AI completamente on-device (ML Kit + Gemini Nano)</span><span data-lang="en">Fully on-device AI (ML Kit + Gemini Nano)</span></li>
@@ -584,40 +592,103 @@
         <span data-lang="en">Ready to never miss<br>an appointment again?</span>
       </h2>
       <p class="cta-sub">
-        <span data-lang="it">Acquista Smart Calendar una sola volta. Nessun abbonamento, nessun costo nascosto. Compatibile con Android 8.0+.</span>
-        <span data-lang="en">Buy Smart Calendar once. No subscription, no hidden costs. Compatible with Android 8.0+.</span>
+        <span data-lang="it">Acquista IDQ Smart Calendar una sola volta. Nessun abbonamento, nessun costo nascosto. Compatibile con Android 8.0+.</span>
+        <span data-lang="en">Buy IDQ Smart Calendar once. No subscription, no hidden costs. Compatible with Android 8.0+.</span>
       </p>
       <div class="price-badge">
         ✅ <span data-lang="it">Acquisto unico — nessun abbonamento</span><span data-lang="en">One-time purchase — no subscription</span>
       </div>
       <br>
-      <a href="https://idqster.gumroad.com/l/smart-calendar" class="btn-primary" style="font-size:16px; padding:16px 36px;">
-        🛒 <span data-lang="it">Acquista ora — €2.99</span><span data-lang="en">Buy now — €2.99</span>
+      <a href="https://play.google.com/store/apps/details?id=com.joker78.smartcalendar" class="btn-primary" style="font-size:16px; padding:16px 36px;" target="_blank" rel="noopener">
+        🛒 <span data-lang="it">2,99 € su Google Play</span><span data-lang="en">€2.99 on Google Play</span>
       </a>
       <p class="cta-note">
-        <span data-lang="it">Android 8.0+ · Versione 1.0.0 · ~10 MB · Pagamento sicuro tramite Gumroad</span>
-        <span data-lang="en">Android 8.0+ · Version 1.0.0 · ~10 MB · Secure payment via Gumroad</span>
-      </p>
-      <p class="cta-note" style="margin-top:8px;">
-        <span data-lang="it">⚠️ Nota: Android potrebbe mostrare un avviso durante l'installazione. È normale per le app fuori dal Play Store — l'app è sicura al 100%.</span>
-        <span data-lang="en">⚠️ Note: Android may show a warning during installation. This is normal for apps outside the Play Store — the app is 100% safe.</span>
+        <span data-lang="it">Android 8.0+ · Disponibile su Google Play</span>
+        <span data-lang="en">Android 8.0+ · Available on Google Play</span>
       </p>
     </div>
   </section>
 
   <!-- ── FOOTER ── -->
-  <footer>
+  <section id="contatti" style="padding:72px 24px">
+  <div style="max-width:620px;margin:0 auto">
+    <p style="color:var(--blue);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:13px;margin:0 0 10px">
+      <span data-lang="it">Contatti</span><span data-lang="en">Contact</span>
+    </p>
+    <h2 style="margin:0 0 14px">
+      <span data-lang="it">Parliamone</span><span data-lang="en">Let's talk</span>
+    </h2>
+    <p style="color:var(--muted);margin:0 0 28px">
+      <span data-lang="it">Due domande veloci prima di scrivere: così il messaggio arriva già con tutto il contesto che serve per risponderti bene.</span>
+      <span data-lang="en">Two quick questions before you write: that way the message arrives with all the context needed to answer you well.</span>
+    </p>
+
+    <form id="contact-form" novalidate style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-wrap:wrap;gap:14px">
+        <div style="flex:1 1 220px;display:flex;flex-direction:column;gap:6px">
+          <label for="cf-project" style="font-size:13px;font-weight:700;color:var(--muted)">Progetto <span style="color:var(--blue)">*</span></label>
+          <select id="cf-project" class="pcf-input" required>
+            <option value="" disabled selected id="cf-project-ph">Seleziona un progetto</option>
+            <option value="Sito / generale" id="cf-opt-general">Sito / generale</option>
+            <option value="IDQ Biker Maps">IDQ Biker Maps</option>
+            <option value="IDQ Navigator">IDQ Navigator</option>
+            <option value="IDQ Monitor User">IDQ Monitor User</option>
+            <option value="IDQ Smart Calendar" selected>IDQ Smart Calendar</option>
+            <option value="IDQ File Converter">IDQ File Converter</option>
+            <option value="Altro" id="cf-opt-other-p">Altro</option>
+          </select>
+        </div>
+        <div style="flex:1 1 220px;display:flex;flex-direction:column;gap:6px">
+          <label for="cf-type" style="font-size:13px;font-weight:700;color:var(--muted)">Tipo di richiesta <span style="color:var(--blue)">*</span></label>
+          <select id="cf-type" class="pcf-input" required>
+            <option value="" disabled selected id="cf-type-ph">Seleziona il tipo</option>
+            <option value="Segnalazione bug" id="cf-opt-bug">Segnalazione di un bug</option>
+            <option value="Idea o nuova funzione" id="cf-opt-idea">Idea o nuova funzione</option>
+            <option value="Domanda generale" id="cf-opt-question">Domanda generale</option>
+            <option value="Collaborazione" id="cf-opt-collab">Proposta di collaborazione</option>
+            <option value="Altro" id="cf-opt-other-t">Altro</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label for="cf-email" id="cf-email-label" style="font-size:13px;font-weight:700;color:var(--muted)">La tua email <span style="color:var(--blue)">*</span></label>
+        <input type="email" id="cf-email" class="pcf-input" required>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <label for="cf-message" id="cf-message-label" style="font-size:13px;font-weight:700;color:var(--muted)">Messaggio <span style="color:var(--blue)">*</span></label>
+        <textarea id="cf-message" class="pcf-input" rows="5" required style="resize:vertical;min-height:120px"></textarea>
+      </div>
+      <p class="error" id="cf-error" hidden style="color:#ff5d6c;font-weight:700;font-size:13.5px;margin:0"></p>
+      <button type="submit" class="btn-primary" style="border:none;cursor:pointer;width:fit-content">
+        <span id="cf-submit-label">Invia messaggio</span>
+      </button>
+    </form>
+
+    <div id="cf-modal-overlay" hidden data-pcf-overlay style="position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:20px">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;max-width:400px;width:100%;padding:28px 26px;text-align:center">
+        <span id="cf-modal-icon" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:rgba(95,217,122,.14);color:#5fd97a;margin-bottom:14px">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>
+        <h3 id="cf-modal-title" style="margin:0 0 8px;color:var(--white)">Email inviata</h3>
+        <p id="cf-modal-desc" style="color:var(--muted);font-size:14.5px;margin:0">Il tuo messaggio è stato inviato.</p>
+        <button type="button" id="cf-modal-close" class="btn-primary" style="border:none;cursor:pointer;margin-top:18px;width:100%">Ho capito</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
     <p style="margin-bottom:8px;">
-      <strong>Smart Calendar</strong> —
+      <strong>IDQ Smart Calendar</strong> —
       <span data-lang="it">Sviluppato da</span>
       <span data-lang="en">Developed by</span>
-      <a href="mailto:info.idq.26@gmail.com">Paolo Migliaccio</a>
+      <a href="mailto:info@idq-developer.com">Paolo Migliaccio</a>
     </p>
     <p>
       <a href="privacy.html" data-lang="it">Informativa sulla Privacy</a>
       <a href="privacy.html" data-lang="en">Privacy Policy</a>
       ·
-      <a href="mailto:info.idq.26@gmail.com">info.idq.26@gmail.com</a>
+      <a href="mailto:info@idq-developer.com">info@idq-developer.com</a>
       ·
       <span data-lang="it">© 2026 Tutti i diritti riservati</span>
       <span data-lang="en">© 2026 All rights reserved</span>
@@ -655,6 +726,159 @@
   btn.addEventListener('click',function(e){e.stopPropagation();menu.hidden?openM():closeM();});
   document.addEventListener('click',function(e){if(!sw.contains(e.target))closeM();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- EmailJS + Parliamone -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function(){
+  var EMAILJS_PUBLIC_KEY = "5G9tkTfFUdPZAEQgS";
+  var EMAILJS_SERVICE_ID = "service_4zywimj";
+  var EMAILJS_TEMPLATE_ID = "template_8vojqyh";
+  var FALLBACK_EMAIL = "info@idq-developer.com";
+  if (window.emailjs) { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); }
+
+  var I18N = {
+    it: { project_label:"Progetto", project_ph:"Seleziona un progetto", opt_general:"Sito / generale", opt_other:"Altro",
+      type_label:"Tipo di richiesta", type_ph:"Seleziona il tipo",
+      opt_bug:"Segnalazione di un bug", opt_idea:"Idea o nuova funzione", opt_question:"Domanda generale", opt_collab:"Proposta di collaborazione",
+      email_label:"La tua email", message_label:"Messaggio",
+      error:"Compila correttamente progetto, tipo di richiesta, la tua email e il messaggio prima di inviare.",
+      submit:"Invia messaggio", sending:"Invio in corso…",
+      modal_ok_title:"Email inviata", modal_ok_desc:"Il tuo messaggio è stato inviato. Ti rispondo appena posso all'indirizzo che hai scritto.",
+      modal_err_title:"Invio non riuscito",
+      modal_err_config:"Configurazione email mancante. Scrivi nel frattempo a " + FALLBACK_EMAIL + ".",
+      modal_err_network:"Non è stato possibile inviare il messaggio. Riprova tra poco, oppure scrivi a " + FALLBACK_EMAIL + ".",
+      modal_close:"Ho capito" },
+    en: { project_label:"Project", project_ph:"Select a project", opt_general:"Site / general", opt_other:"Other",
+      type_label:"Request type", type_ph:"Select the type",
+      opt_bug:"Bug report", opt_idea:"Idea or new feature", opt_question:"General question", opt_collab:"Collaboration proposal",
+      email_label:"Your email", message_label:"Message",
+      error:"Fill in project, request type, your email and the message correctly before sending.",
+      submit:"Send message", sending:"Sending…",
+      modal_ok_title:"Message sent", modal_ok_desc:"Your message has been sent. I'll reply as soon as I can to the address you wrote.",
+      modal_err_title:"Sending failed",
+      modal_err_config:"Email not configured yet. Write in the meantime to " + FALLBACK_EMAIL + ".",
+      modal_err_network:"The message could not be sent. Try again shortly, or write to " + FALLBACK_EMAIL + ".",
+      modal_close:"Got it" }
+  };
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  var form = document.getElementById("contact-form");
+  if (!form) return;
+  var projectEl = document.getElementById("cf-project");
+  var typeEl = document.getElementById("cf-type");
+  var emailEl = document.getElementById("cf-email");
+  var msgEl = document.getElementById("cf-message");
+  var errorEl = document.getElementById("cf-error");
+  var submitBtn = form.querySelector("button[type=submit]");
+  var submitLabelEl = document.getElementById("cf-submit-label");
+  var fields = [projectEl, typeEl, emailEl, msgEl];
+  var currentLang = "it";
+
+  function renderI18n(lang){
+    var t = I18N[lang] || I18N.it;
+    currentLang = lang;
+    document.getElementById("cf-project-ph").textContent = t.project_ph;
+    document.getElementById("cf-opt-general").textContent = t.opt_general;
+    document.getElementById("cf-opt-other-p").textContent = t.opt_other;
+    document.getElementById("cf-type-ph").textContent = t.type_ph;
+    document.getElementById("cf-opt-bug").textContent = t.opt_bug;
+    document.getElementById("cf-opt-idea").textContent = t.opt_idea;
+    document.getElementById("cf-opt-question").textContent = t.opt_question;
+    document.getElementById("cf-opt-collab").textContent = t.opt_collab;
+    document.getElementById("cf-opt-other-t").textContent = t.opt_other;
+    document.getElementById("cf-email-label").firstChild.textContent = t.email_label + " ";
+    document.getElementById("cf-message-label").firstChild.textContent = t.message_label + " ";
+    submitLabelEl.textContent = submitBtn.disabled ? t.sending : t.submit;
+    errorEl.textContent = t.error;
+  }
+  window.renderContactI18n = renderI18n;
+
+  // osserva i cambi di lingua del sito (classe "en" su <body>) senza toccare
+  // il motore linguistico gia' esistente di questa pagina
+  function currentLangFromBody(){ return document.body.classList.contains("en") ? "en" : "it"; }
+  new MutationObserver(function(){
+    renderI18n(currentLangFromBody());
+  }).observe(document.body, { attributes:true, attributeFilter:["class"] });
+  renderI18n(currentLangFromBody());
+
+  function fieldValue(el){ return el.value.trim(); }
+  function clearInvalid(el){ el.classList.remove("invalid"); }
+  fields.forEach(function(el){
+    el.addEventListener("input", function(){ clearInvalid(el); errorEl.hidden = true; });
+    el.addEventListener("change", function(){ clearInvalid(el); errorEl.hidden = true; });
+  });
+
+  function validate(){
+    var ok = true;
+    fields.forEach(function(el){
+      var val = fieldValue(el);
+      var good = val && (el !== emailEl || EMAIL_RE.test(val));
+      if (good) { clearInvalid(el); } else { el.classList.add("invalid"); ok = false; }
+    });
+    return ok;
+  }
+
+  function setSending(on){
+    var t = I18N[currentLang] || I18N.it;
+    submitBtn.disabled = on;
+    submitLabelEl.textContent = on ? t.sending : t.submit;
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var t = I18N[currentLang] || I18N.it;
+    if (!validate()) {
+      errorEl.hidden = false;
+      var firstInvalid = form.querySelector(".invalid");
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+    errorEl.hidden = true;
+    var project = projectEl.value, type = typeEl.value, fromEmail = emailEl.value.trim(), message = msgEl.value.trim();
+    var params = { project:project, request_type:type, from_email:fromEmail, reply_to:fromEmail, message:message, subject:"[IDQ] " + type + " — " + project, lang:currentLang };
+
+    if (!window.emailjs) {
+      showModal(false, t.modal_err_config);
+      return;
+    }
+    setSending(true);
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params).then(
+      function(){ setSending(false); showModal(true); form.reset(); },
+      function(){ setSending(false); showModal(false, t.modal_err_network); }
+    );
+  });
+
+  var modalOverlay = document.getElementById("cf-modal-overlay");
+  var modalIcon = document.getElementById("cf-modal-icon");
+  var modalTitle = document.getElementById("cf-modal-title");
+  var modalDesc = document.getElementById("cf-modal-desc");
+  var modalClose = document.getElementById("cf-modal-close");
+  var lastFocused = null;
+
+  function showModal(success, errorText){
+    var t = I18N[currentLang] || I18N.it;
+    if (success) {
+      modalIcon.style.background = "rgba(95,217,122,.14)"; modalIcon.style.color = "#5fd97a";
+      modalIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+      modalTitle.textContent = t.modal_ok_title; modalDesc.textContent = t.modal_ok_desc;
+    } else {
+      modalIcon.style.background = "rgba(255,93,108,.14)"; modalIcon.style.color = "#ff5d6c";
+      modalIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>';
+      modalTitle.textContent = t.modal_err_title; modalDesc.textContent = errorText || t.modal_err_network;
+    }
+    modalClose.textContent = t.modal_close;
+    lastFocused = document.activeElement;
+    modalOverlay.hidden = false;
+    modalClose.focus();
+  }
+  function hideModal(){ modalOverlay.hidden = true; if (lastFocused) lastFocused.focus(); }
+  modalClose.addEventListener("click", hideModal);
+  modalOverlay.addEventListener("click", function(e){ if (e.target === modalOverlay) hideModal(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !modalOverlay.hidden) hideModal(); });
 })();
 </script>
 </body>
