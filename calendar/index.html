@@ -90,19 +90,19 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-    .lang-btn {
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 4px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      transition: all 0.2s;
-    }
-    .lang-btn.active { border-color: var(--blue); color: var(--blue); background: rgba(91,141,239,0.1); }
-    .lang-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .lang-switch{position:relative;flex:none}
+    .lang-btn{display:flex;align-items:center;gap:7px;border:1px solid var(--border);background:var(--card);color:var(--white);border-radius:999px;padding:7px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px}
+    .lang-btn:hover{border-color:var(--blue)}
+    .lang-btn .flag{font-size:17px;line-height:1}
+    .lang-btn .code{font-weight:700;letter-spacing:.02em}
+    .lang-btn .chev{width:14px;height:14px;transition:transform .15s ease;flex:none}
+    .lang-switch.open .lang-btn .chev{transform:rotate(180deg)}
+    .lang-menu{position:absolute;top:calc(100% + 8px);right:0;z-index:30;list-style:none;margin:0;padding:6px;min-width:168px;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+    .lang-menu[hidden]{display:none}
+    .lang-menu button{width:100%;display:flex;align-items:center;gap:10px;background:none;border:0;border-radius:9px;padding:9px 10px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:14.5px;text-align:left;cursor:pointer}
+    .lang-menu button:hover{background:rgba(255,255,255,.06)}
+    .lang-menu button.on{color:var(--blue);font-weight:700}
+    .lang-menu .flag{font-size:17px}
 
     .hero {
       min-height: 100vh;
@@ -303,9 +303,12 @@
     .delay-3 { animation-delay: 0.3s; opacity: 0; }
     .delay-4 { animation-delay: 0.4s; opacity: 0; }
 
-    [data-lang="en"] { display: none; }
-    body.en [data-lang="it"] { display: none; }
-    body.en [data-lang="en"] { display: revert; }
+    [data-lang] { display: none; }
+    body[data-l="it"] [data-lang="it"] { display: revert; }
+    body[data-l="en"] [data-lang="en"] { display: revert; }
+    body[data-l="fr"] [data-lang="fr"] { display: revert; }
+    body[data-l="de"] [data-lang="de"] { display: revert; }
+    body[data-l="es"] [data-lang="es"] { display: revert; }
 
     @media (max-width: 768px) {
       .hero-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
@@ -346,7 +349,7 @@
 [data-pcf-overlay]:not([hidden]){display:flex}
 </style>
 </head>
-<body>
+<body data-l="it">
 
   <div class="lang-bar" style="align-items:center;gap:10px">
     <a href="index.html" style="display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--white);font-weight:800;font-size:17px;margin-right:auto">
@@ -365,10 +368,19 @@
 <a href="../converter/"><img src="../assets/icons/converter.png" alt="">IDQ File Converter</a>
 </div>
 </div>
-    <div style="display:flex;gap:8px">
-      <button class="lang-btn active" id="btn-it" onclick="setLang('it')">🇮🇹 IT</button>
-      <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
-    </div>
+    <div class="lang-switch" id="lang-switch">
+<button class="lang-btn" id="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false">
+<span class="flag" id="lang-flag">🇮🇹</span><span class="code" id="lang-code">IT</span>
+<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+<ul class="lang-menu" id="lang-menu" role="listbox" hidden>
+<li><button type="button" data-l="it" role="option"><span class="flag">🇮🇹</span>Italiano</button></li>
+<li><button type="button" data-l="en" role="option"><span class="flag">🇬🇧</span>English</button></li>
+<li><button type="button" data-l="fr" role="option"><span class="flag">🇫🇷</span>Français</button></li>
+<li><button type="button" data-l="de" role="option"><span class="flag">🇩🇪</span>Deutsch</button></li>
+<li><button type="button" data-l="es" role="option"><span class="flag">🇪🇸</span>Español</button></li>
+</ul>
+</div>
   </div>
 
   <!-- ── HERO ── -->
@@ -377,25 +389,25 @@
       <div>
         <div class="hero-badge fade-up">
           ✨ <span data-lang="it">Powered by Gemini Nano · AI On-Device</span>
-          <span data-lang="en">Powered by Gemini Nano · On-Device AI</span>
+          <span data-lang="en">Powered by Gemini Nano · On-Device AI</span><span data-lang="fr">Propulsé par Gemini Nano · IA embarquée</span><span data-lang="de">Unterstützt von Gemini Nano · KI auf dem Gerät</span><span data-lang="es">Desarrollado con Gemini Nano · IA en el dispositivo</span>
         </div>
 
         <h1 class="hero-title fade-up delay-1">
           <span data-lang="it">Il tuo calendario<br>si aggiorna<br><span>da solo</span></span>
-          <span data-lang="en">Your calendar<br>updates<br><span>itself</span></span>
+          <span data-lang="en">Your calendar<br>updates<br><span>itself</span></span><span data-lang="fr">Ton agenda<br>se met à jour<br><span>tout seul</span></span><span data-lang="de">Dein Kalender<br>aktualisiert sich<br><span>von selbst</span></span><span data-lang="es">Tu calendario<br>se actualiza<br><span>solo</span></span>
         </h1>
 
         <p class="hero-sub fade-up delay-2">
           <span data-lang="it">IDQ Smart Calendar analizza SMS, WhatsApp, Telegram ed Email con AI on-device e aggiunge automaticamente gli appuntamenti al tuo calendario. Zero cloud, acquisto unico.</span>
-          <span data-lang="en">IDQ Smart Calendar scans SMS, WhatsApp, Telegram and Email with on-device AI and automatically adds appointments to your calendar. Zero cloud, one-time purchase.</span>
+          <span data-lang="en">IDQ Smart Calendar scans SMS, WhatsApp, Telegram and Email with on-device AI and automatically adds appointments to your calendar. Zero cloud, one-time purchase.</span><span data-lang="fr">IDQ Smart Calendar analyse SMS, WhatsApp, Telegram et Email avec une IA embarquée et ajoute automatiquement les rendez-vous à ton agenda. Zéro cloud, achat unique.</span><span data-lang="de">IDQ Smart Calendar analysiert SMS, WhatsApp, Telegram und E-Mail mit KI auf dem Gerät und fügt Termine automatisch zu deinem Kalender hinzu. Kein Cloud-Zugriff, einmaliger Kauf.</span><span data-lang="es">IDQ Smart Calendar analiza SMS, WhatsApp, Telegram y correo con IA en el dispositivo y añade automáticamente las citas a tu calendario. Cero nube, compra única.</span>
         </p>
 
         <div class="hero-actions fade-up delay-3">
           <a href="https://play.google.com/store/apps/details?id=com.joker78.smartcalendar" class="btn-primary" target="_blank" rel="noopener">
-            🛒 <span data-lang="it">2,99 € su Google Play</span><span data-lang="en">€2.99 on Google Play</span>
+            🛒 <span data-lang="it">2,99 € su Google Play</span><span data-lang="en">€2.99 on Google Play</span><span data-lang="fr">2,99 € sur Google Play</span><span data-lang="de">2,99 € bei Google Play</span><span data-lang="es">2,99 € en Google Play</span>
           </a>
           <a href="#screenshots" class="btn-secondary">
-            📱 <span data-lang="it">Guarda l'app</span><span data-lang="en">See the app</span>
+            📱 <span data-lang="it">Guarda l'app</span><span data-lang="en">See the app</span><span data-lang="fr">Voir l'appli</span><span data-lang="de">App ansehen</span><span data-lang="es">Ver la app</span>
           </a>
         </div>
 
@@ -403,17 +415,17 @@
           <div class="stat">
             <div class="stat-num">4</div>
             <div class="stat-label" data-lang="it">Sorgenti</div>
-            <div class="stat-label" data-lang="en">Sources</div>
+            <div class="stat-label" data-lang="en">Sources</div><div class="stat-label" data-lang="fr">Sources</div><div class="stat-label" data-lang="de">Quellen</div><div class="stat-label" data-lang="es">Fuentes</div>
           </div>
           <div class="stat">
             <div class="stat-num">100%</div>
             <div class="stat-label" data-lang="it">On-Device</div>
-            <div class="stat-label" data-lang="en">On-Device</div>
+            <div class="stat-label" data-lang="en">On-Device</div><div class="stat-label" data-lang="fr">Sur l'appareil</div><div class="stat-label" data-lang="de">Auf dem Gerät</div><div class="stat-label" data-lang="es">En el dispositivo</div>
           </div>
           <div class="stat">
             <div class="stat-num">€2.99</div>
             <div class="stat-label" data-lang="it">Acquisto unico</div>
-            <div class="stat-label" data-lang="en">One-time</div>
+            <div class="stat-label" data-lang="en">One-time</div><div class="stat-label" data-lang="fr">Achat unique</div><div class="stat-label" data-lang="de">Einmalig</div><div class="stat-label" data-lang="es">Compra única</div>
           </div>
         </div>
       </div>
@@ -438,56 +450,56 @@
   <!-- ── FEATURES ── -->
   <section id="features">
     <p class="section-label" data-lang="it">Funzionalità</p>
-    <p class="section-label" data-lang="en">Features</p>
+    <p class="section-label" data-lang="en">Features</p><p class="section-label" data-lang="fr">Fonctionnalités</p><p class="section-label" data-lang="de">Funktionen</p><p class="section-label" data-lang="es">Funciones</p>
     <h2 class="section-title">
       <span data-lang="it">Tutto ciò che ti serve,<br>tutto sul tuo telefono</span>
-      <span data-lang="en">Everything you need,<br>all on your phone</span>
+      <span data-lang="en">Everything you need,<br>all on your phone</span><span data-lang="fr">Tout ce dont tu as besoin,<br>tout sur ton téléphone</span><span data-lang="de">Alles, was du brauchst,<br>alles auf deinem Handy</span><span data-lang="es">Todo lo que necesitas,<br>todo en tu teléfono</span>
     </h2>
     <p class="section-sub">
       <span data-lang="it">Nessun dato inviato a server remoti. L'AI gira direttamente sul tuo dispositivo.</span>
-      <span data-lang="en">No data sent to remote servers. AI runs directly on your device.</span>
+      <span data-lang="en">No data sent to remote servers. AI runs directly on your device.</span><span data-lang="fr">Aucune donnée envoyée à des serveurs distants. L'IA fonctionne directement sur ton appareil.</span><span data-lang="de">Keine Daten werden an externe Server gesendet. Die KI läuft direkt auf deinem Gerät.</span><span data-lang="es">Ningún dato se envía a servidores remotos. La IA funciona directamente en tu dispositivo.</span>
     </p>
     <div class="features-grid">
       <div class="feature-card card-sms">
         <span class="feature-icon">📱</span>
         <div class="feature-title" data-lang="it">Analisi SMS</div>
-        <div class="feature-title" data-lang="en">SMS Analysis</div>
+        <div class="feature-title" data-lang="en">SMS Analysis</div><div class="feature-title" data-lang="fr">Analyse des SMS</div><div class="feature-title" data-lang="de">SMS-Analyse</div><div class="feature-title" data-lang="es">Análisis de SMS</div>
         <div class="feature-desc" data-lang="it">Legge tutti gli SMS ricevuti e identifica automaticamente date, orari e luoghi degli appuntamenti.</div>
-        <div class="feature-desc" data-lang="en">Reads all received SMS and automatically identifies dates, times and locations of appointments.</div>
+        <div class="feature-desc" data-lang="en">Reads all received SMS and automatically identifies dates, times and locations of appointments.</div><div class="feature-desc" data-lang="fr">Lit tous les SMS reçus et identifie automatiquement dates, horaires et lieux des rendez-vous.</div><div class="feature-desc" data-lang="de">Liest alle empfangenen SMS und erkennt automatisch Datum, Uhrzeit und Ort von Terminen.</div><div class="feature-desc" data-lang="es">Lee todos los SMS recibidos e identifica automáticamente fechas, horas y lugares de las citas.</div>
       </div>
       <div class="feature-card card-wa">
         <span class="feature-icon">💬</span>
         <div class="feature-title">WhatsApp &amp; Telegram</div>
         <div class="feature-desc" data-lang="it">Monitora le notifiche in tempo reale e rileva appuntamenti nei tuoi messaggi istantanei.</div>
-        <div class="feature-desc" data-lang="en">Monitors notifications in real time and detects appointments in your instant messages.</div>
+        <div class="feature-desc" data-lang="en">Monitors notifications in real time and detects appointments in your instant messages.</div><div class="feature-desc" data-lang="fr">Surveille les notifications en temps réel et détecte les rendez-vous dans tes messages instantanés.</div><div class="feature-desc" data-lang="de">Überwacht Benachrichtigungen in Echtzeit und erkennt Termine in deinen Instant-Messages.</div><div class="feature-desc" data-lang="es">Supervisa las notificaciones en tiempo real y detecta citas en tus mensajes instantáneos.</div>
       </div>
       <div class="feature-card card-email">
         <span class="feature-icon">📧</span>
         <div class="feature-title" data-lang="it">Email IMAP</div>
-        <div class="feature-title" data-lang="en">IMAP Email</div>
+        <div class="feature-title" data-lang="en">IMAP Email</div><div class="feature-title" data-lang="fr">E-mail IMAP</div><div class="feature-title" data-lang="de">IMAP-E-Mail</div><div class="feature-title" data-lang="es">Correo IMAP</div>
         <div class="feature-desc" data-lang="it">Supporta Gmail, Outlook, Libero, Yahoo e qualsiasi provider IMAP. Analisi diretta sul dispositivo.</div>
-        <div class="feature-desc" data-lang="en">Supports Gmail, Outlook, Libero, Yahoo and any IMAP provider. Direct analysis on the device.</div>
+        <div class="feature-desc" data-lang="en">Supports Gmail, Outlook, Libero, Yahoo and any IMAP provider. Direct analysis on the device.</div><div class="feature-desc" data-lang="fr">Compatible avec Gmail, Outlook, Libero, Yahoo et tout fournisseur IMAP. Analyse directement sur l'appareil.</div><div class="feature-desc" data-lang="de">Unterstützt Gmail, Outlook, Libero, Yahoo und jeden IMAP-Anbieter. Analyse direkt auf dem Gerät.</div><div class="feature-desc" data-lang="es">Compatible con Gmail, Outlook, Libero, Yahoo y cualquier proveedor IMAP. Análisis directamente en el dispositivo.</div>
       </div>
       <div class="feature-card card-ai">
         <span class="feature-icon">🤖</span>
         <div class="feature-title" data-lang="it">Gemini Nano AI</div>
-        <div class="feature-title" data-lang="en">Gemini Nano AI</div>
+        <div class="feature-title" data-lang="en">Gemini Nano AI</div><div class="feature-title" data-lang="fr">IA Gemini Nano</div><div class="feature-title" data-lang="de">Gemini Nano KI</div><div class="feature-title" data-lang="es">IA Gemini Nano</div>
         <div class="feature-desc" data-lang="it">Usa Gemini Nano su Android 14+ per un'estrazione intelligente. Fallback automatico su ML Kit.</div>
-        <div class="feature-desc" data-lang="en">Uses Gemini Nano on Android 14+ for smart extraction. Automatic fallback to ML Kit.</div>
+        <div class="feature-desc" data-lang="en">Uses Gemini Nano on Android 14+ for smart extraction. Automatic fallback to ML Kit.</div><div class="feature-desc" data-lang="fr">Utilise Gemini Nano sur Android 14+ pour une extraction intelligente. Bascule automatique sur ML Kit.</div><div class="feature-desc" data-lang="de">Nutzt Gemini Nano auf Android 14+ für eine intelligente Erkennung. Automatischer Rückgriff auf ML Kit.</div><div class="feature-desc" data-lang="es">Usa Gemini Nano en Android 14+ para una extracción inteligente. Recurre automáticamente a ML Kit.</div>
       </div>
       <div class="feature-card card-tg">
         <span class="feature-icon">📊</span>
         <div class="feature-title" data-lang="it">Widget &amp; Notifiche</div>
-        <div class="feature-title" data-lang="en">Widget &amp; Notifications</div>
+        <div class="feature-title" data-lang="en">Widget &amp; Notifications</div><div class="feature-title" data-lang="fr">Widget et notifications</div><div class="feature-title" data-lang="de">Widget &amp; Benachrichtigungen</div><div class="feature-title" data-lang="es">Widget y notificaciones</div>
         <div class="feature-desc" data-lang="it">Widget homescreen con i prossimi appuntamenti. Notifiche push istantanee quando trova qualcosa di nuovo.</div>
-        <div class="feature-desc" data-lang="en">Homescreen widget with upcoming appointments. Instant push notifications when it finds something new.</div>
+        <div class="feature-desc" data-lang="en">Homescreen widget with upcoming appointments. Instant push notifications when it finds something new.</div><div class="feature-desc" data-lang="fr">Widget sur l'écran d'accueil avec les prochains rendez-vous. Notifications push instantanées dès qu'une nouveauté est détectée.</div><div class="feature-desc" data-lang="de">Startbildschirm-Widget mit den nächsten Terminen. Sofortige Push-Benachrichtigungen bei neuen Funden.</div><div class="feature-desc" data-lang="es">Widget en la pantalla de inicio con las próximas citas. Notificaciones push instantáneas cuando encuentra algo nuevo.</div>
       </div>
       <div class="feature-card card-privacy">
         <span class="feature-icon">🔐</span>
         <div class="feature-title" data-lang="it">Privacy &amp; Sicurezza</div>
-        <div class="feature-title" data-lang="en">Privacy &amp; Security</div>
+        <div class="feature-title" data-lang="en">Privacy &amp; Security</div><div class="feature-title" data-lang="fr">Confidentialité et sécurité</div><div class="feature-title" data-lang="de">Datenschutz &amp; Sicherheit</div><div class="feature-title" data-lang="es">Privacidad y seguridad</div>
         <div class="feature-desc" data-lang="it">PIN o impronta digitale, backup criptato, filtro spam intelligente. I tuoi dati restano sul dispositivo.</div>
-        <div class="feature-desc" data-lang="en">PIN or fingerprint, encrypted backup, smart spam filter. Your data stays on the device.</div>
+        <div class="feature-desc" data-lang="en">PIN or fingerprint, encrypted backup, smart spam filter. Your data stays on the device.</div><div class="feature-desc" data-lang="fr">Code PIN ou empreinte digitale, sauvegarde chiffrée, filtre anti-spam intelligent. Tes données restent sur l'appareil.</div><div class="feature-desc" data-lang="de">PIN oder Fingerabdruck, verschlüsseltes Backup, intelligenter Spamfilter. Deine Daten bleiben auf dem Gerät.</div><div class="feature-desc" data-lang="es">PIN o huella digital, copia de seguridad cifrada, filtro de spam inteligente. Tus datos permanecen en el dispositivo.</div>
       </div>
     </div>
   </section>
@@ -496,43 +508,43 @@
   <section style="background: var(--surface); max-width:100%; padding: 100px 24px;">
     <div style="max-width:1100px; margin:0 auto;">
       <p class="section-label" data-lang="it">Come funziona</p>
-      <p class="section-label" data-lang="en">How it works</p>
+      <p class="section-label" data-lang="en">How it works</p><p class="section-label" data-lang="fr">Comment ça marche</p><p class="section-label" data-lang="de">So funktioniert's</p><p class="section-label" data-lang="es">Cómo funciona</p>
       <h2 class="section-title">
         <span data-lang="it">Semplice come 1, 2, 3</span>
-        <span data-lang="en">Simple as 1, 2, 3</span>
+        <span data-lang="en">Simple as 1, 2, 3</span><span data-lang="fr">Simple comme bonjour</span><span data-lang="de">Einfach wie 1, 2, 3</span><span data-lang="es">Fácil como 1, 2, 3</span>
       </h2>
       <p class="section-sub">
         <span data-lang="it">Nessuna configurazione complessa. Acquista, installa, scannerizza, conferma.</span>
-        <span data-lang="en">No complex configuration. Purchase, install, scan, confirm.</span>
+        <span data-lang="en">No complex configuration. Purchase, install, scan, confirm.</span><span data-lang="fr">Aucune configuration complexe. Achète, installe, scanne, confirme.</span><span data-lang="de">Keine komplizierte Einrichtung. Kaufen, installieren, scannen, bestätigen.</span><span data-lang="es">Sin configuraciones complicadas. Compra, instala, escanea, confirma.</span>
       </p>
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-title" data-lang="it">Acquista e installa</div>
-          <div class="step-title" data-lang="en">Purchase and install</div>
+          <div class="step-title" data-lang="en">Purchase and install</div><div class="step-title" data-lang="fr">Achète et installe</div><div class="step-title" data-lang="de">Kaufen und installieren</div><div class="step-title" data-lang="es">Compra e instala</div>
           <div class="step-desc" data-lang="it">Scaricala da Google Play e installala. Concedi i permessi SMS e calendario.</div>
-          <div class="step-desc" data-lang="en">Get it on Google Play and install it. Grant SMS and calendar permissions.</div>
+          <div class="step-desc" data-lang="en">Get it on Google Play and install it. Grant SMS and calendar permissions.</div><div class="step-desc" data-lang="fr">Télécharge-la sur Google Play et installe-la. Accorde les autorisations SMS et agenda.</div><div class="step-desc" data-lang="de">Lade sie bei Google Play herunter und installiere sie. Erteile die Berechtigungen für SMS und Kalender.</div><div class="step-desc" data-lang="es">Descárgala en Google Play e instálala. Concede los permisos de SMS y calendario.</div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-title" data-lang="it">Scansiona i messaggi</div>
-          <div class="step-title" data-lang="en">Scan messages</div>
+          <div class="step-title" data-lang="en">Scan messages</div><div class="step-title" data-lang="fr">Scanne les messages</div><div class="step-title" data-lang="de">Nachrichten scannen</div><div class="step-title" data-lang="es">Escanea los mensajes</div>
           <div class="step-desc" data-lang="it">Premi "Scansiona tutto" o lascia che l'app lo faccia automaticamente ogni 6 ore. L'AI analizza tutto in locale.</div>
-          <div class="step-desc" data-lang="en">Press "Scan all" or let the app do it automatically every 6 hours. AI analyzes everything locally.</div>
+          <div class="step-desc" data-lang="en">Press "Scan all" or let the app do it automatically every 6 hours. AI analyzes everything locally.</div><div class="step-desc" data-lang="fr">Appuie sur « Tout scanner » ou laisse l'appli le faire automatiquement toutes les 6 heures. L'IA analyse tout localement.</div><div class="step-desc" data-lang="de">Tippe auf „Alles scannen“ oder lass die App es automatisch alle 6 Stunden erledigen. Die KI analysiert alles lokal.</div><div class="step-desc" data-lang="es">Pulsa "Escanear todo" o deja que la app lo haga automáticamente cada 6 horas. La IA analiza todo de forma local.</div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-title" data-lang="it">Conferma e salva</div>
-          <div class="step-title" data-lang="en">Confirm and save</div>
+          <div class="step-title" data-lang="en">Confirm and save</div><div class="step-title" data-lang="fr">Confirme et enregistre</div><div class="step-title" data-lang="de">Bestätigen und speichern</div><div class="step-title" data-lang="es">Confirma y guarda</div>
           <div class="step-desc" data-lang="it">Rivedi le bozze trovate, modifica se necessario e salva direttamente nel tuo calendario Android.</div>
-          <div class="step-desc" data-lang="en">Review found drafts, edit if needed and save directly to your Android calendar.</div>
+          <div class="step-desc" data-lang="en">Review found drafts, edit if needed and save directly to your Android calendar.</div><div class="step-desc" data-lang="fr">Vérifie les brouillons trouvés, modifie-les si besoin et enregistre-les directement dans ton agenda Android.</div><div class="step-desc" data-lang="de">Überprüfe die gefundenen Entwürfe, bearbeite sie bei Bedarf und speichere sie direkt in deinem Android-Kalender.</div><div class="step-desc" data-lang="es">Revisa los borradores encontrados, edítalos si es necesario y guárdalos directamente en tu calendario de Android.</div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
           <div class="step-title" data-lang="it">Tutto automatico</div>
-          <div class="step-title" data-lang="en">Fully automatic</div>
+          <div class="step-title" data-lang="en">Fully automatic</div><div class="step-title" data-lang="fr">Tout automatique</div><div class="step-title" data-lang="de">Alles automatisch</div><div class="step-title" data-lang="es">Todo automático</div>
           <div class="step-desc" data-lang="it">Il servizio in background monitora continuamente i nuovi messaggi e ti avvisa in tempo reale.</div>
-          <div class="step-desc" data-lang="en">The background service continuously monitors new messages and notifies you in real time.</div>
+          <div class="step-desc" data-lang="en">The background service continuously monitors new messages and notifies you in real time.</div><div class="step-desc" data-lang="fr">Le service en arrière-plan surveille en permanence les nouveaux messages et t'avertit en temps réel.</div><div class="step-desc" data-lang="de">Der Hintergrunddienst überwacht kontinuierlich neue Nachrichten und benachrichtigt dich in Echtzeit.</div><div class="step-desc" data-lang="es">El servicio en segundo plano supervisa continuamente los nuevos mensajes y te avisa en tiempo real.</div>
         </div>
       </div>
     </div>
@@ -541,10 +553,10 @@
   <!-- ── SCREENSHOTS ── -->
   <section id="screenshots">
     <p class="section-label" data-lang="it">Screenshots</p>
-    <p class="section-label" data-lang="en">Screenshots</p>
+    <p class="section-label" data-lang="en">Screenshots</p><p class="section-label" data-lang="fr">Captures d'écran</p><p class="section-label" data-lang="de">Screenshots</p><p class="section-label" data-lang="es">Capturas de pantalla</p>
     <h2 class="section-title">
       <span data-lang="it">Guarda l'app in azione</span>
-      <span data-lang="en">See the app in action</span>
+      <span data-lang="en">See the app in action</span><span data-lang="fr">Vois l'appli en action</span><span data-lang="de">Die App in Aktion</span><span data-lang="es">Mira la app en acción</span>
     </h2>
     <div class="screenshots-grid">
       <div class="screenshot-item"><img src="screenshots/screen1.png" alt="IDQ Smart Calendar - Schermata SMS"></div>
@@ -560,30 +572,30 @@
     <div class="privacy-box">
       <div>
         <p class="section-label" data-lang="it">Privacy first</p>
-        <p class="section-label" data-lang="en">Privacy first</p>
+        <p class="section-label" data-lang="en">Privacy first</p><p class="section-label" data-lang="fr">La confidentialité avant tout</p><p class="section-label" data-lang="de">Datenschutz zuerst</p><p class="section-label" data-lang="es">La privacidad primero</p>
         <h2 class="section-title" style="margin-bottom:24px;">
           <span data-lang="it">I tuoi dati restano<br>sul tuo telefono</span>
-          <span data-lang="en">Your data stays<br>on your phone</span>
+          <span data-lang="en">Your data stays<br>on your phone</span><span data-lang="fr">Tes données restent<br>sur ton téléphone</span><span data-lang="de">Deine Daten bleiben<br>auf deinem Handy</span><span data-lang="es">Tus datos permanecen<br>en tu teléfono</span>
         </h2>
         <p style="color:var(--muted); margin-bottom:32px; font-size:0.95rem;">
           <span data-lang="it">IDQ Smart Calendar è progettata con la privacy come priorità assoluta. Nessun server esterno, nessun tracciamento, nessuna pubblicità.</span>
-          <span data-lang="en">IDQ Smart Calendar is designed with privacy as the absolute priority. No external servers, no tracking, no ads.</span>
+          <span data-lang="en">IDQ Smart Calendar is designed with privacy as the absolute priority. No external servers, no tracking, no ads.</span><span data-lang="fr">IDQ Smart Calendar est conçue avec la confidentialité comme priorité absolue. Aucun serveur externe, aucun suivi, aucune publicité.</span><span data-lang="de">IDQ Smart Calendar wurde mit Datenschutz als oberster Priorität entwickelt. Keine externen Server, kein Tracking, keine Werbung.</span><span data-lang="es">IDQ Smart Calendar está diseñada con la privacidad como prioridad absoluta. Sin servidores externos, sin rastreo, sin publicidad.</span>
         </p>
         <ul class="privacy-points">
-          <li><span class="privacy-check">✓</span><span data-lang="it">AI completamente on-device (ML Kit + Gemini Nano)</span><span data-lang="en">Fully on-device AI (ML Kit + Gemini Nano)</span></li>
-          <li><span class="privacy-check">✓</span><span data-lang="it">Nessun dato inviato a server esterni</span><span data-lang="en">No data sent to external servers</span></li>
-          <li><span class="privacy-check">✓</span><span data-lang="it">Nessuna pubblicità o tracciamento</span><span data-lang="en">No advertising or tracking</span></li>
-          <li><span class="privacy-check">✓</span><span data-lang="it">Backup locale criptato</span><span data-lang="en">Local encrypted backup</span></li>
-          <li><span class="privacy-check">✓</span><span data-lang="it">Acquisto unico, nessun abbonamento</span><span data-lang="en">One-time purchase, no subscription</span></li>
+          <li><span class="privacy-check">✓</span><span data-lang="it">AI completamente on-device (ML Kit + Gemini Nano)</span><span data-lang="en">Fully on-device AI (ML Kit + Gemini Nano)</span><span data-lang="fr">IA entièrement embarquée (ML Kit + Gemini Nano)</span><span data-lang="de">Vollständig geräteinterne KI (ML Kit + Gemini Nano)</span><span data-lang="es">IA totalmente en el dispositivo (ML Kit + Gemini Nano)</span></li>
+          <li><span class="privacy-check">✓</span><span data-lang="it">Nessun dato inviato a server esterni</span><span data-lang="en">No data sent to external servers</span><span data-lang="fr">Aucune donnée envoyée à des serveurs externes</span><span data-lang="de">Keine Daten an externe Server gesendet</span><span data-lang="es">Ningún dato enviado a servidores externos</span></li>
+          <li><span class="privacy-check">✓</span><span data-lang="it">Nessuna pubblicità o tracciamento</span><span data-lang="en">No advertising or tracking</span><span data-lang="fr">Aucune publicité ni suivi</span><span data-lang="de">Keine Werbung oder Tracking</span><span data-lang="es">Sin publicidad ni rastreo</span></li>
+          <li><span class="privacy-check">✓</span><span data-lang="it">Backup locale criptato</span><span data-lang="en">Local encrypted backup</span><span data-lang="fr">Sauvegarde locale chiffrée</span><span data-lang="de">Lokales verschlüsseltes Backup</span><span data-lang="es">Copia de seguridad local cifrada</span></li>
+          <li><span class="privacy-check">✓</span><span data-lang="it">Acquisto unico, nessun abbonamento</span><span data-lang="en">One-time purchase, no subscription</span><span data-lang="fr">Achat unique, sans abonnement</span><span data-lang="de">Einmaliger Kauf, kein Abo</span><span data-lang="es">Compra única, sin suscripción</span></li>
         </ul>
       </div>
       <div style="text-align:center;">
         <div style="font-size:6rem; margin-bottom:24px;">🔒</div>
         <div style="background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:12px; padding:20px;">
           <div style="font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:600; margin-bottom:8px;" data-lang="it">100% privato per design</div>
-          <div style="font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:600; margin-bottom:8px;" data-lang="en">100% private by design</div>
+          <div style="font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:600; margin-bottom:8px;" data-lang="en">100% private by design</div><div style="font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:600; margin-bottom:8px;" data-lang="fr">100 % privé par conception</div><div style="font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:600; margin-bottom:8px;" data-lang="de">100 % privat von Grund auf</div><div style="font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:600; margin-bottom:8px;" data-lang="es">100 % privado por diseño</div>
           <div style="color:var(--muted); font-size:0.85rem;" data-lang="it">Tutti i dati rimangono sul dispositivo e non vengono mai condivisi con terze parti.</div>
-          <div style="color:var(--muted); font-size:0.85rem;" data-lang="en">All data remains on the device and is never shared with third parties.</div>
+          <div style="color:var(--muted); font-size:0.85rem;" data-lang="en">All data remains on the device and is never shared with third parties.</div><div style="color:var(--muted); font-size:0.85rem;" data-lang="fr">Toutes les données restent sur l'appareil et ne sont jamais partagées avec des tiers.</div><div style="color:var(--muted); font-size:0.85rem;" data-lang="de">Alle Daten bleiben auf dem Gerät und werden niemals an Dritte weitergegeben.</div><div style="color:var(--muted); font-size:0.85rem;" data-lang="es">Todos los datos permanecen en el dispositivo y nunca se comparten con terceros.</div>
         </div>
       </div>
     </div>
@@ -594,22 +606,22 @@
     <div class="cta-box">
       <h2 class="cta-title">
         <span data-lang="it">Pronto a non perdere<br>più nessun appuntamento?</span>
-        <span data-lang="en">Ready to never miss<br>an appointment again?</span>
+        <span data-lang="en">Ready to never miss<br>an appointment again?</span><span data-lang="fr">Prêt à ne plus jamais<br>manquer un rendez-vous ?</span><span data-lang="de">Bereit, nie wieder<br>einen Termin zu verpassen?</span><span data-lang="es">¿Listo para no perderte<br>ninguna cita más?</span>
       </h2>
       <p class="cta-sub">
         <span data-lang="it">Acquista IDQ Smart Calendar una sola volta. Nessun abbonamento, nessun costo nascosto. Compatibile con Android 8.0+.</span>
-        <span data-lang="en">Buy IDQ Smart Calendar once. No subscription, no hidden costs. Compatible with Android 8.0+.</span>
+        <span data-lang="en">Buy IDQ Smart Calendar once. No subscription, no hidden costs. Compatible with Android 8.0+.</span><span data-lang="fr">Achète IDQ Smart Calendar une seule fois. Pas d'abonnement, pas de coûts cachés. Compatible avec Android 8.0+.</span><span data-lang="de">Kaufe IDQ Smart Calendar einmalig. Kein Abo, keine versteckten Kosten. Kompatibel mit Android 8.0+.</span><span data-lang="es">Compra IDQ Smart Calendar una sola vez. Sin suscripción, sin costes ocultos. Compatible con Android 8.0+.</span>
       </p>
       <div class="price-badge">
-        ✅ <span data-lang="it">Acquisto unico — nessun abbonamento</span><span data-lang="en">One-time purchase — no subscription</span>
+        ✅ <span data-lang="it">Acquisto unico — nessun abbonamento</span><span data-lang="en">One-time purchase — no subscription</span><span data-lang="fr">Achat unique — sans abonnement</span><span data-lang="de">Einmaliger Kauf — kein Abo</span><span data-lang="es">Compra única — sin suscripción</span>
       </div>
       <br>
       <a href="https://play.google.com/store/apps/details?id=com.joker78.smartcalendar" class="btn-primary" style="font-size:16px; padding:16px 36px;" target="_blank" rel="noopener">
-        🛒 <span data-lang="it">2,99 € su Google Play</span><span data-lang="en">€2.99 on Google Play</span>
+        🛒 <span data-lang="it">2,99 € su Google Play</span><span data-lang="en">€2.99 on Google Play</span><span data-lang="fr">2,99 € sur Google Play</span><span data-lang="de">2,99 € bei Google Play</span><span data-lang="es">2,99 € en Google Play</span>
       </a>
       <p class="cta-note">
         <span data-lang="it">Android 8.0+ · Disponibile su Google Play</span>
-        <span data-lang="en">Android 8.0+ · Available on Google Play</span>
+        <span data-lang="en">Android 8.0+ · Available on Google Play</span><span data-lang="fr">Android 8.0+ · Disponible sur Google Play</span><span data-lang="de">Android 8.0+ · Erhältlich bei Google Play</span><span data-lang="es">Android 8.0+ · Disponible en Google Play</span>
       </p>
     </div>
   </section>
@@ -618,14 +630,14 @@
   <section id="contatti" style="padding:72px 24px">
   <div style="max-width:620px;margin:0 auto">
     <p style="color:var(--blue);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:13px;margin:0 0 10px">
-      <span data-lang="it">Contatti</span><span data-lang="en">Contact</span>
+      <span data-lang="it">Contatti</span><span data-lang="en">Contact</span><span data-lang="fr">Contact</span><span data-lang="de">Kontakt</span><span data-lang="es">Contacto</span>
     </p>
     <h2 style="margin:0 0 14px">
-      <span data-lang="it">Parliamone</span><span data-lang="en">Let's talk</span>
+      <span data-lang="it">Parliamone</span><span data-lang="en">Let's talk</span><span data-lang="fr">Discutons-en</span><span data-lang="de">Lass uns reden</span><span data-lang="es">Hablemos</span>
     </h2>
     <p style="color:var(--muted);margin:0 0 28px">
       <span data-lang="it">Due domande veloci prima di scrivere: così il messaggio arriva già con tutto il contesto che serve per risponderti bene.</span>
-      <span data-lang="en">Two quick questions before you write: that way the message arrives with all the context needed to answer you well.</span>
+      <span data-lang="en">Two quick questions before you write: that way the message arrives with all the context needed to answer you well.</span><span data-lang="fr">Deux questions rapides avant d'écrire : ainsi le message arrive déjà avec tout le contexte nécessaire pour bien te répondre.</span><span data-lang="de">Zwei kurze Fragen, bevor du schreibst: So kommt die Nachricht schon mit allem nötigen Kontext an, um dir gut zu antworten.</span><span data-lang="es">Dos preguntas rápidas antes de escribir: así el mensaje llega ya con todo el contexto necesario para responderte bien.</span>
     </p>
 
     <form id="contact-form" novalidate style="display:flex;flex-direction:column;gap:16px">
@@ -686,29 +698,53 @@
     <p style="margin-bottom:8px;">
       <strong>IDQ Smart Calendar</strong> —
       <span data-lang="it">Sviluppato da</span>
-      <span data-lang="en">Developed by</span>
+      <span data-lang="en">Developed by</span><span data-lang="fr">Développé par</span><span data-lang="de">Entwickelt von</span><span data-lang="es">Desarrollado por</span>
       <a href="mailto:info@idq-developer.com">Paolo Migliaccio</a>
     </p>
     <p>
       <a href="privacy.html" data-lang="it">Informativa sulla Privacy</a>
-      <a href="privacy.html" data-lang="en">Privacy Policy</a>
+      <a href="privacy.html" data-lang="en">Privacy Policy</a><a href="privacy.html" data-lang="fr">Politique de confidentialité</a><a href="privacy.html" data-lang="de">Datenschutzerklärung</a><a href="privacy.html" data-lang="es">Política de privacidad</a>
       ·
       <a href="mailto:info@idq-developer.com">info@idq-developer.com</a>
       ·
       <span data-lang="it">© 2026 Tutti i diritti riservati</span>
-      <span data-lang="en">© 2026 All rights reserved</span>
+      <span data-lang="en">© 2026 All rights reserved</span><span data-lang="fr">© 2026 Tous droits réservés</span><span data-lang="de">© 2026 Alle Rechte vorbehalten</span><span data-lang="es">© 2026 Todos los derechos reservados</span>
     </p>
   </footer>
 
   <script>
+    var LANGS = ["it","en","fr","de","es"];
+    var FLAGS = {it:"🇮🇹",en:"🇬🇧",fr:"🇫🇷",de:"🇩🇪",es:"🇪🇸"};
     function setLang(lang) {
-      document.body.classList.toggle('en', lang === 'en');
-      document.getElementById('btn-it').classList.toggle('active', lang === 'it');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      if (LANGS.indexOf(lang) < 0) lang = "it";
+      document.body.setAttribute('data-l', lang);
+      var flagEl = document.getElementById('lang-flag');
+      var codeEl = document.getElementById('lang-code');
+      if (flagEl) flagEl.textContent = FLAGS[lang];
+      if (codeEl) codeEl.textContent = lang.toUpperCase();
+      document.querySelectorAll('#lang-menu button[data-l]').forEach(function(b){
+        b.classList.toggle('on', b.dataset.l === lang);
+      });
       localStorage.setItem('sc-lang', lang);
     }
-    const saved = localStorage.getItem('sc-lang');
-    if (saved === 'en') setLang('en');
+    (function(){
+      var q = (location.search.match(/[?&]lang=(\w\w)/) || [])[1];
+      var saved = null; try { saved = localStorage.getItem('sc-lang'); } catch(e){}
+      var nav = (navigator.language || 'it').slice(0,2);
+      var lang = LANGS.indexOf(q) >= 0 ? q : (LANGS.indexOf(saved) >= 0 ? saved : (LANGS.indexOf(nav) >= 0 ? nav : 'it'));
+      setLang(lang);
+      var sw = document.getElementById('lang-switch');
+      var btn = document.getElementById('lang-btn');
+      var menu = document.getElementById('lang-menu');
+      function openMenu(){ sw.classList.add('open'); menu.hidden = false; btn.setAttribute('aria-expanded','true'); }
+      function closeMenu(){ sw.classList.remove('open'); menu.hidden = true; btn.setAttribute('aria-expanded','false'); }
+      btn.addEventListener('click', function(e){ e.stopPropagation(); menu.hidden ? openMenu() : closeMenu(); });
+      document.addEventListener('click', function(e){ if (!sw.contains(e.target)) closeMenu(); });
+      document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+      menu.querySelectorAll('button[data-l]').forEach(function(b){
+        b.addEventListener('click', function(){ setLang(b.dataset.l); closeMenu(); });
+      });
+    })();
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -767,7 +803,40 @@
       modal_err_title:"Sending failed",
       modal_err_config:"Email not configured yet. Write in the meantime to " + FALLBACK_EMAIL + ".",
       modal_err_network:"The message could not be sent. Try again shortly, or write to " + FALLBACK_EMAIL + ".",
-      modal_close:"Got it" }
+      modal_close:"Got it" },
+    fr: { project_label:"Projet", project_ph:"Sélectionnez un projet", opt_general:"Site / général", opt_other:"Autre",
+      type_label:"Type de demande", type_ph:"Sélectionnez le type",
+      opt_bug:"Signalement d'un bug", opt_idea:"Idée ou nouvelle fonction", opt_question:"Question générale", opt_collab:"Proposition de collaboration",
+      email_label:"Votre email", message_label:"Message",
+      error:"Remplissez correctement le projet, le type de demande, votre email et le message avant d'envoyer.",
+      submit:"Envoyer le message", sending:"Envoi en cours…",
+      modal_ok_title:"Message envoyé", modal_ok_desc:"Votre message a été envoyé. Je vous répondrai dès que possible.",
+      modal_err_title:"Envoi échoué",
+      modal_err_config:"Configuration email manquante. En attendant, écrivez à " + FALLBACK_EMAIL + ".",
+      modal_err_network:"Le message n'a pas pu être envoyé. Réessayez bientôt, ou écrivez à " + FALLBACK_EMAIL + ".",
+      modal_close:"J'ai compris" },
+    de: { project_label:"Projekt", project_ph:"Projekt auswählen", opt_general:"Website / allgemein", opt_other:"Sonstiges",
+      type_label:"Art der Anfrage", type_ph:"Art auswählen",
+      opt_bug:"Fehlermeldung", opt_idea:"Idee oder neue Funktion", opt_question:"Allgemeine Frage", opt_collab:"Kooperationsvorschlag",
+      email_label:"Ihre E-Mail", message_label:"Nachricht",
+      error:"Füllen Sie Projekt, Anfrageart, Ihre E-Mail und die Nachricht korrekt aus.",
+      submit:"Nachricht senden", sending:"Wird gesendet…",
+      modal_ok_title:"Nachricht gesendet", modal_ok_desc:"Ihre Nachricht wurde gesendet. Ich antworte Ihnen so bald wie möglich.",
+      modal_err_title:"Senden fehlgeschlagen",
+      modal_err_config:"E-Mail noch nicht konfiguriert. Schreiben Sie an " + FALLBACK_EMAIL + ".",
+      modal_err_network:"Die Nachricht konnte nicht gesendet werden. Versuchen Sie es erneut oder schreiben Sie an " + FALLBACK_EMAIL + ".",
+      modal_close:"Verstanden" },
+    es: { project_label:"Proyecto", project_ph:"Selecciona un proyecto", opt_general:"Sitio / general", opt_other:"Otro",
+      type_label:"Tipo de solicitud", type_ph:"Selecciona el tipo",
+      opt_bug:"Informe de un error", opt_idea:"Idea o nueva función", opt_question:"Pregunta general", opt_collab:"Propuesta de colaboración",
+      email_label:"Tu email", message_label:"Mensaje",
+      error:"Completa correctamente el proyecto, el tipo de solicitud, tu email y el mensaje antes de enviar.",
+      submit:"Enviar mensaje", sending:"Enviando…",
+      modal_ok_title:"Mensaje enviado", modal_ok_desc:"Tu mensaje ha sido enviado. Te responderé en cuanto pueda.",
+      modal_err_title:"Envío fallido",
+      modal_err_config:"Configuración de email pendiente. Mientras tanto, escribe a " + FALLBACK_EMAIL + ".",
+      modal_err_network:"No se pudo enviar el mensaje. Vuelve a intentarlo, o escribe a " + FALLBACK_EMAIL + ".",
+      modal_close:"Entendido" }
   };
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -802,12 +871,12 @@
   }
   window.renderContactI18n = renderI18n;
 
-  // osserva i cambi di lingua del sito (classe "en" su <body>) senza toccare
+  // osserva i cambi di lingua del sito (attributo data-l su <body>) senza toccare
   // il motore linguistico gia' esistente di questa pagina
-  function currentLangFromBody(){ return document.body.classList.contains("en") ? "en" : "it"; }
+  function currentLangFromBody(){ return document.body.getAttribute("data-l") || "it"; }
   new MutationObserver(function(){
     renderI18n(currentLangFromBody());
-  }).observe(document.body, { attributes:true, attributeFilter:["class"] });
+  }).observe(document.body, { attributes:true, attributeFilter:["data-l"] });
   renderI18n(currentLangFromBody());
 
   function fieldValue(el){ return el.value.trim(); }
